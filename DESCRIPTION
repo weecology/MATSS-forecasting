@@ -1,0 +1,27 @@
+Package: MATSSforecasting
+Title: Analysis and Synthesis of Forecasting Ecological Time Series
+Version: 0.0.0.9000
+Authors@R: 
+    person("Hao", "Ye",
+           email = "hao.ye@weecology.org",
+           role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0002-8630-1458"))
+Description: This project investigates different approaches to forecasting ecological time series. It will investigate multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
+License: MIT + file LICENSE
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    forecast,
+    MATSS (>= 0.0.2),
+    drake (>= 6.2.1.9004),
+    dplyr,
+    tidyr,
+    magrittr,
+    purrr,
+    here
+Remotes: 
+    weecology/MATSS,
+    ropensci/drake
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
