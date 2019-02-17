@@ -20,6 +20,11 @@ Imports:
     magrittr,
     purrr,
     here
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown, 
+    pkgdown
 Remotes: 
     weecology/MATSS,
     ropensci/drake
