@@ -1,9 +1,13 @@
+^docs$
+^_pkgdown\.yml$
 ^LICENSE\.md$
+^CONTRIBUTING\.md$
+^CODE_OF_CONDUCT\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^.travis.yml
 /analysis
 /output
 ^README\.Rmd$
 ^README-.*\.png$
-^CODE_OF_CONDUCT\.md$
-^CONTRIBUTING\.md$
+
