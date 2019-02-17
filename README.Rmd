@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 
 # MATSSforecasting
 
+[![Build Status](https://travis-ci.org/ha0ye/MATSS-forecasting.svg?branch=master)](https://travis-ci.org/ha0ye/MATSS-forecasting)
+
 ## Overview
 
 MATSSforecasting is a research compendium for investigationg different approaches to forecasting ecological time series. It implements multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
