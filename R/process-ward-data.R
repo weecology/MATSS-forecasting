@@ -63,7 +63,7 @@ get_ward_data <- function(database_name, ward_RDS_file)
 reshape_ward_data <- function(ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
 {
     # file locations
-    data_file <- system.file("extdata", "processed_data", "masterDat 052015.csv",
+    data_file <- system.file("extdata", "processed_data", "masterDat_052015.csv",
                             package = "MATSSforecasting", mustWork = TRUE)
     
     dat <- read.csv(data_file)
