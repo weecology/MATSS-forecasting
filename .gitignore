@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 /analysis
+/inst/doc
 .drake
