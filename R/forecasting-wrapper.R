@@ -40,15 +40,15 @@ forecast_wrapper <- function(dataset, fun, ...)
     # Assemble the formatted output into a single tibble, inserting in the 
     #   variable names, the dataset name, and the forecast method
     results <- 
-        pmap(list(forecasts = forecasts, 
-                  var_names = var_names, 
-                  method = method_name), 
-             function(forecasts, var_names, method) {
-                 mutate(forecasts, 
-                        variable = var_names, 
-                        method = method)
-             }) %>%
-        bind_rows() %>%
+        purrr::pmap(list(forecasts = forecasts, 
+                         var_names = var_names, 
+                         method = method_name), 
+                    function(forecasts, var_names, method) {
+                        dplyr::mutate(forecasts, 
+                                      variable = var_names, 
+                                      method = method)
+                    }) %>%
+        dplyr::bind_rows() %>%
         list()
     names(results) <- database_name
     
@@ -57,6 +57,6 @@ forecast_wrapper <- function(dataset, fun, ...)
     names(metadata) <- database_name
     
     # Return the combined results and metadata
-    tibble(results = results, 
-           metadata = metadata)
+    tibble::tibble(results = results, 
+                   metadata = metadata)
 }

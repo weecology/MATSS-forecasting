@@ -21,7 +21,8 @@ Imports:
     tidyr,
     magrittr,
     purrr,
-    here
+    here,
+    tibble
 Suggests:
     testthat,
     knitr,
