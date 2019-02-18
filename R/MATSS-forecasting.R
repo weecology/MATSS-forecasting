@@ -1,4 +1,4 @@
-#' @importFrom utils data read.csv
+#' @importFrom utils data read.csv tail
 #' 
 
 ## quiets concerns of R CMD check re: variables used in NSE functions
