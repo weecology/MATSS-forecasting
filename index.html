@@ -81,16 +81,32 @@
 <div id="running-the-code" class="section level2">
 <h2 class="hasAnchor">
 <a href="#running-the-code" class="anchor"></a>Running the code</h2>
-<p>Much of the underlying support code comprises the <code>MATSSforecasting</code> package, while the analysis code is in the analysis folder. Here is the suggested workflow for running the analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Download or clone the entire repository.</li>
-<li>Build and Install the package locally.</li>
-<li>Run <code>main.R</code> in the <code>analysis</code> folder.</li>
-</ol>
-<p>Alternatively, you can install <code>MATSSforecasting</code> from github with:</p>
+<p>This project is set up as an R package compendium. What this means is much of the core functionality is bundled up into functions that are documented, much like an R package would. The recommended way to run the analysis, and/or contribute to the analyses is as follows:</p>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
+<p>There are two main ways to install the package. You can install it using the automated tools in <code>devtools</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ha0ye/MATSS-forecasting"</span>)</a></code></pre></div>
-<p>and then obtain just the <code>analysis</code> subfolder, and run <code>main.R</code>.</p>
+<p>This will automatically install any dependencies, so can be a good way to start.</p>
+</div>
+<div id="cloning-the-repo" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cloning-the-repo" class="anchor"></a>Cloning the repo</h3>
+<p>However, you will also want the analysis scripts, which are part of this github repo and not part of the package. You will want to clone this repo using Git. Here are <a href="https://happygitwithr.com/rstudio-git-github.html">some instructions</a> if you are unfamiliar.</p>
+<p>This will then enable you to get the most recent version of the code from within RStudio, by opening the project, clicking on the Git pane, and the “Pull” button.</p>
+<p><em>Since this project is under active development, the codebase is likely to change rapidly from week to week.</em></p>
+</div>
+<div id="re-building-the-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#re-building-the-package" class="anchor"></a>Re-building the package</h3>
+<p>With changes to the package components, you will want to re-build and install the latest copy. You can do this following the instructions above using <code>devtools</code>. Or if you already have an updated copy within RStudio, use “Install and Restart” from the “Build” pane.</p>
+</div>
+<div id="analysis-code" class="section level3">
+<h3 class="hasAnchor">
+<a href="#analysis-code" class="anchor"></a>Analysis Code</h3>
+<p>The main control of analysis scripts will be in the <code>analysis</code> folder. We suggest you start by running <code>main.R</code>.</p>
+</div>
 </div>
 </div>
   </div>
