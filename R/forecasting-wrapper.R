@@ -29,8 +29,7 @@ forecast_wrapper <- function(dataset, fun, ...)
 {
     # Get the name of the dataset and the forecast method
     method_name <- all.vars(match.call()$fun)
-    database_name <- all.vars(match.call()$dataset)
-    
+
     # Get the variable names
     var_names <- colnames(dataset$abundance)
     
@@ -48,15 +47,12 @@ forecast_wrapper <- function(dataset, fun, ...)
                                       variable = var_names, 
                                       method = method)
                     }) %>%
-        dplyr::bind_rows() %>%
-        list()
-    names(results) <- database_name
+        dplyr::bind_rows()
     
     # Extract the metadata from the original dataset
-    metadata <- list(dataset$metadata)
-    names(metadata) <- database_name
-    
+    metadata <- dataset$metadata
+
     # Return the combined results and metadata
-    tibble::tibble(results = results, 
-                   metadata = metadata)
+    tibble::tibble(results = list(results), 
+                   metadata = list(metadata))
 }
