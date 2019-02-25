@@ -3,8 +3,13 @@
 
 # MATSSforecasting
 
+<!-- badges: start -->
+
 [![Build
 Status](https://travis-ci.org/ha0ye/MATSS-forecasting.svg?branch=master)](https://travis-ci.org/ha0ye/MATSS-forecasting)
+[![Codecov test
+coverage](https://codecov.io/gh/ha0ye/MATSS-forecasting/branch/master/graph/badge.svg)](https://codecov.io/gh/ha0ye/MATSS-forecasting?branch=master)
+<!-- badges: end -->
 
 ## Overview
 
