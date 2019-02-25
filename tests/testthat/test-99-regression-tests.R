@@ -1,9 +1,9 @@
 context("Regression Tests")
 
 test_that("autoarima_ts works as expected", {
-    expect_error(output <- autoarima_ts(sunspot.year), NA)
+    expect_error(output <- autoarima_ts(Nile), NA)
     expect_identical(digest::digest(output), 
-                     "60434a48e798ab2d259dc923a522fb08")
+                     "7dfe780731ae1802bd3a85323facf062")
 })
 
 test_that("autoarima_ts works on SGS dataset", {
