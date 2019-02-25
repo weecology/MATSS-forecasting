@@ -20,9 +20,8 @@ plan_ward_data <- function(ward_RDS_file = here::here("analysis", "data", "ward_
     }
     
     drake::drake_plan(
-        ward_RDS_file = !!ward_RDS_file, 
         data = target(
-            get_ward_data(ward_database, ward_RDS_file), 
+            get_ward_data(ward_database, drake::file_in(!!ward_RDS_file)), 
             transform = map(ward_database = !!ward_database_names)
         )
     )
@@ -101,6 +100,6 @@ reshape_ward_data <- function(ward_RDS_file = here::here("analysis", "data", "wa
     ## save resulting tibble
     saveRDS(dat, file = ward_RDS_file)
     
-    ## return location of destination
+    ## return names of databases
     return(dplyr::pull(dat, database))
 }

@@ -26,8 +26,9 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    rmarkdown, 
-    pkgdown
+    rmarkdown,
+    pkgdown,
+    covr
 Remotes: 
     weecology/MATSS,
     ropensci/drake
