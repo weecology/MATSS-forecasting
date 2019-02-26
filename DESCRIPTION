@@ -28,7 +28,8 @@ Suggests:
     knitr,
     rmarkdown,
     pkgdown,
-    covr
+    covr, 
+    digest
 Remotes: 
     weecology/MATSS,
     ropensci/drake
