@@ -127,7 +127,8 @@ For each level of `class`, produce a histogram for `frac_correct`:
 ggplot(data = to_plot, 
        mapping = aes(x = frac_correct, fill = class)) + 
     facet_wrap(~class, scales = "free_y") + 
-    geom_bar(width = 0.15)
+    geom_bar(width = 0.15) + 
+    theme_bw()
 ```
 
     ## Warning: Removed 12 rows containing non-finite values (stat_count).

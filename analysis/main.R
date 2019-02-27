@@ -16,7 +16,7 @@ analyses <- MATSS::build_analyses_plan(methods, datasets)
 ## define a report that summarize the autoarima analysis
 reports <- drake_plan(
     autoarima_report = rmarkdown::render(
-        knitr_in("analysis/autoarima_report.Rmd")
+        knitr_in("reports/autoarima_report.Rmd")
     )
 )
 

@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 /output
+/analysis/data
+/reports/*.html
 /inst/doc
 .drake
