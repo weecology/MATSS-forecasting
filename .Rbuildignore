@@ -9,6 +9,7 @@
 ^.travis.yml
 /analysis
 /output
+/reports
 ^README\.Rmd$
 ^README-.*\.png$
 

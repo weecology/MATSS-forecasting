@@ -53,3 +53,7 @@ With changes to the package components, you will want to re-build and install th
 ### Analysis Code
 
 The main control of analysis scripts will be in the `analysis` folder. We suggest you start by running `main.R`.
+
+### Reports
+
+Summarized reports generated via Rmarkdown are visible in the `reports` folder. Any files with a `.md` extension should be viewable from within GitHub.

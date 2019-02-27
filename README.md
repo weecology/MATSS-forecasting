@@ -65,3 +65,9 @@ RStudio, use “Install and Restart” from the “Build” pane.
 
 The main control of analysis scripts will be in the `analysis` folder.
 We suggest you start by running `main.R`.
+
+### Reports
+
+Summarized reports generated via Rmarkdown are visible in the `reports`
+folder. Any files with a `.md` extension should be viewable from within
+GitHub.
