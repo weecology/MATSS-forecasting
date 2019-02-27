@@ -125,20 +125,6 @@ For each level of `class`, produce a histogram for `frac_correct`:
 
 ``` r
 ggplot(data = to_plot, 
-       mapping = aes(x = class, y = frac_correct, color = class)) + 
-    geom_point(position = position_jitter(w = 0.2, h = 0.05), alpha = 0.3) + 
-    geom_boxplot(color = "black", fill = NA) + 
-    theme_bw()
-```
-
-    ## Warning: Removed 12 rows containing non-finite values (stat_boxplot).
-
-    ## Warning: Removed 12 rows containing missing values (geom_point).
-
-![](autoarima_report_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
-
-``` r
-ggplot(data = to_plot, 
        mapping = aes(x = frac_correct, fill = class)) + 
     facet_wrap(~class, scales = "free_y") + 
     geom_bar(width = 0.15)
@@ -146,4 +132,4 @@ ggplot(data = to_plot,
 
     ## Warning: Removed 12 rows containing non-finite values (stat_count).
 
-![](autoarima_report_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+![](autoarima_report_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
