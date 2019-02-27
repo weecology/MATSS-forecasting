@@ -26,19 +26,19 @@ test_that("autoarima_ts error checking works for too short time series", {
 })
 
 test_that("autoarima_ts function works", {
-    ts <- sunspot.year
+    ts <- Nile
     expect_error(output <- autoarima_ts(ts), NA)
     expect_true(is.data.frame(output))
     expect_true(all(c("observed", "predicted", "lower_95", "upper_95") %in% names(output)))
     expect_equal(dim(output), c(5, 4))
-    expect_known_hash(output, "60434a48e7")
+    expect_known_hash(output, "7dfe780731")
 })
 
 test_that("autoarima_ts function works with different num of forecasts", {
-    ts <- sunspot.year
+    ts <- Nile
     expect_error(output <- autoarima_ts(ts, 11), NA)
     expect_true(is.data.frame(output))
     expect_true(all(c("observed", "predicted", "lower_95", "upper_95") %in% names(output)))
     expect_equal(dim(output), c(11, 4))
-    expect_known_hash(output, "10b9492b47")
+    expect_known_hash(output, "2aa744780f")
 })

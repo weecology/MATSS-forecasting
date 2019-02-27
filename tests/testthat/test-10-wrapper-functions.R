@@ -16,13 +16,12 @@ test_that("forecast_wrapper works for simple functions", {
     # check results data.frame
     expect_error(results <- output$results[[1]], NA)
     expect_equal(dim(results), c(11, 5))
-    expect_equal(results$variable, names(data$abundance))
+    expect_equal(results$id, names(data$abundance))
     expect_true(all(results$method == "fun"))
     
     # check metadata
     expect_identical(output$metadata[[1]], data$metadata)
     
     # check digest
-    expect_known_hash(digest::digest(output), "cf96ed965f")
-    
+    expect_known_hash(digest::digest(output), "940980012f")
 })
