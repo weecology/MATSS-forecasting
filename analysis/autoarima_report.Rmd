@@ -1,0 +1,95 @@
+---
+title: "Autoarima report"
+author: "Hao Ye"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(MATSSforecasting)
+library(tidyverse)
+library(drake)
+```
+
+## Read in the results
+
+```{r load LDA results}
+# define where the cache is located
+db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
+cache <- storr::storr_dbi("datatable", "keystable", db)
+
+results_list <- readd(results_autoarima, cache = cache)
+```
+
+## Process results together
+
+Here, `results_list` is a list with `r length(results_list)` elements, one for each of the datasets that were analyzed. Each individual element is a tibble with the same list columns, `results` and `metadata`.
+
+```{r}
+str(results_list, max.level = 2)
+```
+
+First, we combine these results together into a single tibble, making sure to keep the name of the original dataset, and doing some cleaning of the dataset names:
+
+```{r}
+results <- bind_rows(results_list, .id = "dataset") %>%
+    mutate(dataset = sub("analysis_.+_data_\\.(.+)\\.", "\\1", dataset))
+```
+
+To facilitate combining results from different datasets, we're going to grab the `species_table` from within the `metadata` column, and join it with the results:
+
+```{r}
+# function to combine elements from the three columns
+process_row <- function(dataset, results, metadata) {
+    results %>%
+        mutate(dataset = dataset) %>%
+        left_join(mutate(metadata$species_table, id = as.character(id), 
+                         by = "id"))
+}
+
+# apply process_row to each dataset, then combine into a single tibble
+out <- results %>%
+    pmap(process_row) %>%
+    bind_rows()
+
+# what is the structure of out?
+str(out)
+```
+
+## Prepare for plotting
+
+What we want to plot is a summary of the results for each time series (represented by unique combinations of `id` x `dataset`). Since the observed and predicted values are going to have very different scales across each time series, let's just count the fraction of times the observed value fell within the predicted 95% range:
+
+```{r}
+to_plot <- out %>%
+    group_by(id, dataset) %>%
+    summarize(frac_correct = sum(observed > lower_95 & observed < upper_95) / n(), 
+              species = first(species), 
+              class = first(class))
+```
+
+## Plot
+
+For each level of `class`, produce a histogram for `frac_correct`:
+
+```{r}
+ggplot(data = to_plot, 
+       mapping = aes(x = class, y = frac_correct, color = class)) + 
+    geom_point(position = position_jitter(w = 0.2, h = 0.05), alpha = 0.3) + 
+    geom_boxplot(color = "black", fill = NA) + 
+    theme_bw()
+
+ggplot(data = to_plot, 
+       mapping = aes(x = frac_correct, fill = class)) + 
+    facet_wrap(~class, scales = "free_y") + 
+    geom_bar(width = 0.15)
+```
+
+
+
+
+
+
+

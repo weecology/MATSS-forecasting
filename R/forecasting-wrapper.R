@@ -44,7 +44,7 @@ forecast_wrapper <- function(dataset, fun, ...)
                          method = method_name), 
                     function(forecasts, var_names, method) {
                         dplyr::mutate(forecasts, 
-                                      variable = var_names, 
+                                      id = var_names, 
                                       method = method)
                     }) %>%
         dplyr::bind_rows()

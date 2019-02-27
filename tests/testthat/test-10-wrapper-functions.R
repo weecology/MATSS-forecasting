@@ -21,4 +21,8 @@ test_that("forecast_wrapper works for simple functions", {
     
     # check metadata
     expect_identical(output$metadata[[1]], data$metadata)
+    
+    # check digest
+    expect_known_hash(digest::digest(output), "cf96ed965f")
+    
 })
