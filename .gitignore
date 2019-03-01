@@ -1,3 +1,4 @@
+inst/doc
 .Rproj.user
 .Rhistory
 .RData
@@ -6,4 +7,3 @@
 /analysis/data
 /reports/*.html
 /inst/doc
-.drake

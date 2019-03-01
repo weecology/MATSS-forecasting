@@ -1,7 +1,7 @@
 Autoarima report
 ================
 Hao Ye
-2019-02-26
+2019-03-01
 
 ## Read in the results
 
@@ -10,17 +10,17 @@ Hao Ye
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-results_list <- readd(results_autoarima, cache = cache)
+results_autoarima <- readd(results_autoarima, cache = cache)
 ```
 
 ## Process results together
 
-Here, `results_list` is a list with 8 elements, one for each of the
+Here, `results_autoarima` is a list with 8 elements, one for each of the
 datasets that were analyzed. Each individual element is a tibble with
 the same list columns, `results` and `metadata`.
 
 ``` r
-str(results_list, max.level = 2)
+str(results_autoarima, max.level = 2)
 ```
 
     ## List of 8
@@ -54,9 +54,23 @@ sure to keep the name of the original dataset, and doing some cleaning
 of the dataset names:
 
 ``` r
-results <- bind_rows(results_list, .id = "dataset") %>%
+results_autoarima <- bind_rows(results_autoarima, .id = "dataset") %>%
     mutate(dataset = sub("analysis_.+_data_\\.(.+)\\.", "\\1", dataset))
+
+print(results_autoarima)
 ```
+
+    ## # A tibble: 8 x 3
+    ##   dataset             results                  metadata  
+    ##   <chr>               <list>                   <list>    
+    ## 1 salmon              <data.frame [751 × 6]>   <list [2]>
+    ## 2 RAMlegacy_catch     <data.frame [1,340 × 6]> <list [2]>
+    ## 3 RAMlegacy_ssb       <data.frame [1,195 × 6]> <list [2]>
+    ## 4 RAMlegacy_recperssb <data.frame [1,070 × 6]> <list [2]>
+    ## 5 Dorner2008          <data.frame [430 × 6]>   <list [2]>
+    ## 6 LPI                 <data.frame [1,280 × 6]> <list [2]>
+    ## 7 SprSum_Col_Chinook  <data.frame [110 × 6]>   <list [2]>
+    ## 8 PugSound_Chinook    <data.frame [110 × 6]>   <list [2]>
 
 To facilitate combining results from different datasets, we’re going to
 grab the `species_table` from within the `metadata` column, and join it
@@ -72,7 +86,7 @@ process_row <- function(dataset, results, metadata) {
 }
 
 # apply process_row to each dataset, then combine into a single tibble
-out <- results %>%
+results <- results_autoarima %>%
     pmap(process_row) %>%
     bind_rows()
 ```
@@ -87,8 +101,8 @@ out <- results %>%
     ## Joining, by = "id"
 
 ``` r
-# what is the structure of out?
-str(out)
+# what is the structure of results?
+str(results)
 ```
 
     ## 'data.frame':    6286 obs. of  10 variables:
@@ -112,7 +126,7 @@ across each time series, let’s just count the fraction of times the
 observed value fell within the predicted 95% range:
 
 ``` r
-to_plot <- out %>%
+to_plot <- results %>%
     group_by(id, dataset) %>%
     summarize(frac_correct = sum(observed > lower_95 & observed < upper_95) / n(), 
               species = first(species), 

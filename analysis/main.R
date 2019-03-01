@@ -20,7 +20,7 @@ reports <- drake_plan(
     )
 )
 
-## The entire pipeline
+## create a master plan
 pipeline <- bind_rows(datasets, methods, analyses, reports)
 
 ## Set up the cache and config

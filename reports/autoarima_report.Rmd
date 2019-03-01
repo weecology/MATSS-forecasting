@@ -20,22 +20,24 @@ library(drake)
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-results_list <- readd(results_autoarima, cache = cache)
+results_autoarima <- readd(results_autoarima, cache = cache)
 ```
 
 ## Process results together
 
-Here, `results_list` is a list with `r length(results_list)` elements, one for each of the datasets that were analyzed. Each individual element is a tibble with the same list columns, `results` and `metadata`.
+Here, `results_autoarima` is a list with `r length(results_autoarima)` elements, one for each of the datasets that were analyzed. Each individual element is a tibble with the same list columns, `results` and `metadata`.
 
 ```{r}
-str(results_list, max.level = 2)
+str(results_autoarima, max.level = 2)
 ```
 
 First, we combine these results together into a single tibble, making sure to keep the name of the original dataset, and doing some cleaning of the dataset names:
 
 ```{r}
-results <- bind_rows(results_list, .id = "dataset") %>%
+results_autoarima <- bind_rows(results_autoarima, .id = "dataset") %>%
     mutate(dataset = sub("analysis_.+_data_\\.(.+)\\.", "\\1", dataset))
+
+print(results_autoarima)
 ```
 
 To facilitate combining results from different datasets, we're going to grab the `species_table` from within the `metadata` column, and join it with the results:
@@ -50,12 +52,12 @@ process_row <- function(dataset, results, metadata) {
 }
 
 # apply process_row to each dataset, then combine into a single tibble
-out <- results %>%
+results <- results_autoarima %>%
     pmap(process_row) %>%
     bind_rows()
 
-# what is the structure of out?
-str(out)
+# what is the structure of results?
+str(results)
 ```
 
 ## Prepare for plotting
@@ -63,7 +65,7 @@ str(out)
 What we want to plot is a summary of the results for each time series (represented by unique combinations of `id` x `dataset`). Since the observed and predicted values are going to have very different scales across each time series, let's just count the fraction of times the observed value fell within the predicted 95% range:
 
 ```{r}
-to_plot <- out %>%
+to_plot <- results %>%
     group_by(id, dataset) %>%
     summarize(frac_correct = sum(observed > lower_95 & observed < upper_95) / n(), 
               species = first(species), 
@@ -81,9 +83,6 @@ ggplot(data = to_plot,
     geom_bar(width = 0.15) + 
     theme_bw()
 ```
-
-
-
 
 
 

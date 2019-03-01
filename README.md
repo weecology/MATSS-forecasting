@@ -63,8 +63,7 @@ RStudio, use “Install and Restart” from the “Build” pane.
 
 ### Analysis Code
 
-The main control of analysis scripts will be in the `analysis` folder.
-We suggest you start by running `main.R`.
+The main control of analysis scripts can be found in `analysis/main.R`.
 
 ### Reports
 
