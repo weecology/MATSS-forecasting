@@ -1,0 +1,82 @@
+---
+title: "MATSSforecasting"
+author: 
+- Hao Ye
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+%\VignetteIndexEntry{MATSSforecasting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  ---
+  
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+```{r setup}
+library(MATSSforecasting)
+```
+
+# Overview
+
+This is a 
+
+# Data Format
+
+We follow the dataset format from [MATSS](https://weecology.github.io/MATSS/index.html). You can read more about the specific format in the [Data Formats vignette](https://weecology.github.io/MATSS/articles/data-formats.html) of the `MATSS` package.
+
+## How this works
+
+Datasets that we import from the `MATSS` package arrive in that specific format. Datasets that we import using code within `MATSSforecasting` follow the same format. This allows all analysis code to be interoperable.
+
+Note that the specified format is for a **dataset**, as opposed to a single time series. This provides better support for community-oriented analysis, and means time series collected following a similar protocol or as part of a broader sampling effort should probably be grouped together as a single dataset.
+
+# Forecasting Analysis
+
+## Forecasting functions
+
+The basic analysis function should operate on a single time series, receiving the time series as its first argument, with all other arguments being optional.
+
+The output of this function should return a data.frame with named arguments for the outputs. At the very least, it should contain columns for `observed` and `predicted`, though many of the functions will also include `lower_95` and `upper_95` columns for the 95% predictive bounds.
+
+As an example, consider the following, which also wraps the code in a tryCatch, so that errors  will not cause the calculation to halt, but instead generate warnings and NA outputs.
+```{r, eval = FALSE}
+f <- function(ts, option = 1)
+{
+    tryCatch(
+    {
+        # do some calculation, possibly depending on the value of `option`, which 
+        #   has a default value of 1
+        
+        data.frame(observed = rnorm(10), 
+                   predicted = rnorm(10), 
+                   lower_95 = rnorm(10, mean = -1), 
+                   upper_95 = rnorm(10, mean = 1))
+    }, error = function(e) {
+        warning(e, "  returning a NA object")
+        return(data.frame(observed = NA, 
+                          predicted = NA, 
+                          lower_95 = NA, 
+                          upper_95 = NA))
+    })
+}
+```
+
+## Scaling up forecasting
+
+`MATSSForecasting` includes a function, `forecast_wrapper()` to facilitate repeating the forecasting analysis on all the time series in a dataset. `forecast_wrapper()` takes in a dataset, and a forecasting function, and then applies the forecasting function to all the time series in the dataset. Any additional arguments passed to `forecast_wrapper()` are automatically passed through to the forecasting function.
+
+The output is a `tibble` with two columns:
+  * `results`, a list-column of the joined together outputs from the forecasting function, with 1 additional column:
+    - `id`, the column name from the dataset, which is used to index any relevant metadata
+  * `metadata`, a list-column of metadata (whatever was associated with the original dataset)
+  * `dataset`, a character-column with the name of the dataset
+  * `method`, a character-column with the name of the forecasting function
+  
+The idea here is that the outputs from applying a forecasting function to a dataset can then be joined together easily, while retaining the appropriate associations for summarizing (since each row has the full output of a particular forecasting method x dataset, and associated metadata)
+
+# Summary

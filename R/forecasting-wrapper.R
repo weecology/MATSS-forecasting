@@ -8,10 +8,12 @@
 #' @param fun the forecasting function
 #' @param ... extra params to be passed to the forecasting function
 #' 
-#' @return a tibble with two list-columns:
+#' @return a tibble with these columns:
 #'   \tabular{ll}{
 #'     \code{results} \tab a combined results data.frame\cr
 #'     \code{metadata} \tab the metadata component of the original dataset\cr
+#'     \code{dataset} \tab the name of the dataset (taken from the passed argument)\cr
+#'     \code{method} \tab the name of the forecasting method (taken from the passed argument)\cr
 #'   }
 #'   The results have all the columns returned from the forecasting function, 
 #'     with additional columns for the variable that was forecast (pulled from 
@@ -28,31 +30,18 @@
 forecast_wrapper <- function(dataset, fun, ...)
 {
     # Get the name of the dataset and the forecast method
+    dataset_name <- all.vars(match.call()$dataset)
     method_name <- all.vars(match.call()$fun)
-
-    # Get the variable names
-    var_names <- colnames(dataset$abundance)
     
     # Make the forecasts
-    forecasts <- purrr::map(dataset$abundance, fun, ...)
-    
-    # Assemble the formatted output into a single tibble, inserting in the 
-    #   variable names, the dataset name, and the forecast method
-    results <- 
-        purrr::pmap(list(forecasts = forecasts, 
-                         var_names = var_names, 
-                         method = method_name), 
-                    function(forecasts, var_names, method) {
-                        dplyr::mutate(forecasts, 
-                                      id = var_names, 
-                                      method = method)
-                    }) %>%
-        dplyr::bind_rows()
+    forecasts <- purrr::map_dfr(dataset$abundance, fun, .id = "id")
     
     # Extract the metadata from the original dataset
     metadata <- dataset$metadata
 
     # Return the combined results and metadata
-    tibble::tibble(results = list(results), 
-                   metadata = list(metadata))
+    tibble::tibble(results = list(forecasts), 
+                   metadata = list(metadata), 
+                   dataset = dataset_name, 
+                   method = method_name)
 }
