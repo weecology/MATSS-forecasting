@@ -2,6 +2,11 @@ library(MATSSforecasting)
 library(tidyverse)
 library(drake)
 
+## make sure the package functions in MATSS and MATSSforecasting are loaded in 
+##   as dependencies
+expose_imports(MATSS)
+expose_imports(MATSSforecasting)
+
 ## define the datasets
 datasets <- plan_ward_data()
 
@@ -11,7 +16,7 @@ methods <- drake_plan(
 )
 
 ## define the analyses (each method x dataset combination)
-analyses <- MATSS::build_analyses_plan(methods, datasets)
+analyses <- build_analyses_plan(methods, datasets)
 
 ## define a report that summarize the autoarima analysis
 reports <- drake_plan(
