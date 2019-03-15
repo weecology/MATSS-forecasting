@@ -10,7 +10,8 @@ test_that("forecast_wrapper works for simple functions", {
     }
     
     # check if it worked properly and had the right size
-    expect_error(output <- forecast_wrapper(data, fun), NA)
+    expect_error(f <- analysis_wrapper(fun), NA)
+    expect_error(output <- f(data), NA)
     expect_equal(dim(output), c(1, 4))
     
     # check results data.frame

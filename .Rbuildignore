@@ -7,9 +7,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.travis.yml
-/analysis
-/output
-/reports
+^analysis$
+^output$
+^reports$
 ^README\.Rmd$
 ^README-.*\.png$
 

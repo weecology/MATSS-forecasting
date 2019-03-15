@@ -12,7 +12,7 @@ datasets <- plan_ward_data()
 
 ## define the forecasting methods
 methods <- drake_plan(
-    autoarima = function(dataset) {forecast_wrapper(dataset, autoarima_ts)}
+    autoarima = analysis_wrapper(autoarima_ts)
 )
 
 ## define the analyses (each method x dataset combination)
