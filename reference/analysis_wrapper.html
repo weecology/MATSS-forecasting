@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Apply a forecasting function to all time series in a dataset — forecast_wrapper • MATSSforecasting</title>
+<title>Create a function that replicates an analysis for all time series in a
+dataset — analysis_wrapper • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +31,13 @@
 
 
 
-<meta property="og:title" content="Apply a forecasting function to all time series in a dataset — forecast_wrapper" />
+<meta property="og:title" content="Create a function that replicates an analysis for all time series in a
+dataset — analysis_wrapper" />
 
-<meta property="og:description" content="This wrapper applies a forecasting function to all the time
-series in a dataset, and then coerces the results and metadata into a
-combined object." />
+<meta property="og:description" content="This wrapper takes as input, an analysis function intended to be
+applied to a single time series, and creates a function that will apply
+that analysis to all the time series as part of a dataset, returning a
+combined object with all of the results." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,56 +116,59 @@ combined object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Apply a forecasting function to all time series in a dataset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-wrapper.R'><code>R/forecasting-wrapper.R</code></a></small>
-    <div class="hidden name"><code>forecast_wrapper.Rd</code></div>
+    <h1>Create a function that replicates an analysis for all time series in a
+dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/analysis-wrapper.R'><code>R/analysis-wrapper.R</code></a></small>
+    <div class="hidden name"><code>analysis_wrapper.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This wrapper applies a forecasting function to all the time
-series in a dataset, and then coerces the results and metadata into a
-combined object.</p>
+    <p>This wrapper takes as input, an analysis function intended to be
+applied to a single time series, and creates a function that will apply
+that analysis to all the time series as part of a dataset, returning a
+combined object with all of the results.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>forecast_wrapper</span>(<span class='no'>dataset</span>, <span class='no'>fun</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>analysis_wrapper</span>(<span class='no'>fun</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset</th>
-      <td><p>the dataset object (following the <code>MATSS</code> data format)</p></td>
-    </tr>
-    <tr>
       <th>fun</th>
-      <td><p>the forecasting function</p></td>
+      <td><p>the analysis function</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra params to be passed to the forecasting function</p></td>
+      <td><p>extra params to be passed to the analysis function</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble with two list-columns:</p><table class='table'>
+    <p>a function that takes in a single argument, <code>dataset</code>, and returns a
+tibble with these columns:</p><table class='table'>
 <tr><td></td><td><code>results</code></td></tr>
 <tr><td></td><td>a combined results data.frame</td></tr>
 <tr><td></td><td><code>metadata</code></td></tr>
 <tr><td></td><td>the metadata component of the original dataset</td></tr>
+<tr><td></td><td><code>dataset</code></td></tr>
+<tr><td></td><td>the name of the dataset</td></tr>
+<tr><td></td><td><code>method</code></td></tr>
+<tr><td></td><td>the name of the analysis function</td></tr>
 <tr><td></td><td></td></tr>
 </table>
-<p>The results have all the columns returned from the forecasting function,
-with additional columns for the variable that was forecast (pulled from
-the original dataset), and a column for the forecast method</p>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
   <span class='no'>salmon</span> <span class='kw'>&lt;-</span> <span class='fu'>readd</span>(<span class='no'>data_.salmon.</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='no'>cache</span>)
-  <span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'>forecast_wrapper</span>(<span class='no'>salmon</span>, <span class='no'>autoarima_ts</span>)
+  <span class='no'>autoarima</span> <span class='kw'>&lt;-</span> <span class='fu'>forecast_wrapper</span>(<span class='no'>autoarima_ts</span>)
+  <span class='fu'>autoarima</span>(<span class='no'>salmon</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
