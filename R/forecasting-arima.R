@@ -1,11 +1,16 @@
-#' @title Make forward forecasts using a fractionally-differences ARIMA
+#' @name arima_fracdiff_ts
+#' @aliases randomwalk_ts
+#' @title Make forward forecasts using AR / ARIMA models
 #' 
-#' @description This function performs the forecasting according to the 
-#'   approach in Ward et al. 2014, where the end of the time series is trimmed, 
-#'   and a forecasting model is fit to the remainder of the data. This model is 
-#'   then used to make 1-step ahead forecasts, projecting the forecasts forward 
-#'   for the end of the time series. (i.e. the first forecast is fed into the 
-#'   model to make the next forecast, and so forth).)
+#' @description These functions follow the forecasting approach in Ward et al. 
+#'   2014: 
+#'   \enumerate{
+#'     \item fit the model to all but the last `num_ahead` time points
+#'     \item make 1-step ahead forecasts, and feed each forecast in as the 
+#'           observed, until `num_ahead` total forecasts are made
+#'   }
+#'   
+#' `arima_fracdiff_ts` fits a step-wise fractionally differenced auto-arima 
 #' 
 #' @param ts a single time series
 #' @param num_ahead the number of points at the end of the time series to forecast
@@ -46,7 +51,13 @@ arima_fracdiff_ts <- function(ts, num_ahead = 5)
         })
 }
 
+#' @rdname arima_fracdiff_ts
+#' 
+#' @description `randomwalk_ts` uses a random walk model
+#' @param drift a boolean to allow for drift (by default, `drift = FALSE`)
+#' 
 #' @export
+#' 
 randomwalk_ts <- function(ts, num_ahead = 5, drift = FALSE)
 {
     tryCatch(

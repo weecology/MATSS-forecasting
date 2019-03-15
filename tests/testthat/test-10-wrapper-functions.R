@@ -1,6 +1,6 @@
 context("Tests of Wrapper Functions")
 
-test_that("forecast_wrapper works for simple functions", {
+test_that("analysis_wrapper works for simple functions", {
     # setup sample inputs
     data <- MATSS::get_sgs_data()
     fun <- function(ts) {
@@ -29,7 +29,7 @@ test_that("forecast_wrapper works for simple functions", {
     expect_known_hash(digest::digest(output), "a5b8d5c75c")
 })
 
-test_that("forecast_wrapper preserves arguments correctly", {
+test_that("analysis_wrapper preserves arguments correctly", {
     # setup sample inputs
     data <- MATSS::get_sgs_data()
     CI_levels <- c(0.05, 0.95)
