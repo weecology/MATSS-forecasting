@@ -1,14 +1,14 @@
 ---
-title: "MATSSforecasting"
+title: "MATSSforecasting: Getting Started"
 author: 
 - Hao Ye
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{MATSSforecasting}
+  %\VignetteIndexEntry{MATSSforecasting: Getting Started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  ---
+---
   
   ```{r, include = FALSE}
 knitr::opts_chunk$set(
