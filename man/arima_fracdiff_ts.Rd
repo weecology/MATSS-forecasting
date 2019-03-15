@@ -3,33 +3,28 @@
 \name{arima_fracdiff_ts}
 \alias{arima_fracdiff_ts}
 \alias{randomwalk_ts}
-\title{Make forward forecasts using AR / ARIMA models}
+\title{Make forecasts using AR / ARIMA}
 \usage{
-arima_fracdiff_ts(ts, num_ahead = 5)
+arima_fracdiff_ts(ts, num_ahead = 5, level = 95)
 
-randomwalk_ts(ts, num_ahead = 5, drift = FALSE)
+randomwalk_ts(ts, num_ahead = 5, drift = FALSE, level = 95)
 }
 \arguments{
-\item{ts}{a single time series}
+\item{ts}{the time series to forecast}
 
 \item{num_ahead}{the number of points at the end of the time series to forecast}
 
-\item{drift}{a boolean to allow for drift (by default, \code{drift = FALSE})}
+\item{level}{Confidence level for prediction intervals.}
+
+\item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }
 \value{
 a data.frame of the mean forecasts, the observed values, and the
-lower and upper 95 CI levels (if an error occurs, then just NA values)
+lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-These functions follow the forecasting approach in Ward et al.
-2014:
-\enumerate{
-\item fit the model to all but the last \code{num_ahead} time points
-\item make 1-step ahead forecasts, and feed each forecast in as the
-observed, until \code{num_ahead} total forecasts are made
-}
-
-\code{arima_fracdiff_ts} fits a step-wise fractionally differenced auto-arima
+\code{arima_fracdiff_ts} fits a step-wise fractionally differenced
+auto-arima
 
 \code{randomwalk_ts} uses a random walk model
 }

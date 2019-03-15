@@ -10,12 +10,23 @@ expose_imports(MATSSforecasting)
 ## define the datasets
 datasets <- plan_ward_data()
 
-## define the forecasting methods
-methods <- drake_plan(
+## arima methods
+arima_methods <- drake_plan(
     autoarima = analysis_wrapper(arima_fracdiff_ts),
     randomwalk = analysis_wrapper(randomwalk_ts), 
-    randomwalk_drift = analysis_wrapper(randomwalk_ts, drift = TRUE)
+    randomwalk_drift = analysis_wrapper(randomwalk_ts, drift = TRUE), 
 )
+
+## ets methods (I think the frequency parameter doesn't actually do anything?)
+ets_methods <- drake_plan(
+    ets_1 = analysis_wrapper(ets_ts, frequency = 1), 
+    ets_2 = analysis_wrapper(ets_ts, frequency = 2), 
+    ets_3 = analysis_wrapper(ets_ts, frequency = 3), 
+    ets_4 = analysis_wrapper(ets_ts, frequency = 4)
+)
+
+## full list of methods
+methods <- bind_rows(arima_methods, ets_methods)
 
 ## define the analyses (each method x dataset combination)
 analyses <- build_analyses_plan(methods, datasets)
