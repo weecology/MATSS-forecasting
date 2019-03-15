@@ -44,10 +44,11 @@ To facilitate combining results from different datasets, we're going to grab the
 
 ```{r}
 # function to combine elements from the three columns
-process_row <- function(results, metadata, dataset, method) {
+process_row <- function(results, metadata, dataset, method, args) {
     results %>%
         mutate(dataset = dataset, 
-               method = method) %>%
+               method = method, 
+               args = list(args)) %>%
         left_join(mutate(metadata$species_table, id = as.character(id), 
                          by = "id"))
 }

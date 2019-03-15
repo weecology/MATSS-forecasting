@@ -2,9 +2,10 @@
 
 export("%>%")
 export(analysis_wrapper)
-export(autoarima_ts)
+export(arima_fracdiff_ts)
 export(get_ward_data)
 export(plan_ward_data)
+export(randomwalk_ts)
 export(reshape_ward_data)
 importFrom(magrittr,"%>%")
 importFrom(utils,data)

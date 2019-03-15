@@ -12,7 +12,9 @@ datasets <- plan_ward_data()
 
 ## define the forecasting methods
 methods <- drake_plan(
-    autoarima = analysis_wrapper(autoarima_ts)
+    autoarima = analysis_wrapper(arima_fracdiff_ts),
+    randomwalk = analysis_wrapper(randomwalk_ts), 
+    randomwalk_drift = analysis_wrapper(randomwalk_ts, drift = TRUE)
 )
 
 ## define the analyses (each method x dataset combination)

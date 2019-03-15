@@ -20,6 +20,7 @@ tibble with these columns:
 \code{metadata} \tab the metadata component of the original dataset\cr
 \code{dataset} \tab the name of the dataset\cr
 \code{method} \tab the name of the analysis function\cr
+\code{args} \tab a list of optional args to \code{method}\cr
 }
 }
 \description{

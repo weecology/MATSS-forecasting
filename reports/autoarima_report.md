@@ -24,46 +24,54 @@ str(results_autoarima, max.level = 2)
 ```
 
     ## List of 8
-    ##  $ analysis_autoarima_data_.salmon.             :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##  $ analysis_autoarima_data_.salmon.             :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.salmon."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.RAMlegacy_catch.    :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.RAMlegacy_catch.    :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.RAMlegacy_catch."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.RAMlegacy_ssb.      :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.RAMlegacy_ssb.      :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.RAMlegacy_ssb."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.RAMlegacy_recperssb.:Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.RAMlegacy_recperssb.:Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.RAMlegacy_recperssb."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.Dorner2008.         :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.Dorner2008.         :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.Dorner2008."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.LPI.                :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.LPI.                :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.LPI."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.SprSum_Col_Chinook. :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.SprSum_Col_Chinook. :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.SprSum_Col_Chinook."
-    ##   ..$ method  : chr "autoarima_ts"
-    ##  $ analysis_autoarima_data_.PugSound_Chinook.   :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  4 variables:
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
+    ##  $ analysis_autoarima_data_.PugSound_Chinook.   :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
     ##   ..$ results :List of 1
     ##   ..$ metadata:List of 1
     ##   ..$ dataset : chr "data_.PugSound_Chinook."
-    ##   ..$ method  : chr "autoarima_ts"
+    ##   ..$ method  : chr "arima_fracdiff_ts"
+    ##   ..$ args    :List of 1
 
 First, we combine these results together into a single tibble, making
 sure to keep the name of the original dataset, and doing some cleaning
@@ -76,17 +84,17 @@ results_autoarima <- bind_rows(results_autoarima) %>%
 print(results_autoarima)
 ```
 
-    ## # A tibble: 8 x 4
-    ##   results                  metadata   dataset             method      
-    ##   <list>                   <list>     <chr>               <chr>       
-    ## 1 <data.frame [751 × 5]>   <list [2]> salmon              autoarima_ts
-    ## 2 <data.frame [1,340 × 5]> <list [2]> RAMlegacy_catch     autoarima_ts
-    ## 3 <data.frame [1,195 × 5]> <list [2]> RAMlegacy_ssb       autoarima_ts
-    ## 4 <data.frame [1,070 × 5]> <list [2]> RAMlegacy_recperssb autoarima_ts
-    ## 5 <data.frame [430 × 5]>   <list [2]> Dorner2008          autoarima_ts
-    ## 6 <data.frame [1,280 × 5]> <list [2]> LPI                 autoarima_ts
-    ## 7 <data.frame [110 × 5]>   <list [2]> SprSum_Col_Chinook  autoarima_ts
-    ## 8 <data.frame [110 × 5]>   <list [2]> PugSound_Chinook    autoarima_ts
+    ## # A tibble: 8 x 5
+    ##   results               metadata   dataset          method         args    
+    ##   <list>                <list>     <chr>            <chr>          <list>  
+    ## 1 <data.frame [751 × 5… <list [2]> salmon           arima_fracdif… <list […
+    ## 2 <data.frame [1,340 ×… <list [2]> RAMlegacy_catch  arima_fracdif… <list […
+    ## 3 <data.frame [1,195 ×… <list [2]> RAMlegacy_ssb    arima_fracdif… <list […
+    ## 4 <data.frame [1,070 ×… <list [2]> RAMlegacy_recpe… arima_fracdif… <list […
+    ## 5 <data.frame [430 × 5… <list [2]> Dorner2008       arima_fracdif… <list […
+    ## 6 <data.frame [1,280 ×… <list [2]> LPI              arima_fracdif… <list […
+    ## 7 <data.frame [110 × 5… <list [2]> SprSum_Col_Chin… arima_fracdif… <list […
+    ## 8 <data.frame [110 × 5… <list [2]> PugSound_Chinook arima_fracdif… <list […
 
 To facilitate combining results from different datasets, we’re going to
 grab the `species_table` from within the `metadata` column, and join it
@@ -94,10 +102,11 @@ with the results:
 
 ``` r
 # function to combine elements from the three columns
-process_row <- function(results, metadata, dataset, method) {
+process_row <- function(results, metadata, dataset, method, args) {
     results %>%
         mutate(dataset = dataset, 
-               method = method) %>%
+               method = method, 
+               args = list(args)) %>%
         left_join(mutate(metadata$species_table, id = as.character(id), 
                          by = "id"))
 }
@@ -122,14 +131,115 @@ results <- results_autoarima %>%
 str(results)
 ```
 
-    ## 'data.frame':    6286 obs. of  10 variables:
+    ## 'data.frame':    6286 obs. of  11 variables:
     ##  $ id       : chr  "62" "62" "62" "62" ...
     ##  $ observed : num  10.5 10.5 11.2 11.2 11 ...
     ##  $ predicted: num  9.66 9.8 9.87 9.9 9.92 ...
     ##  $ lower_95 : num  8.34 8.45 8.5 8.53 8.54 ...
     ##  $ upper_95 : num  11 11.2 11.2 11.3 11.3 ...
     ##  $ dataset  : chr  "salmon" "salmon" "salmon" "salmon" ...
-    ##  $ method   : chr  "autoarima_ts" "autoarima_ts" "autoarima_ts" "autoarima_ts" ...
+    ##  $ method   : chr  "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" ...
+    ##  $ args     :List of 6286
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   .. [list output truncated]
     ##  $ species  : Factor w/ 193 levels "Allocyttus niger",..: 21 21 21 21 21 21 21 21 21 21 ...
     ##  $ class    : Factor w/ 4 levels "Actinopterygii",..: 1 1 1 1 1 1 1 1 1 1 ...
     ##  $ by       : chr  "id" "id" "id" "id" ...
