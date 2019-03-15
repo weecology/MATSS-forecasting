@@ -12,9 +12,25 @@ datasets <- plan_ward_data()
 
 ## arima methods
 arima_methods <- drake_plan(
-    autoarima = analysis_wrapper(arima_fracdiff_ts),
+    arima_001 = analysis_wrapper(arima, order = c(0, 0, 1)), 
+    arima_002 = analysis_wrapper(arima, order = c(0, 0, 2)), 
+    arima_011 = analysis_wrapper(arima, order = c(0, 1, 1)), 
+    arima_012 = analysis_wrapper(arima, order = c(0, 1, 2)), 
+    arima_100 = analysis_wrapper(arima, order = c(1, 0, 0)), 
+    arima_101 = analysis_wrapper(arima, order = c(1, 0, 1)), 
+    arima_102 = analysis_wrapper(arima, order = c(1, 0, 2)), 
+    arima_110 = analysis_wrapper(arima, order = c(1, 1, 0)), 
+    arima_111 = analysis_wrapper(arima, order = c(1, 1, 1)), 
+    arima_112 = analysis_wrapper(arima, order = c(1, 1, 2)),     
+    arima_200 = analysis_wrapper(arima, order = c(2, 0, 0)), 
+    arima_201 = analysis_wrapper(arima, order = c(2, 0, 1)), 
+    arima_202 = analysis_wrapper(arima, order = c(2, 0, 2)), 
+    arima_210 = analysis_wrapper(arima, order = c(2, 1, 0)), 
+    arima_211 = analysis_wrapper(arima, order = c(2, 1, 1)), 
+    arima_212 = analysis_wrapper(arima, order = c(2, 1, 2)), 
     randomwalk = analysis_wrapper(randomwalk_ts), 
     randomwalk_drift = analysis_wrapper(randomwalk_ts, drift = TRUE), 
+    autoarima = analysis_wrapper(arima_fracdiff_ts)
 )
 
 ## ets methods (I think the frequency parameter doesn't actually do anything?)

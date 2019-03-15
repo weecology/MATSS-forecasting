@@ -20,7 +20,7 @@ arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
     f <- function(training, observed, order, level)
     {
         # make forecasts
-        arima_model <- forecast::arima(ts(training), order = order)
+        arima_model <- stats::arima(ts(training), order = order)
         
         forecasts <- forecast::forecast(arima_model, NROW(observed), level = level)
         
