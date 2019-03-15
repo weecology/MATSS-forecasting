@@ -46,13 +46,13 @@ test_that("arima_ts function works", {
     ts <- Nile
     expect_error(output <- arima_ts(ts), NA)
     expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"))
-    expect_known_hash(output, "9ec02f284e")
+    expect_known_hash(round(output, 4), "41466ee2a8")
 })
 
 test_that("arima_ts function works with different order", {
     ts <- Nile
     expect_error(output <- arima_ts(ts, order = c(2, 0, 1)), NA)
     expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"))
-    expect_known_hash(output, "4aa5ee6acf")
+    expect_known_hash(round(output, 4), "44104d07fa")
 })
     

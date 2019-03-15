@@ -7,6 +7,7 @@
 #' @description `arima_ts` fits an arima model
 #' 
 #' @param level the CI level to include
+#' @inheritParams stats::arima
 #' @inheritParams make_forecasts
 #' @inheritParams forecast::forecast
 #' 

@@ -19,6 +19,10 @@ randomwalk_ts(ts, num_ahead = 5, drift = FALSE, level = 95)
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
 
+\item{order}{A specification of the non-seasonal part of the ARIMA
+    model: the three integer components \eqn{(p, d, q)} are the AR order, the
+    degree of differencing, and the MA order.}
+
 \item{level}{the CI level to include}
 
 \item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
