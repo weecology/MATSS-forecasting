@@ -6,7 +6,7 @@
 #'   the parameter from the data
 #' 
 #' @param level the CI level to include
-#' @inheritParams forecast_wrapper
+#' @inheritParams make_forecasts
 #' @inheritParams stats::ts
 #' 
 #' @return a data.frame of the mean forecasts, the observed values, and the 
@@ -20,7 +20,7 @@ ets_ts <- function(ts, num_ahead = 5, level = 95, frequency = 1)
     {
         # make forecasts
         ts_model <- forecast::ets(ts(training, frequency = frequency))
-        forecasts <- forecast::forecast(ts_model, num_ahead, level = level)
+        forecasts <- forecast::forecast(ts_model, NROW(observed), level = level)
         
         # return
         data.frame(observed = as.numeric(observed),
@@ -29,5 +29,6 @@ ets_ts <- function(ts, num_ahead = 5, level = 95, frequency = 1)
                    upper_CI = as.numeric(forecasts$upper))
     }
     
-    forecast_wrapper(f, ts, num_ahead, level, frequency)
+    make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+                     level = level, frequency = frequency)
 }

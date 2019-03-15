@@ -8,7 +8,14 @@
 #'           observed, until `num_ahead` total forecasts are made
 #'   }
 #' 
-#' @param fun a 
+#' @param fun a function for doing the forecasting. It should have arguments:
+#'   \describe{
+#'     \item{training}{the data for training the model}
+#'     \item{observed}{the observed values to be forecasted}
+#'     \item{...}{any optional arguments}
+#'   } and should return a data.frame with at least the observed and predicted 
+#'   values (other columns are optional, and may be specific to the forecasting 
+#'   method)
 #' @param ts the time series to forecast
 #' @param num_ahead the number of points at the end of the time series to 
 #'   forecast
@@ -18,7 +25,7 @@
 #'   remaining values returned by `fun`. If and error occurs, then NA values for 
 #'   the observed and predicted
 #' 
-forecast_wrapper <- function(fun, ts, num_ahead = 5, ...)
+make_forecasts <- function(fun, ts, num_ahead = 5, ...)
 {
     tryCatch(
         {
@@ -32,7 +39,9 @@ forecast_wrapper <- function(fun, ts, num_ahead = 5, ...)
             training_subset <- seq_len(num_points - num_ahead)
             
             # make forecasts
-            fun(ts[training_subset], tail(ts, num_ahead), ...)
+            fun(training = ts[training_subset], 
+                observed = tail(ts, num_ahead), 
+                ...)
             
         }, error = function(e) {
             warning(e, "  returning a NA object")

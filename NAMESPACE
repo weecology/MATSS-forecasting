@@ -3,6 +3,7 @@
 export("%>%")
 export(analysis_wrapper)
 export(arima_fracdiff_ts)
+export(arima_ts)
 export(ets_ts)
 export(expect_forecasts)
 export(get_ward_data)
