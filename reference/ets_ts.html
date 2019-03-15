@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a function that replicates an analysis for all time series in a
-dataset — analysis_wrapper • MATSSforecasting</title>
+<title>Make forecasts using exponentially smoothed time series — ets_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,13 +30,11 @@ dataset — analysis_wrapper • MATSSforecasting</title>
 
 
 
-<meta property="og:title" content="Create a function that replicates an analysis for all time series in a
-dataset — analysis_wrapper" />
+<meta property="og:title" content="Make forecasts using exponentially smoothed time series — ets_ts" />
 
-<meta property="og:description" content="This wrapper takes as input, an analysis function intended to be
-applied to a single time series, and creates a function that will apply
-that analysis to all the time series as part of a dataset, returning a
-combined object with all of the results." />
+<meta property="og:description" content="Fit an exponentially smoothed time series and make forecasts.
+Here, the frequency of the data is set a priori, as opposed to estimating
+the parameter from the data" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,64 +113,49 @@ combined object with all of the results." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a function that replicates an analysis for all time series in a
-dataset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/analysis-wrapper.R'><code>R/analysis-wrapper.R</code></a></small>
-    <div class="hidden name"><code>analysis_wrapper.Rd</code></div>
+    <h1>Make forecasts using exponentially smoothed time series</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-ets.R'><code>R/forecasting-ets.R</code></a></small>
+    <div class="hidden name"><code>ets_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This wrapper takes as input, an analysis function intended to be
-applied to a single time series, and creates a function that will apply
-that analysis to all the time series as part of a dataset, returning a
-combined object with all of the results.</p>
+    <p>Fit an exponentially smoothed time series and make forecasts.
+Here, the frequency of the data is set a priori, as opposed to estimating
+the parameter from the data</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>analysis_wrapper</span>(<span class='no'>fun</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fun</th>
-      <td><p>the analysis function</p></td>
+      <th>ts</th>
+      <td><p>the time series to forecast</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>extra params to be passed to the analysis function</p></td>
+      <th>num_ahead</th>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>the CI level to include</p></td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td><p>the number of observations per unit of time.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a function that takes in a single argument, <code>dataset</code>, and returns a
-tibble with these columns:</p><table class='table'>
-<tr><td></td><td><code>results</code></td></tr>
-<tr><td></td><td>a combined results data.frame</td></tr>
-<tr><td></td><td><code>metadata</code></td></tr>
-<tr><td></td><td>the metadata component of the original dataset</td></tr>
-<tr><td></td><td><code>dataset</code></td></tr>
-<tr><td></td><td>the name of the dataset</td></tr>
-<tr><td></td><td><code>method</code></td></tr>
-<tr><td></td><td>the name of the analysis function</td></tr>
-<tr><td></td><td><code>args</code></td></tr>
-<tr><td></td><td>a list of optional args to</td></tr>
-<tr><td><code>method</code></td><td></td></tr>
-<tr><td></td><td></td></tr>
-</table>
-
-
+    <p>a data.frame of the mean forecasts, the observed values, and the
+lower and upper CI levels (if an error occurs, then just NA values)</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-  <span class='no'>salmon</span> <span class='kw'>&lt;-</span> <span class='fu'>readd</span>(<span class='no'>data_.salmon.</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='no'>cache</span>)
-  <span class='no'>autoarima</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='forecast_wrapper.html'>forecast_wrapper</a></span>(<span class='no'>autoarima_ts</span>)
-  <span class='fu'>autoarima</span>(<span class='no'>salmon</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -181,9 +163,7 @@ tibble with these columns:</p><table class='table'>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
