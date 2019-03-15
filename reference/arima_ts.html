@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using AR / ARIMA — arima_fracdiff_ts • MATSSforecasting</title>
+<title>Make forecasts using AR / ARIMA — arima_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,12 @@
 
 
 
-<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_fracdiff_ts" />
+<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
 
-<meta property="og:description" content="arima_fracdiff_ts fits a step-wise fractionally differenced
+<meta property="og:description" content="arima_ts fits an arima model
+arima_fracdiff_ts fits a step-wise fractionally differenced
 auto-arima
-randomwalk_ts uses a random walk model" />
+randomwalk_ts fits a random walk model" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,18 +116,21 @@ randomwalk_ts uses a random walk model" />
     <div class="page-header">
     <h1>Make forecasts using AR / ARIMA</h1>
     <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-arima.R'><code>R/forecasting-arima.R</code></a></small>
-    <div class="hidden name"><code>arima_fracdiff_ts.Rd</code></div>
+    <div class="hidden name"><code>arima_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>arima_fracdiff_ts</code> fits a step-wise fractionally differenced
+    <p><code>arima_ts</code> fits an arima model</p>
+<p><code>arima_fracdiff_ts</code> fits a step-wise fractionally differenced
 auto-arima</p>
-<p><code>randomwalk_ts</code> uses a random walk model</p>
+<p><code>randomwalk_ts</code> fits a random walk model</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>arima_fracdiff_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
+    <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
+
+<span class='fu'>arima_fracdiff_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
 
 <span class='fu'>randomwalk_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
     
@@ -139,11 +143,12 @@ auto-arima</p>
     </tr>
     <tr>
       <th>num_ahead</th>
-      <td><p>the number of points at the end of the time series to forecast</p></td>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
     </tr>
     <tr>
       <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
+      <td><p>the CI level to include</p></td>
     </tr>
     <tr>
       <th>drift</th>
