@@ -1,0 +1,78 @@
+---
+title: "MATSSforecasting"
+author: 
+- Hao Ye
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MATSSforecasting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+```{r setup}
+library(MATSSforecasting)
+```
+
+# Overview
+
+This document is intended to guide developers and contributors to the `MATSSforecasting` project. We recommend everyone start with the [README](README.md) for instructions on installing dependencies and the necessary codebase.
+
+# Data Format
+
+We follow the dataset format from [MATSS](https://weecology.github.io/MATSS/index.html). You can read more about the specific format in the [Data Formats vignette](https://weecology.github.io/MATSS/articles/data-formats.html) of the `MATSS` package.
+
+## How this works
+
+Datasets that we import from the `MATSS` package arrive in that specific format. Datasets that we import using code within `MATSSforecasting` follow the same format. This allows all analysis code to be interoperable.
+
+Note that the specified format is for a **dataset**, as opposed to a single time series. This provides better support for community-oriented analysis, and means time series collected following a similar protocol or as part of a broader sampling effort should probably be grouped together as a single dataset.
+
+# Forecasting Analysis
+
+## Forecasting functions
+
+The basic analysis function should operate on a single time series. To facilitate the analysis and reduce duplication of code, we use several wrappers to handle data pre-processing, so that forecast functions only need minimal amounts of code.
+
+For example, consider this function to define the ARIMA model:
+```{r, eval = FALSE}
+arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
+{
+    f <- function(training, observed, order, level)
+    {
+        # make forecasts
+        arima_model <- stats::arima(ts(training), order = order)
+        
+        forecasts <- forecast::forecast(arima_model, NROW(observed), level = level)
+        
+        # return
+        data.frame(observed = as.numeric(observed),
+                   predicted = as.numeric(forecasts$mean),
+                   lower_CI = as.numeric(forecasts$lower),
+                   upper_CI = as.numeric(forecasts$upper))
+    }
+    
+    make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+                   order = order, level = level)
+}
+```
+
+* `arima_ts` is a function that operates on a single time series, with arguments for `num_ahead` (required), and `order` and `level`, which are optional.
+  - Inside `arima_ts`, we define a function, `f`, that takes in the training and observed time series portions, along with any model arguments.
+    + `f` trains the model and makes forecasts, and these are returned as a data.frame, which must have at least the `observed` and `predicted` columns, though many of the functions will also include `lower_95` and `upper_95` columns for the 95% predictive bounds.
+  - `f` is passed to `make_forecasts`, a function which performs the necessary splitting of the data into `training` and `observed` portions, runs `f`, and handles any errors gracefully (returning NAs) if necessary.
+
+We use this (admittedly) convoluted coding structure so that `make_forecasts` provides a consistent wrapper for handling any kind of forecast model, and so that each defined forecasting function (e.g. `arima_ts`) can be used on individual time series, with optional arguments passed in without issue. 
+
+## Scaling up forecasting
+
+We use a function, `analysis_wrapper()` from `MATSS` that facilitates repeating a forecasting analysis on one time series to run on all the time series in a dataset. For more info, see the documentation of [that function](https://weecology.github.io/MATSS/reference/analysis_wrapper.html). 
+
+# Summary
