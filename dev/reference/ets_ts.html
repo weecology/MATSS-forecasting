@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • MATSSforecasting</title>
+<title>Make forecasts using exponentially smoothed time series — ets_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,14 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Make forecasts using exponentially smoothed time series — ets_ts" />
 
+<meta property="og:description" content="Fit an exponentially smoothed time series and make forecasts.
+Here, the frequency of the data is set a priori, as opposed to estimating
+the parameter from the data" />
+<meta name="twitter:card" content="summary" />
 
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -47,9 +52,9 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -60,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0</span>
       </span>
     </div>
 
@@ -73,19 +78,10 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/MATSSforecasting.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/matssforecasting.html">MATSSforecasting: Getting Started</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
@@ -108,17 +104,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Make forecasts using exponentially smoothed time series</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-ets.R'><code>R/forecasting-ets.R</code></a></small>
+    <div class="hidden name"><code>ets_ts.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="matssforecasting.html">MATSSforecasting: Getting Started</a></li>
-      </ul>
+    <div class="ref-description">
+    
+    <p>Fit an exponentially smoothed time series and make forecasts.
+Here, the frequency of the data is set a priori, as opposed to estimating
+the parameter from the data</p>
+    
     </div>
+
+    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ts</th>
+      <td><p>the time series to forecast</p></td>
+    </tr>
+    <tr>
+      <th>num_ahead</th>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>the CI level to include</p></td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td><p>the number of observations per unit of time.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a data.frame of the mean forecasts, the observed values, and the
+lower and upper CI levels (if an error occurs, then just NA values)</p>
+    
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 
