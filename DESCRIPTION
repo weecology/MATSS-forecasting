@@ -30,7 +30,8 @@ Suggests:
     rmarkdown,
     pkgdown,
     covr, 
-    digest
+    digest, 
+    visNetwork
 Remotes: 
     weecology/MATSS,
     ropensci/drake
