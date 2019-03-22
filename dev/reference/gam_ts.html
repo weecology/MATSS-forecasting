@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using an exponentially smoothed or structural time
-series mdoel — ets_ts • MATSSforecasting</title>
+<title>Make forecasts using a Generalized Additive Model — gam_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,14 +30,10 @@ series mdoel — ets_ts • MATSSforecasting</title>
 
 
 
-<meta property="og:title" content="Make forecasts using an exponentially smoothed or structural time
-series mdoel — ets_ts" />
+<meta property="og:title" content="Make forecasts using a Generalized Additive Model — gam_ts" />
 
-<meta property="og:description" content="Fit a time series model and make forecasts. The frequency of the
-data is set a priori, as opposed to estimating the parameter from the data.
-ets_ts fits an exponentially smoothed time series model.
-sts_ts fits a structural model for a time series by
-maximum likelihood." />
+<meta property="og:description" content="Fit a Generalized Additive Model (GAM) with spline over
+time/years and use it to make forecasts" />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -108,45 +103,26 @@ maximum likelihood." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using an exponentially smoothed or structural time
-series mdoel</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-ets.R'><code>R/forecasting-ets.R</code></a></small>
-    <div class="hidden name"><code>ets_ts.Rd</code></div>
+    <h1>Make forecasts using a Generalized Additive Model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-gam.R'><code>R/forecasting-gam.R</code></a></small>
+    <div class="hidden name"><code>gam_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fit a time series model and make forecasts. The frequency of the
-data is set a priori, as opposed to estimating the parameter from the data.</p>
-<p><code>ets_ts</code> fits an exponentially smoothed time series model.</p>
-<p><code>sts_ts</code> fits a structural model for a time series by
-maximum likelihood.</p>
+    <p>Fit a Generalized Additive Model (GAM) with spline over
+time/years and use it to make forecasts</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>sts_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>gam_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ts</th>
-      <td><p>the time series to forecast</p></td>
-    </tr>
-    <tr>
-      <th>num_ahead</th>
-      <td><p>the number of points at the end of the time series to
-forecast</p></td>
-    </tr>
-    <tr>
       <th>level</th>
       <td><p>the CI level to include</p></td>
-    </tr>
-    <tr>
-      <th>frequency</th>
-      <td><p>the number of observations per unit of time.</p></td>
     </tr>
     </table>
     
