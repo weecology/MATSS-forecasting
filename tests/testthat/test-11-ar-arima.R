@@ -1,4 +1,4 @@
-context("AR/ARIMA forecasting functions")
+context("AR/ARIMA functions")
 
 test_that("arima_fracdiff_ts error checking works for too short time series", {
     expect_warning(arima_fracdiff_ts(c(1, NA)), "Error in seq_len\\(num_points - num_ahead\\): ")

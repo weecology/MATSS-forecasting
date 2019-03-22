@@ -34,7 +34,7 @@ arima_methods <- drake_plan(
     autoarima = analysis_wrapper(arima_fracdiff_ts)
 )
 
-## ets methods
+## ets methods (I think the frequency parameter doesn't actually do anything?)
 ets_methods <- drake_plan(
     ets_1 = analysis_wrapper(ets_ts, frequency = 1), 
     ets_2 = analysis_wrapper(ets_ts, frequency = 2), 
@@ -43,7 +43,8 @@ ets_methods <- drake_plan(
 )
 
 ## sts methods (I am not sure why Ward et al. only explore up to frequency = 2 
-##   here, but up to frequency = 4 for ets)
+##   here, but up to frequency = 4 for ets; this appears to give different 
+##   results for different values of the frequency parameter)
 sts_methods <- drake_plan(
     sts_1 = analysis_wrapper(sts_ts, frequency = 1), 
     sts_2 = analysis_wrapper(sts_ts, frequency = 2)

@@ -28,8 +28,8 @@ gam_ts <- function(ts, num_ahead = 5, level = 95)
         # return
         data.frame(observed = as.numeric(observed),
                    predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, f$fit, f$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, f$fit, f$se.fit)))
+                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
+                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
     
     make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
