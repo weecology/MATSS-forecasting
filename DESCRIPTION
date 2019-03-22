@@ -22,7 +22,8 @@ Imports:
     magrittr,
     purrr,
     here,
-    tibble
+    tibble,
+    mgcv
 Suggests:
     testthat,
     knitr,

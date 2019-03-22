@@ -2,9 +2,13 @@
 % Please edit documentation in R/forecasting-ets.R
 \name{ets_ts}
 \alias{ets_ts}
-\title{Make forecasts using exponentially smoothed time series}
+\alias{sts_ts}
+\title{Make forecasts using an exponentially smoothed or structural time
+series mdoel}
 \usage{
 ets_ts(ts, num_ahead = 5, level = 95, frequency = 1)
+
+sts_ts(ts, num_ahead = 5, level = 95, frequency = 1)
 }
 \arguments{
 \item{ts}{the time series to forecast}
@@ -21,7 +25,11 @@ a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-Fit an exponentially smoothed time series and make forecasts.
-Here, the frequency of the data is set a priori, as opposed to estimating
-the parameter from the data
+Fit a time series model and make forecasts. The frequency of the
+data is set a priori, as opposed to estimating the parameter from the data.
+
+\code{ets_ts} fits an exponentially smoothed time series model.
+
+\code{sts_ts} fits a structural model for a time series by
+maximum likelihood.
 }

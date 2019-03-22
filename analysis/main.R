@@ -34,7 +34,7 @@ arima_methods <- drake_plan(
     autoarima = analysis_wrapper(arima_fracdiff_ts)
 )
 
-## ets methods (I think the frequency parameter doesn't actually do anything?)
+## ets methods
 ets_methods <- drake_plan(
     ets_1 = analysis_wrapper(ets_ts, frequency = 1), 
     ets_2 = analysis_wrapper(ets_ts, frequency = 2), 
@@ -42,8 +42,20 @@ ets_methods <- drake_plan(
     ets_4 = analysis_wrapper(ets_ts, frequency = 4)
 )
 
+## sts methods (I am not sure why Ward et al. only explore up to frequency = 2 
+##   here, but up to frequency = 4 for ets)
+sts_methods <- drake_plan(
+    sts_1 = analysis_wrapper(sts_ts, frequency = 1), 
+    sts_2 = analysis_wrapper(sts_ts, frequency = 2)
+)
+
+## spline methods
+spline_methods <- drake_plan(
+    gam = analysis_wrapper(gam_ts)
+)
+
 ## full list of methods
-methods <- bind_rows(arima_methods, ets_methods)
+methods <- bind_rows(arima_methods, ets_methods, sts_methods, spline_methods)
 
 ## define the analyses (each method x dataset combination)
 analyses <- build_analyses_plan(methods, datasets)
