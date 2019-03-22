@@ -1,7 +1,7 @@
-Autoarima report
+autoarima report
 ================
 Hao Ye
-2019-03-15
+2019-03-22
 
 ## Read in the results
 
@@ -135,8 +135,8 @@ str(results)
     ##  $ id       : chr  "62" "62" "62" "62" ...
     ##  $ observed : num  10.5 10.5 11.2 11.2 11 ...
     ##  $ predicted: num  9.66 9.8 9.87 9.9 9.92 ...
-    ##  $ lower_95 : num  8.34 8.45 8.5 8.53 8.54 ...
-    ##  $ upper_95 : num  11 11.2 11.2 11.3 11.3 ...
+    ##  $ lower_CI : num  8.34 8.45 8.5 8.53 8.54 ...
+    ##  $ upper_CI : num  11 11.2 11.2 11.3 11.3 ...
     ##  $ dataset  : chr  "salmon" "salmon" "salmon" "salmon" ...
     ##  $ method   : chr  "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" ...
     ##  $ args     :List of 6286
@@ -255,7 +255,7 @@ observed value fell within the predicted 95% range:
 ``` r
 to_plot <- results %>%
     group_by(id, dataset) %>%
-    summarize(frac_correct = sum(observed > lower_95 & observed < upper_95) / n(), 
+    summarize(frac_correct = sum(observed > lower_CI & observed < upper_CI) / n(), 
               species = first(species), 
               class = first(class))
 ```

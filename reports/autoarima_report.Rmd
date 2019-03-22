@@ -1,5 +1,5 @@
 ---
-title: "Autoarima report"
+title: "autoarima report"
 author: "Hao Ye"
 date: "`r Sys.Date()`"
 output: github_document
@@ -69,7 +69,7 @@ What we want to plot is a summary of the results for each time series (represent
 ```{r}
 to_plot <- results %>%
     group_by(id, dataset) %>%
-    summarize(frac_correct = sum(observed > lower_95 & observed < upper_95) / n(), 
+    summarize(frac_correct = sum(observed > lower_CI & observed < upper_CI) / n(), 
               species = first(species), 
               class = first(class))
 ```
