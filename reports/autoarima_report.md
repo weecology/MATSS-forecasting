@@ -10,7 +10,7 @@ Hao Ye
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-results_autoarima <- readd(results_autoarima, cache = cache)
+results_autoarima <- readd(results_autoarima, character_only = FALSE, cache = cache)
 ```
 
 ## Process results together
@@ -107,142 +107,34 @@ process_row <- function(results, metadata, dataset, method, args) {
         mutate(dataset = dataset, 
                method = method, 
                args = list(args)) %>%
-        left_join(mutate(metadata$species_table, id = as.character(id), 
-                         by = "id"))
+        left_join(mutate(metadata$species_table, id = as.character(id)), 
+                  by = "id")
 }
 
 # apply process_row to each dataset, then combine into a single tibble
 results <- results_autoarima %>%
     pmap(process_row) %>%
-    bind_rows()
-```
+    bind_rows() %>%
+    as_tibble()
 
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-    ## Joining, by = "id"
-
-``` r
 # what is the structure of results?
-str(results)
+print(results)
 ```
 
-    ## 'data.frame':    6286 obs. of  11 variables:
-    ##  $ id       : chr  "62" "62" "62" "62" ...
-    ##  $ observed : num  10.5 10.5 11.2 11.2 11 ...
-    ##  $ predicted: num  9.66 9.8 9.87 9.9 9.92 ...
-    ##  $ lower_CI : num  8.34 8.45 8.5 8.53 8.54 ...
-    ##  $ upper_CI : num  11 11.2 11.2 11.3 11.3 ...
-    ##  $ dataset  : chr  "salmon" "salmon" "salmon" "salmon" ...
-    ##  $ method   : chr  "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" ...
-    ##  $ args     :List of 6286
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   ..$ : list()
-    ##   .. [list output truncated]
-    ##  $ species  : Factor w/ 193 levels "Allocyttus niger",..: 21 21 21 21 21 21 21 21 21 21 ...
-    ##  $ class    : Factor w/ 4 levels "Actinopterygii",..: 1 1 1 1 1 1 1 1 1 1 ...
-    ##  $ by       : chr  "id" "id" "id" "id" ...
+    ## # A tibble: 6,286 x 10
+    ##    id    observed predicted lower_CI upper_CI dataset method args  species
+    ##    <chr>    <dbl>     <dbl>    <dbl>    <dbl> <chr>   <chr>  <lis> <fct>  
+    ##  1 62       10.5       9.66     8.34     11.0 salmon  arima… <lis… Chinook
+    ##  2 62       10.5       9.80     8.45     11.2 salmon  arima… <lis… Chinook
+    ##  3 62       11.2       9.87     8.50     11.2 salmon  arima… <lis… Chinook
+    ##  4 62       11.2       9.90     8.53     11.3 salmon  arima… <lis… Chinook
+    ##  5 62       11.0       9.92     8.54     11.3 salmon  arima… <lis… Chinook
+    ##  6 63        8.52      8.63     7.26     10.0 salmon  arima… <lis… Chinook
+    ##  7 63        7.88      8.78     7.32     10.2 salmon  arima… <lis… Chinook
+    ##  8 63        8.52      8.68     7.09     10.3 salmon  arima… <lis… Chinook
+    ##  9 63        8.26      8.68     7.05     10.3 salmon  arima… <lis… Chinook
+    ## 10 63        8.32      8.65     6.99     10.3 salmon  arima… <lis… Chinook
+    ## # … with 6,276 more rows, and 1 more variable: class <fct>
 
 ## Prepare for plotting
 

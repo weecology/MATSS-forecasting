@@ -1,5 +1,5 @@
 ---
-title: "autoarima report"
+title: "Forecasting Comparison Report"
 author: "Hao Ye"
 date: "`r Sys.Date()`"
 output: github_document
@@ -20,27 +20,33 @@ library(drake)
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-results_autoarima <- readd(results_autoarima, character_only = FALSE, cache = cache)
+# find results objects
+results_pattern <- "^results_"
+cache_names <- cache$list()
+results_names <- grep(results_pattern, cache_names, value = TRUE)
+
+# load results
+loadd(list = results_names, cache = cache)
 ```
 
 ## Process results together
 
-Here, `results_autoarima` is a list with `r length(results_autoarima)` elements, one for each of the datasets that were analyzed. Each individual element is a tibble with the same list columns, `results` and `metadata`.
+We have quite a few results objects loaded. There is one for each analysis method, combining the individual runs on the different datasets.
 
 ```{r}
-str(results_autoarima, max.level = 2)
+ls(pattern = results_pattern)
 ```
 
-First, we combine these results together into a single tibble, making sure to keep the name of the original dataset, and doing some cleaning of the dataset names:
+Just as in the "autoarima_report", we combine the outputs in each results object using `bind_rows()`, and wrap this all together using `purrr::map_dfr()` (and some cleaning of the dataset names):
 
 ```{r}
-results_autoarima <- bind_rows(results_autoarima) %>%
-    mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
+full_results <- purrr::map_dfr(mget(results_names), bind_rows) %>%
+        mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
 
-print(results_autoarima)
+print(full_results)
 ```
 
-To facilitate combining results from different datasets, we're going to grab the `species_table` from within the `metadata` column, and join it with the results:
+Again, we combine the `species_table` from within the `metadata` column, and join it with the results:
 
 ```{r}
 # function to combine elements from the three columns
@@ -54,7 +60,7 @@ process_row <- function(results, metadata, dataset, method, args) {
 }
 
 # apply process_row to each dataset, then combine into a single tibble
-results <- results_autoarima %>%
+results <- full_results %>%
     pmap(process_row) %>%
     bind_rows() %>%
     as_tibble()
@@ -66,10 +72,10 @@ print(results)
 ## Prepare for plotting
 
 What we want to plot is a summary of the results for each time series (represented by unique combinations of `id` x `dataset`). Since the observed and predicted values are going to have very different scales across each time series, let's just count the fraction of times the observed value fell within the predicted 95% range:
-
+    
 ```{r}
 to_plot <- results %>%
-    group_by(id, dataset) %>%
+    group_by(id, dataset, method) %>%
     summarize(frac_correct = sum(observed > lower_CI & observed < upper_CI) / n(), 
               species = first(species), 
               class = first(class))
@@ -78,15 +84,12 @@ to_plot <- results %>%
 ## Plot
 
 For each level of `class`, produce a histogram for `frac_correct`:
-
+    
 ```{r}
 ggplot(data = to_plot, 
        mapping = aes(x = frac_correct, fill = class)) + 
-    facet_wrap(~class, scales = "free_y") + 
-    geom_bar(width = 0.15) + 
+    facet_wrap(~method, scales = "free_y") + 
+    geom_density(position = "stack") + 
     theme_bw()
 ```
-
-
-
 

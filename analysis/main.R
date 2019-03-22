@@ -65,6 +65,9 @@ analyses <- build_analyses_plan(methods, datasets)
 reports <- drake_plan(
     autoarima_report = rmarkdown::render(
         knitr_in("reports/autoarima_report.Rmd")
+    ),
+    forecasting_comparison = rmarkdown::render(
+        knitr_in("reports/forecasting_comparison.Rmd")
     )
 )
 
