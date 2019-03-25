@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 # MATSSforecasting
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.org/ha0ye/MATSS-forecasting.svg?branch=master)](https://travis-ci.org/ha0ye/MATSS-forecasting)
-[![Codecov test coverage](https://codecov.io/gh/ha0ye/MATSS-forecasting/branch/master/graph/badge.svg)](https://codecov.io/gh/ha0ye/MATSS-forecasting?branch=master)
+[![Build Status](https://travis-ci.org/weecology/MATSS-forecasting.svg?branch=master)](https://travis-ci.org/weecology/MATSS-forecasting)
+[![Codecov test coverage](https://codecov.io/gh/weecology/MATSS-forecasting/branch/master/graph/badge.svg)](https://codecov.io/gh/weecology/MATSS-forecasting?branch=master)
 <!-- badges: end -->
 
 ## Overview
@@ -33,7 +33,7 @@ There are two main ways to install the package. You can install it using the aut
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("ha0ye/MATSS-forecasting")
+devtools::install_github("weecology/MATSS-forecasting")
 ```
 
 This will automatically install any dependencies, so can be a good way to start.
