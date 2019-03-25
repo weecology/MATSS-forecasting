@@ -4,6 +4,6 @@ pkgdown_sha: ~
 articles:
   MATSSforecasting: MATSSforecasting.html
 urls:
-  reference: https://ha0ye.github.io/MATSS-forecasting/reference
-  article: https://ha0ye.github.io/MATSS-forecasting/articles
+  reference: https://weecology.github.io/MATSS-forecasting/reference
+  article: https://weecology.github.io/MATSS-forecasting/articles
 
