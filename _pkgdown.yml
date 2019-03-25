@@ -1,5 +1,5 @@
-url: https://ha0ye.github.io/MATSSforecasting
+url: https://ha0ye.github.io/MATSS-forecasting
 development:
-  mode: devel
+  mode: unreleased
 navbar:
   type: inverse
