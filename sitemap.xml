@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/arima_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/ets_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/expect_forecasts.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/gam_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/get_ward_data.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/make_forecasts.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/plan_ward_data.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/reference/reshape_ward_data.html</loc>
+  </url>
+  <url>
+    <loc>https://ha0ye.github.io/MATSS-forecasting/articles/MATSSforecasting.html</loc>
+  </url>
+</urlset>

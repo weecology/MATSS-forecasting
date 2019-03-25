@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • MATSSforecasting</title>
+<title>A wrapper function for forecasting methods — make_forecasts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,17 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:title" content="A wrapper function for forecasting methods — make_forecasts" />
 
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:description" content="This function faciliates the forecasting approach in Ward et al.
+2014:
+fit the model to all but the last num_ahead time points
+make 1-step ahead forecasts, and feed each forecast in as the
+observed, until num_ahead total forecasts are made
+" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -63,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
       </span>
     </div>
 
@@ -102,25 +107,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>A wrapper function for forecasting methods</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-utils.R'><code>R/forecasting-utils.R</code></a></small>
+    <div class="hidden name"><code>make_forecasts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>This function faciliates the forecasting approach in Ward et al.
+2014:</p><ol>
+<li><p>fit the model to all but the last <code>num_ahead</code> time points</p></li>
+<li><p>make 1-step ahead forecasts, and feed each forecast in as the
+observed, until <code>num_ahead</code> total forecasts are made</p></li>
+</ol>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
-        
+    <pre class="usage"><span class='fu'>make_forecasts</span>(<span class='no'>fun</span>, <span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>fun</th>
+      <td><p>a function for doing the forecasting. It should have arguments:</p><dl class='dl-horizontal'>
+<dt>training</dt><dd><p>the data for training the model</p></dd>
+<dt>observed</dt><dd><p>the observed values to be forecasted</p></dd>
+<dt>...</dt><dd><p>any optional arguments</p></dd>
+</dl><p>and should return a data.frame with at least the observed and predicted
+values (other columns are optional, and may be specific to the forecasting
+method)</p></td>
+    </tr>
+    <tr>
+      <th>ts</th>
+      <td><p>the time series to forecast</p></td>
+    </tr>
+    <tr>
+      <th>num_ahead</th>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to pass to <code>fun</code></p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a data.frame of the observed and predicted values, with any other
+remaining values returned by <code>fun</code>. If and error occurs, then NA values for
+the observed and predicted</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if object is in valid forecasts format — expect_forecasts • MATSSforecasting</title>
+<title>Read in a specific database from Ward et al. 2014 — get_ward_data • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,12 @@
 
 
 
-<meta property="og:title" content="Check if object is in valid forecasts format — expect_forecasts" />
+<meta property="og:title" content="Read in a specific database from Ward et al. 2014 — get_ward_data" />
 
-<meta property="og:description" content="Check if object is in valid forecasts format" />
+<meta property="og:description" content="Read in a specific database from Ward et al. 2014" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
       </span>
     </div>
 
@@ -102,32 +102,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if object is in valid forecasts format</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-expectations.R'><code>R/utils-expectations.R</code></a></small>
-    <div class="hidden name"><code>expect_forecasts.Rd</code></div>
+    <h1>Read in a specific database from Ward et al. 2014</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/process-ward-data.R'><code>R/process-ward-data.R</code></a></small>
+    <div class="hidden name"><code>get_ward_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Check if object is in valid forecasts format</p>
+    <p>Read in a specific database from Ward et al. 2014</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>expect_forecasts</span>(<span class='no'>forecasts</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"observed"</span>, <span class='st'>"predicted"</span>))</pre>
+    <pre class="usage"><span class='fu'>get_ward_data</span>(<span class='no'>database_name</span>, <span class='no'>ward_RDS_file</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>forecasts</th>
-      <td><p>the object of forecasts to be checked</p></td>
+      <th>database_name</th>
+      <td><p>the name of the database</p></td>
     </tr>
     <tr>
-      <th>columns</th>
-      <td><p>the expecte columns for <code>forecasts</code> (defaults to
-<code>columns = c("observed", "predicted")</code>)</p></td>
+      <th>ward_RDS_file</th>
+      <td><p>the location of the RDS file with the combined datasets
+that is produced as a result of running <code><a href='reshape_ward_data.html'>reshape_ward_data</a></code></p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>the dataset object</p>
     
 
   </div>
@@ -135,7 +139,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

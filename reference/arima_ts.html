@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A wrapper function for forecasting methods — make_forecasts • MATSSforecasting</title>
+<title>Make forecasts using AR / ARIMA — arima_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,17 +30,15 @@
 
 
 
-<meta property="og:title" content="A wrapper function for forecasting methods — make_forecasts" />
+<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
 
-<meta property="og:description" content="This function faciliates the forecasting approach in Ward et al.
-2014:
-fit the model to all but the last num_ahead time points
-make 1-step ahead forecasts, and feed each forecast in as the
-observed, until num_ahead total forecasts are made
-" />
+<meta property="og:description" content="arima_ts fits an arima model
+arima_fracdiff_ts fits a step-wise fractionally differenced
+auto-arima
+randomwalk_ts fits a random walk model" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -68,7 +66,7 @@ observed, until num_ahead total forecasts are made
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
       </span>
     </div>
 
@@ -107,37 +105,29 @@ observed, until num_ahead total forecasts are made
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A wrapper function for forecasting methods</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-utils.R'><code>R/forecasting-utils.R</code></a></small>
-    <div class="hidden name"><code>make_forecasts.Rd</code></div>
+    <h1>Make forecasts using AR / ARIMA</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-arima.R'><code>R/forecasting-arima.R</code></a></small>
+    <div class="hidden name"><code>arima_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function faciliates the forecasting approach in Ward et al.
-2014:</p><ol>
-<li><p>fit the model to all but the last <code>num_ahead</code> time points</p></li>
-<li><p>make 1-step ahead forecasts, and feed each forecast in as the
-observed, until <code>num_ahead</code> total forecasts are made</p></li>
-</ol>
+    <p><code>arima_ts</code> fits an arima model</p>
+<p><code>arima_fracdiff_ts</code> fits a step-wise fractionally differenced
+auto-arima</p>
+<p><code>randomwalk_ts</code> fits a random walk model</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>make_forecasts</span>(<span class='no'>fun</span>, <span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
+
+<span class='fu'>arima_fracdiff_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
+
+<span class='fu'>randomwalk_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>fun</th>
-      <td><p>a function for doing the forecasting. It should have arguments:</p><dl class='dl-horizontal'>
-<dt>training</dt><dd><p>the data for training the model</p></dd>
-<dt>observed</dt><dd><p>the observed values to be forecasted</p></dd>
-<dt>...</dt><dd><p>any optional arguments</p></dd>
-</dl><p>and should return a data.frame with at least the observed and predicted
-values (other columns are optional, and may be specific to the forecasting
-method)</p></td>
-    </tr>
     <tr>
       <th>ts</th>
       <td><p>the time series to forecast</p></td>
@@ -148,16 +138,25 @@ method)</p></td>
 forecast</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>arguments to pass to <code>fun</code></p></td>
+      <th>order</th>
+      <td><p>A specification of the non-seasonal part of the ARIMA
+    model: the three integer components \((p, d, q)\) are the AR order, the
+    degree of differencing, and the MA order.</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>the CI level to include</p></td>
+    </tr>
+    <tr>
+      <th>drift</th>
+      <td><p>Logical flag. If TRUE, fits a random walk with drift model.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of the observed and predicted values, with any other
-remaining values returned by <code>fun</code>. If and error occurs, then NA values for
-the observed and predicted</p>
+    <p>a data.frame of the mean forecasts, the observed values, and the
+lower and upper CI levels (if an error occurs, then just NA values)</p>
     
 
   </div>

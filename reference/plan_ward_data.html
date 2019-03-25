@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using an exponentially smoothed or structural time
-series mdoel — ets_ts • MATSSforecasting</title>
+<title>Make a drake plan with all the datasets in Ward et al. 2014 — plan_ward_data • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,17 +30,12 @@ series mdoel — ets_ts • MATSSforecasting</title>
 
 
 
-<meta property="og:title" content="Make forecasts using an exponentially smoothed or structural time
-series mdoel — ets_ts" />
+<meta property="og:title" content="Make a drake plan with all the datasets in Ward et al. 2014 — plan_ward_data" />
 
-<meta property="og:description" content="Fit a time series model and make forecasts. The frequency of the
-data is set a priori, as opposed to estimating the parameter from the data.
-ets_ts fits an exponentially smoothed time series model.
-sts_ts fits a structural model for a time series by
-maximum likelihood." />
+<meta property="og:description" content="Make a drake plan with all the datasets in Ward et al. 2014" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -69,7 +63,7 @@ maximum likelihood." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
       </span>
     </div>
 
@@ -108,52 +102,34 @@ maximum likelihood." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using an exponentially smoothed or structural time
-series mdoel</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-ets.R'><code>R/forecasting-ets.R</code></a></small>
-    <div class="hidden name"><code>ets_ts.Rd</code></div>
+    <h1>Make a drake plan with all the datasets in Ward et al. 2014</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/process-ward-data.R'><code>R/process-ward-data.R</code></a></small>
+    <div class="hidden name"><code>plan_ward_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fit a time series model and make forecasts. The frequency of the
-data is set a priori, as opposed to estimating the parameter from the data.</p>
-<p><code>ets_ts</code> fits an exponentially smoothed time series model.</p>
-<p><code>sts_ts</code> fits a structural model for a time series by
-maximum likelihood.</p>
+    <p>Make a drake plan with all the datasets in Ward et al. 2014</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>sts_ts</span>(<span class='no'>ts</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>plan_ward_data</span>(<span class='kw'>ward_RDS_file</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/here/topics/here'>here</a></span>(<span class='st'>"analysis"</span>, <span class='st'>"data"</span>,
+  <span class='st'>"ward_fish_data.RDS"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ts</th>
-      <td><p>the time series to forecast</p></td>
-    </tr>
-    <tr>
-      <th>num_ahead</th>
-      <td><p>the number of points at the end of the time series to
-forecast</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>the CI level to include</p></td>
-    </tr>
-    <tr>
-      <th>frequency</th>
-      <td><p>the number of observations per unit of time.</p></td>
+      <th>ward_RDS_file</th>
+      <td><p>the location of the RDS file with the combined datasets
+that is produced as a result of running <code><a href='reshape_ward_data.html'>reshape_ward_data</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of the mean forecasts, the observed values, and the
-lower and upper CI levels (if an error occurs, then just NA values)</p>
+    <p>a drake plan (i.e. a tibble) specifying the targets and commands
+for gathering datasets</p>
     
 
   </div>
