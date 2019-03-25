@@ -33,7 +33,7 @@ the automated tools in `devtools`:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ha0ye/MATSS-forecasting")
+devtools::install_github("weecology/MATSS-forecasting")
 ```
 
 This will automatically install any dependencies, so can be a good way
