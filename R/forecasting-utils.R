@@ -25,6 +25,7 @@
 #'   remaining values returned by `fun`. If and error occurs, then NA values for 
 #'   the observed and predicted
 #' 
+#' @export
 make_forecasts <- function(fun, ts, num_ahead = 5, ...)
 {
     tryCatch(
@@ -44,7 +45,7 @@ make_forecasts <- function(fun, ts, num_ahead = 5, ...)
                 ...)
             
         }, error = function(e) {
-            warning(e, "  returning a NA object")
+            warning(e, "  returning an NA object.")
             return(data.frame(observed = NA,
                               predicted = NA))
         })
