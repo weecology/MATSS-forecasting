@@ -6,17 +6,17 @@
 \title{Make forecasts using an exponentially smoothed or structural time
 series mdoel}
 \usage{
-ets_ts(ts, num_ahead = 5, level = 95, frequency = 1)
+ets_ts(timeseries, num_ahead = 5, level = 95, frequency = 1)
 
-sts_ts(ts, num_ahead = 5, level = 95, frequency = 1)
+sts_ts(timeseries, num_ahead = 5, level = 95, frequency = 1)
 }
 \arguments{
-\item{ts}{the time series to forecast}
+\item{timeseries}{the time series to forecast}
 
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
 
-\item{level}{the CI level to include}
+\item{level}{Confidence level for prediction intervals.}
 
 \item{frequency}{the number of observations per unit of time.}
 }

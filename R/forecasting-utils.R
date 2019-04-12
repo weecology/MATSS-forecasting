@@ -16,7 +16,7 @@
 #'   } and should return a data.frame with at least the observed and predicted 
 #'   values (other columns are optional, and may be specific to the forecasting 
 #'   method)
-#' @param ts the time series to forecast
+#' @param timeseries the time series to forecast
 #' @param num_ahead the number of points at the end of the time series to 
 #'   forecast
 #' @param ... arguments to pass to `fun`
@@ -26,22 +26,22 @@
 #'   the observed and predicted
 #' 
 #' @export
-make_forecasts <- function(fun, ts, num_ahead = 5, ...)
+make_forecasts <- function(fun, timeseries, num_ahead = 5, ...)
 {
     tryCatch(
         {
             # trim NAs off of front and back
-            idx <- is.finite(ts)
+            idx <- is.finite(timeseries)
             ts_bounds <- range(which(idx))
-            ts <- ts[seq(ts_bounds[1], ts_bounds[2])]
+            timeseries <- timeseries[seq(ts_bounds[1], ts_bounds[2])]
             
             # set up model
-            num_points <- length(ts)
+            num_points <- length(timeseries)
             training_subset <- seq_len(num_points - num_ahead)
             
             # make forecasts
-            fun(training = ts[training_subset], 
-                observed = tail(ts, num_ahead), 
+            fun(training = timeseries[training_subset], 
+                observed = tail(timeseries, num_ahead), 
                 ...)
             
         }, error = function(e) {

@@ -4,7 +4,7 @@
 \alias{make_forecasts}
 \title{A wrapper function for forecasting methods}
 \usage{
-make_forecasts(fun, ts, num_ahead = 5, ...)
+make_forecasts(fun, timeseries, num_ahead = 5, ...)
 }
 \arguments{
 \item{fun}{a function for doing the forecasting. It should have arguments:
@@ -16,7 +16,7 @@ make_forecasts(fun, ts, num_ahead = 5, ...)
 values (other columns are optional, and may be specific to the forecasting
 method)}
 
-\item{ts}{the time series to forecast}
+\item{timeseries}{the time series to forecast}
 
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}

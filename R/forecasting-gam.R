@@ -5,7 +5,7 @@
 #'   time/years and use it to make forecasts
 #' 
 #' @inheritParams make_forecasts
-#' @param level the CI level to include
+#' @inheritParams forecast::forecast
 #' 
 #' @return a data.frame of the mean forecasts, the observed values, and the 
 #'   lower and upper CI levels (if an error occurs, then just NA values)
@@ -13,7 +13,7 @@
 #' @importFrom stats qnorm
 #' @export
 #' 
-# gam_ts <- function(ts, num_ahead = 5, level = 95)
+# gam_ts <- function(timeseries, num_ahead = 5, level = 95)
 # {
 #     f <- function(training, observed, order, level)
 #     {
@@ -34,6 +34,6 @@
 #                    upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
 #     }
 #     
-#     make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+#     make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
 #                    order = order, level = level)
 # }

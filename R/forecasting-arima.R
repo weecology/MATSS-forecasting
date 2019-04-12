@@ -6,7 +6,6 @@
 #' 
 #' @description `arima_ts` fits an arima model
 #' 
-#' @param level the CI level to include
 #' @inheritParams stats::arima
 #' @inheritParams make_forecasts
 #' @inheritParams forecast::forecast
@@ -16,7 +15,7 @@
 #' 
 #' @export
 #' 
-arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
+arima_ts <- function(timeseries, num_ahead = 5, order = c(1, 0, 0), level = 95)
 {
     f <- function(training, observed, order, level)
     {
@@ -32,7 +31,7 @@ arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
                    upper_CI = as.numeric(forecasts$upper))
     }
     
-    make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
                    order = order, level = level)
 }
 
@@ -43,7 +42,7 @@ arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
 #' 
 #' @export
 #' 
-arima_fracdiff_ts <- function(ts, num_ahead = 5, level = 95)
+arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
 {
     f <- function(training, observed, level)
     {
@@ -58,7 +57,7 @@ arima_fracdiff_ts <- function(ts, num_ahead = 5, level = 95)
                    upper_CI = as.numeric(forecasts$upper))
     }
     
-    make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
                      level = level)
 }
 
@@ -70,7 +69,7 @@ arima_fracdiff_ts <- function(ts, num_ahead = 5, level = 95)
 #' 
 #' @export
 #' 
-randomwalk_ts <- function(ts, num_ahead = 5, drift = FALSE, level = 95)
+randomwalk_ts <- function(timeseries, num_ahead = 5, drift = FALSE, level = 95)
 {
     f <- function(training, observed, drift, level)
     {
@@ -84,6 +83,6 @@ randomwalk_ts <- function(ts, num_ahead = 5, drift = FALSE, level = 95)
                    upper_CI = as.numeric(forecasts$upper))
     }
     
-    make_forecasts(fun = f, ts = ts, num_ahead = num_ahead, 
+    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
                      drift = drift, level = level)
 }

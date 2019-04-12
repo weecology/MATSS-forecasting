@@ -7,14 +7,14 @@
 \alias{randomwalk_ts}
 \title{Make forecasts using AR / ARIMA}
 \usage{
-arima_ts(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
+arima_ts(timeseries, num_ahead = 5, order = c(1, 0, 0), level = 95)
 
-arima_fracdiff_ts(ts, num_ahead = 5, level = 95)
+arima_fracdiff_ts(timeseries, num_ahead = 5, level = 95)
 
-randomwalk_ts(ts, num_ahead = 5, drift = FALSE, level = 95)
+randomwalk_ts(timeseries, num_ahead = 5, drift = FALSE, level = 95)
 }
 \arguments{
-\item{ts}{the time series to forecast}
+\item{timeseries}{the time series to forecast}
 
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
@@ -23,7 +23,7 @@ forecast}
     model: the three integer components \eqn{(p, d, q)} are the AR order, the
     degree of differencing, and the MA order.}
 
-\item{level}{the CI level to include}
+\item{level}{Confidence level for prediction intervals.}
 
 \item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }

@@ -6,7 +6,8 @@ test_that("make_forecasts handles an error from `fun`", {
         stop("This error will be converted into a warning.")
     }
     w <- capture_warnings(make_forecasts(fun, rnorm(100)))
-    expect_match(w, "Error in fun\\(training = ts\\[training_subset\\], observed = tail\\(ts, num_ahead\\), : ")
+    expect_match(w, "Error in fun\\(training = timeseries\\[training_subset\\], ")
+    expect_match(w, "observed = tail\\(timeseries, : ")
     expect_match(w, "This error will be converted into a warning.")
     expect_match(w, "returning an NA object.")    
 })
