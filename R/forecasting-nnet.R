@@ -14,15 +14,15 @@
 #' 
 #' @export
 #' 
-nnet_ts <- function(timeseries, num_ahead = 5, m = 1, size = 1, level = 95, 
-                    ...)
+nnet_ts <- function(timeseries, num_ahead = 5, level = 95, 
+                    m = 1, size = 1, ...)
 {
     f <- function(training, observed, order, level, ...)
     {
         # make forecasts
         nnet_model <- tsDyn::nnetTs(training, m = m, size = size)
         
-        nnet_out <- predict(nnet_model, n.ahead = num_ahead, 
+        nnet_out <- tsDyn:::predict.nlar(nnet_model, n.ahead = num_ahead, 
                             ci = 0.5 + level/200, # adjust for implementation issue
                             ...)
         

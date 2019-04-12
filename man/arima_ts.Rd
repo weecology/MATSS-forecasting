@@ -7,11 +7,11 @@
 \alias{randomwalk_ts}
 \title{Make forecasts using AR / ARIMA}
 \usage{
-arima_ts(timeseries, num_ahead = 5, order = c(1, 0, 0), level = 95)
+arima_ts(timeseries, num_ahead = 5, level = 95, order = c(1, 0, 0))
 
 arima_fracdiff_ts(timeseries, num_ahead = 5, level = 95)
 
-randomwalk_ts(timeseries, num_ahead = 5, drift = FALSE, level = 95)
+randomwalk_ts(timeseries, num_ahead = 5, level = 95, drift = FALSE)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -19,11 +19,11 @@ randomwalk_ts(timeseries, num_ahead = 5, drift = FALSE, level = 95)
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
 
+\item{level}{Confidence level for prediction intervals.}
+
 \item{order}{A specification of the non-seasonal part of the ARIMA
     model: the three integer components \eqn{(p, d, q)} are the AR order, the
     degree of differencing, and the MA order.}
-
-\item{level}{Confidence level for prediction intervals.}
 
 \item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }

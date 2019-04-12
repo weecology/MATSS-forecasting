@@ -4,13 +4,16 @@
 \alias{expect_forecasts}
 \title{Check if object is in valid forecasts format}
 \usage{
-expect_forecasts(forecasts, columns = c("observed", "predicted"))
+expect_forecasts(output, columns = c("observed", "predicted"),
+  known_hash = "cca7c70d85")
 }
 \arguments{
-\item{forecasts}{the object of forecasts to be checked}
+\item{output}{the object of forecasts to be checked}
 
-\item{columns}{the expecte columns for \code{forecasts} (defaults to
+\item{columns}{the expecte columns for \code{output} (defaults to
 \code{columns = c("observed", "predicted")})}
+
+\item{known_hash}{a known_hash for \code{output}}
 }
 \description{
 Check if object is in valid forecasts format

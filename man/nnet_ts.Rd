@@ -4,7 +4,7 @@
 \alias{nnet_ts}
 \title{Make forecasts using neural network time series model}
 \usage{
-nnet_ts(timeseries, num_ahead = 5, m = 1, size = 1, level = 95,
+nnet_ts(timeseries, num_ahead = 5, level = 95, m = 1, size = 1,
   ...)
 }
 \arguments{
@@ -13,11 +13,11 @@ nnet_ts(timeseries, num_ahead = 5, m = 1, size = 1, level = 95,
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
 
+\item{level}{Confidence level for prediction intervals.}
+
 \item{m}{ embedding dimension, time delay, forecasting steps }
 
 \item{size}{number of hidden units in the neural network}
-
-\item{level}{Confidence level for prediction intervals.}
 
 \item{...}{arguments to be passed to \code{\link[tsDyn]{predict.nlar}}}
 }

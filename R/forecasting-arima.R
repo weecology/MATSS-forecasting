@@ -13,11 +13,13 @@
 #' @return a data.frame of the mean forecasts, the observed values, and the 
 #'   lower and upper CI levels (if an error occurs, then just NA values)
 #' 
+#' @importFrom stats ts
 #' @export
 #' 
-arima_ts <- function(timeseries, num_ahead = 5, order = c(1, 0, 0), level = 95)
+arima_ts <- function(timeseries, num_ahead = 5, level = 95, 
+                     order = c(1, 0, 0))
 {
-    f <- function(training, observed, order, level)
+    f <- function(training, observed, level, order)
     {
         # make forecasts
         arima_model <- stats::arima(ts(training), order = order)
@@ -32,7 +34,7 @@ arima_ts <- function(timeseries, num_ahead = 5, order = c(1, 0, 0), level = 95)
     }
     
     make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
-                   order = order, level = level)
+                   level = level, order = order)
 }
 
 #' @rdname arima_ts
@@ -69,9 +71,10 @@ arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
 #' 
 #' @export
 #' 
-randomwalk_ts <- function(timeseries, num_ahead = 5, drift = FALSE, level = 95)
+randomwalk_ts <- function(timeseries, num_ahead = 5, level = 95, 
+                          drift = FALSE)
 {
-    f <- function(training, observed, drift, level)
+    f <- function(training, observed, level, drift)
     {
         # make forecasts
         forecasts <- forecast::rwf(training, NROW(observed), drift = drift, level = level)
@@ -84,5 +87,5 @@ randomwalk_ts <- function(timeseries, num_ahead = 5, drift = FALSE, level = 95)
     }
     
     make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead, 
-                     drift = drift, level = level)
+                   level = level, drift = drift)
 }

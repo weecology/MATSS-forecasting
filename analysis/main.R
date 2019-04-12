@@ -55,8 +55,24 @@ spline_methods <- drake_plan(
     gam = analysis_wrapper(gam_ts)
 )
 
+## neural network methods
+nnet_methods <- drake_plan(
+    nnet_1_1 = analysis_wrapper(nnet_ts, m = 1, size = 1), 
+    nnet_1_2 = analysis_wrapper(nnet_ts, m = 1, size = 2), 
+    nnet_2_1 = analysis_wrapper(nnet_ts, m = 2, size = 1), 
+    nnet_2_2 = analysis_wrapper(nnet_ts, m = 2, size = 2), 
+    nnet_3_1 = analysis_wrapper(nnet_ts, m = 3, size = 1), 
+    nnet_3_2 = analysis_wrapper(nnet_ts, m = 3, size = 2)
+)  
+
+## locally weighted regression methods
+locreg_methods <- drake_plan(
+    locreg = analysis_wrapper(locreg_ts)
+)
+
 ## full list of methods
-methods <- bind_rows(arima_methods, ets_methods, sts_methods, spline_methods)
+methods <- bind_rows(arima_methods, ets_methods, sts_methods, 
+                     spline_methods, nnet_methods, locreg_methods)
 
 ## define the analyses (each method x dataset combination)
 analyses <- build_analyses_plan(methods, datasets)

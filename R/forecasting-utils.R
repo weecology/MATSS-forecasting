@@ -35,12 +35,12 @@ make_forecasts <- function(fun, timeseries, num_ahead = 5, ...)
             ts_bounds <- range(which(idx))
             timeseries <- timeseries[seq(ts_bounds[1], ts_bounds[2])]
             
-            # set up model
-            num_points <- length(timeseries)
-            training_subset <- seq_len(num_points - num_ahead)
+            # check length
+            if (length(timeseries) <= 5)
+                stop("time series is not long enough")
             
             # make forecasts
-            fun(training = timeseries[training_subset], 
+            fun(training = head(timeseries, -num_ahead), 
                 observed = tail(timeseries, num_ahead), 
                 ...)
             
