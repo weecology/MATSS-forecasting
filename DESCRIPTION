@@ -22,16 +22,13 @@ Imports:
     magrittr,
     purrr,
     here,
-    tibble,
-    mgcv
+    tibble
 Suggests:
     testthat,
     knitr,
     rmarkdown,
     pkgdown,
-    covr, 
-    digest, 
-    visNetwork
+    covr
 Remotes: 
     weecology/MATSS
 Roxygen: list(markdown = TRUE)

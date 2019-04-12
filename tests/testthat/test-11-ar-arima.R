@@ -1,22 +1,23 @@
 context("AR/ARIMA functions")
 
 test_that("arima_fracdiff_ts error checking works for too short time series", {
-    expect_warning(arima_fracdiff_ts(c(1, NA)), "Error in seq_len\\(num_points - num_ahead\\): ")
-    expect_warning(output <- arima_fracdiff_ts(c(1, NA)), "argument must be coercible to non-negative integer[[:space:]]+returning a NA object")
+    w <- capture_warnings(output <- arima_fracdiff_ts(c(1, NA)))
+    expect_match(w, "Error in seq_len\\(num_points - num_ahead\\): ")
+    expect_match(w, "argument must be coercible to non-negative integer[[:space:]]+returning an NA object")
     expect_forecasts(output)
     expect_known_hash(output, "cca7c70d85")
 })
 
 test_that("randomwalk_ts error checking works for too short time series", {
     expect_warning(randomwalk_ts(c(1, NA)), "Error in seq_len\\(num_points - num_ahead\\): ")
-    expect_warning(output <- randomwalk_ts(c(1, NA)), "argument must be coercible to non-negative integer[[:space:]]+returning a NA object")
+    expect_warning(output <- randomwalk_ts(c(1, NA)), "argument must be coercible to non-negative integer[[:space:]]+returning an NA object")
     expect_forecasts(output)
     expect_known_hash(output, "cca7c70d85")
 })
 
 test_that("arima_ts error checking works for too short time series", {
     expect_warning(arima_ts(c(1, NA)), "Error in seq_len\\(num_points - num_ahead\\): ")
-    expect_warning(output <- arima_ts(c(1, NA)), "argument must be coercible to non-negative integer[[:space:]]+returning a NA object")
+    expect_warning(output <- arima_ts(c(1, NA)), "argument must be coercible to non-negative integer[[:space:]]+returning an NA object")
     expect_forecasts(output)
     expect_known_hash(output, "cca7c70d85")
 })

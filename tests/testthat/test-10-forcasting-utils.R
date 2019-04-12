@@ -5,7 +5,6 @@ test_that("make_forecasts handles an error from `fun`", {
     {
         stop("This error will be converted into a warning.")
     }
-    expect_error(make_forecasts(fun, rnorm(100)), NA)
     w <- capture_warnings(make_forecasts(fun, rnorm(100)))
     expect_match(w, "Error in fun\\(training = ts\\[training_subset\\], observed = tail\\(ts, num_ahead\\), : ")
     expect_match(w, "This error will be converted into a warning.")
@@ -14,7 +13,6 @@ test_that("make_forecasts handles an error from `fun`", {
 
 test_that("make_forecasts handles errors in `ts`", {
     fun <- function(training, observed) {1}
-    expect_error(make_forecasts(fun, seq(4)), NA)
     w <- capture_warnings(make_forecasts(fun, seq(4)))
     expect_match(w, "Error in seq_len\\(num_points - num_ahead\\): ")
     expect_match(w, "argument must be coercible to non-negative integer")
