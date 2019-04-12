@@ -15,7 +15,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     forecast,
-    portalr (>= 0.2.5), 
+    matss (>= 0.0.2), 
     drake (>= 7.0.0)
 Suggests:
     testthat,
@@ -24,7 +24,7 @@ Suggests:
     pkgdown,
     covr
 Remotes: 
-    weecology/portalr
+    weecology/matss
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
