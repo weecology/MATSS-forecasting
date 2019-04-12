@@ -113,19 +113,24 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>expect_forecasts</span>(<span class='no'>forecasts</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"observed"</span>, <span class='st'>"predicted"</span>))</pre>
+    <pre class="usage"><span class='fu'>expect_forecasts</span>(<span class='no'>output</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"observed"</span>, <span class='st'>"predicted"</span>),
+  <span class='kw'>known_hash</span> <span class='kw'>=</span> <span class='st'>"cca7c70d85"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>forecasts</th>
+      <th>output</th>
       <td><p>the object of forecasts to be checked</p></td>
     </tr>
     <tr>
       <th>columns</th>
-      <td><p>the expecte columns for <code>forecasts</code> (defaults to
+      <td><p>the expecte columns for <code>output</code> (defaults to
 <code>columns = c("observed", "predicted")</code>)</p></td>
+    </tr>
+    <tr>
+      <th>known_hash</th>
+      <td><p>a known_hash for <code>output</code></p></td>
     </tr>
     </table>
     
