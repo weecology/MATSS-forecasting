@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using AR / ARIMA — arima_ts • MATSSforecasting</title>
+<title>Make forecasts using nonparametric kernel regression — npreg_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
+<meta property="og:title" content="Make forecasts using nonparametric kernel regression — npreg_ts" />
 
-<meta property="og:description" content="arima_ts fits an arima model using link{arima}
-arima_fracdiff_ts fits a step-wise fractionally differenced
-auto-arima using link{arfima}
-randomwalk_ts fits a random walk model using
-link[forecast]{rwf}" />
+<meta property="og:description" content="npreg_ts fits a timeseries model using npreg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,26 +102,19 @@ link[forecast]{rwf}" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using AR / ARIMA</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-arima.R'><code>R/forecasting-arima.R</code></a></small>
-    <div class="hidden name"><code>arima_ts.Rd</code></div>
+    <h1>Make forecasts using nonparametric kernel regression</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-npreg.R'><code>R/forecasting-npreg.R</code></a></small>
+    <div class="hidden name"><code>npreg_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>arima_ts</code> fits an arima model using <code>link{arima}</code></p>
-<p><code>arima_fracdiff_ts</code> fits a step-wise fractionally differenced
-auto-arima using <code>link{arfima}</code></p>
-<p><code>randomwalk_ts</code> fits a random walk model using
-<code>link[forecast]{rwf}</code></p>
+    <p><code>npreg_ts</code> fits a timeseries model using <code><a href='https://www.rdocumentation.org/packages/np/topics/np.regression'>npreg</a></code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
-
-<span class='fu'>arima_fracdiff_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
-
-<span class='fu'>randomwalk_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>npreg_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>regtype</span> <span class='kw'>=</span> <span class='st'>"ll"</span>,
+  <span class='kw'>bwmethod</span> <span class='kw'>=</span> <span class='st'>"cv.aic"</span>, <span class='kw'>gradients</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,14 +133,24 @@ forecast</p></td>
       <td><p>Confidence level for prediction intervals.</p></td>
     </tr>
     <tr>
-      <th>order</th>
-      <td><p>A specification of the non-seasonal part of the ARIMA
-    model: the three integer components \((p, d, q)\) are the AR order, the
-    degree of differencing, and the MA order.</p></td>
+      <th>regtype</th>
+      <td><p>a character string specifying which type of kernel regression
+    estimator to use. <code>lc</code> specifies a local-constant estimator
+    (Nadaraya-Watson) and <code>ll</code> specifies a local-linear
+    estimator. Defaults to <code>lc</code>.</p></td>
     </tr>
     <tr>
-      <th>drift</th>
-      <td><p>Logical flag. If TRUE, fits a random walk with drift model.</p></td>
+      <th>bwmethod</th>
+      <td><p>which method to use to select bandwidths. <code>cv.aic</code> specifies
+    expected Kullback-Leibler cross-validation (Hurvich, Simonoff, and
+    Tsai (1998)), and <code>cv.ls</code> specifies least-squares
+    cross-validation. Defaults to <code>cv.ls</code>.</p></td>
+    </tr>
+    <tr>
+      <th>gradients</th>
+      <td><p>a logical value indicating that you want gradients computed and
+    returned in the resulting <code>npregression</code> object. Defaults to
+    <code>FALSE</code>.</p></td>
     </tr>
     </table>
     
