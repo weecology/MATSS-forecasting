@@ -6,7 +6,8 @@
 #' @description Fit a time series model and make forecasts. The frequency of the
 #'   data is set a priori, as opposed to estimating the parameter from the data.
 #'
-#'   \code{ets_ts} fits an exponentially smoothed time series model.
+#'   \code{ets_ts} fits an exponentially smoothed time series model using 
+#'     \code{link[forecast]{ets}}
 #'
 #' @inheritParams stats::ts
 #' @inheritParams make_forecasts
@@ -40,7 +41,7 @@ ets_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
 #' @rdname ets_ts
 #'
 #' @description \code{sts_ts} fits a structural model for a time series by
-#'   maximum likelihood.
+#'   maximum likelihood using \code{link{StructTS}}
 #'
 #' @export
 #'

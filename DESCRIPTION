@@ -15,17 +15,18 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     forecast,
-    MATSS (>= 0.0.2), 
-    drake (>= 7.0.0), 
-    dplyr, 
-    tidyr, 
-    magrittr, 
-    purrr, 
-    here, 
+    MATSS (>= 0.0.2),
+    drake (>= 7.0.0),
+    dplyr,
+    tidyr,
+    magrittr,
+    purrr,
+    here,
     tibble,
-    mgcv, 
-    tsDyn, 
-    locfit
+    mgcv,
+    tsDyn,
+    locfit,
+    np
 Suggests:
     testthat,
     knitr,

@@ -28,7 +28,8 @@ a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-\code{locreg_ts} fits a locally weighted regression. It first
-searches over a parameter space of nearest neighbors bandwidth, and
-polynomial degree, and then uses the best solution
+\code{locreg_ts} fits a locally weighted regression using
+\code{\link[locfit]{locfit}}. It first searches over a parameter space of
+nearest neighbors bandwidth, and polynomial degree, and then uses the best
+solution
 }

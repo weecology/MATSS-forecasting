@@ -32,10 +32,11 @@ a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-\code{arima_ts} fits an arima model
+\code{arima_ts} fits an arima model using \code{link{arima}}
 
 \code{arima_fracdiff_ts} fits a step-wise fractionally differenced
-auto-arima
+auto-arima using \code{link{arfima}}
 
-\code{randomwalk_ts} fits a random walk model
+\code{randomwalk_ts} fits a random walk model using
+\code{link[forecast]{rwf}}
 }

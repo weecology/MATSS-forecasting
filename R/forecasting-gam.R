@@ -1,15 +1,15 @@
 #' @name gam_ts
 #' @title Make forecasts using a Generalized Additive Model
 #'
-#' @description Fit a Generalized Additive Model (GAM) with spline over
-#'   time/years and use it to make forecasts
-#'
+#' @description Fit a Generalized Additive Model (GAM) using 
+#'   \code{\link[mgcv]{gam}} with a spline over time/years
+#' 
 #' @inheritParams make_forecasts
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
 #'   lower and upper CI levels (if an error occurs, then just NA values)
-#'
+#' m
 #' @importFrom stats qnorm
 #' @export
 #'

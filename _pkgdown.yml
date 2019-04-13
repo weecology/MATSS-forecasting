@@ -3,3 +3,25 @@ development:
   mode: unreleased
 navbar:
   type: inverse
+reference:
+  - title: "Data Processing"
+    contents:
+    - get_ward_data
+    - plan_ward_data
+    - reshape_ward_data
+  - title: "Forecasting Functions"
+    contents:
+    - arima_ts
+    - ets_ts
+    - gam_ts
+    - locreg_ts
+    - nnet_ts
+  - title: "Forecasting Utilities"
+    contents:
+    - make_forecast
+  - title: "Testing Utilities"
+    contents:
+    - expect_NA_warnings
+    - expect_forecast
+    
+    

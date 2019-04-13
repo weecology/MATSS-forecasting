@@ -17,8 +17,9 @@ forecast}
 \value{
 a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
+m
 }
 \description{
-Fit a Generalized Additive Model (GAM) with spline over
-time/years and use it to make forecasts
+Fit a Generalized Additive Model (GAM) using
+\code{\link[mgcv]{gam}} with a spline over time/years
 }

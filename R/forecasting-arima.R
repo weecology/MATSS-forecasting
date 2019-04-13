@@ -4,7 +4,7 @@
 #'
 #' @rdname arima_ts
 #'
-#' @description `arima_ts` fits an arima model
+#' @description `arima_ts` fits an arima model using \code{link{arima}}
 #'
 #' @inheritParams stats::arima
 #' @inheritParams make_forecasts
@@ -40,7 +40,7 @@ arima_ts <- function(timeseries, num_ahead = 5, level = 95,
 #' @rdname arima_ts
 #'
 #' @description `arima_fracdiff_ts` fits a step-wise fractionally differenced
-#'   auto-arima
+#'   auto-arima using \code{link{arfima}}
 #'
 #' @export
 #'
@@ -65,7 +65,8 @@ arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
 
 #' @rdname arima_ts
 #'
-#' @description `randomwalk_ts` fits a random walk model
+#' @description `randomwalk_ts` fits a random walk model using 
+#'   \code{link[forecast]{rwf}}
 #'
 #' @inheritParams forecast::rwf
 #'

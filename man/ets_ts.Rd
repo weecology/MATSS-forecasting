@@ -28,8 +28,9 @@ lower and upper CI levels (if an error occurs, then just NA values)
 Fit a time series model and make forecasts. The frequency of the
 data is set a priori, as opposed to estimating the parameter from the data.
 
-\code{ets_ts} fits an exponentially smoothed time series model.
+\code{ets_ts} fits an exponentially smoothed time series model using
+\code{link[forecast]{ets}}
 
 \code{sts_ts} fits a structural model for a time series by
-maximum likelihood.
+maximum likelihood using \code{link{StructTS}}
 }

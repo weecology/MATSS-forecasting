@@ -1,9 +1,10 @@
 #' @name locreg_ts
 #' @title Make forecasts using locally weighted regression
 #'
-#' @description `locreg_ts` fits a locally weighted regression. It first
-#'   searches over a parameter space of nearest neighbors bandwidth, and
-#'   polynomial degree, and then uses the best solution
+#' @description `locreg_ts` fits a locally weighted regression using 
+#'   \code{\link[locfit]{locfit}}. It first searches over a parameter space of 
+#'   nearest neighbors bandwidth, and polynomial degree, and then uses the best 
+#'   solution
 #'
 #' @inheritParams locfit::locfit
 #' @inheritParams locfit::lp

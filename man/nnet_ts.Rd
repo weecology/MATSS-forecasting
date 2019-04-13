@@ -26,6 +26,6 @@ a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-\code{nnet_ts} fits a neural network time series model with the
-specified parameters
+\code{nnet_ts} fits a neural network time series model using
+\code{\link[tsDyn]{nnetTs}}
 }

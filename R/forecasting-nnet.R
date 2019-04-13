@@ -1,8 +1,8 @@
 #' @name nnet_ts
 #' @title Make forecasts using neural network time series model
 #'
-#' @description `nnet_ts` fits a neural network time series model with the
-#'   specified parameters
+#' @description `nnet_ts` fits a neural network time series model using 
+#'   \code{\link[tsDyn]{nnetTs}}
 #'
 #' @inheritParams tsDyn::nnetTs
 #' @inheritParams make_forecasts
