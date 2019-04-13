@@ -22,7 +22,10 @@ Imports:
     magrittr, 
     purrr, 
     here, 
-    tibble
+    tibble,
+    mgcv, 
+    tsDyn, 
+    locfit
 Suggests:
     testthat,
     knitr,
