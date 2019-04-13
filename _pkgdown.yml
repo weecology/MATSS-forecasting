@@ -16,6 +16,7 @@ reference:
     - gam_ts
     - locreg_ts
     - nnet_ts
+    - npreg_ts
   - title: "Forecasting Utilities"
     contents:
     - make_forecast
