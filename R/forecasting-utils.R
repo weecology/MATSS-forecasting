@@ -25,6 +25,7 @@
 #'   remaining values returned by `fun`. If and error occurs, then NA values for
 #'   the observed and predicted
 #'
+#' @importFrom utils head tail
 #' @export
 make_forecasts <- function(fun, timeseries, num_ahead = 5, ...)
 {

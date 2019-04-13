@@ -6,6 +6,7 @@
 #'   polynomial degree, and then uses the best solution
 #'
 #' @inheritParams locfit::locfit
+#' @inheritParams locfit::lp
 #' @inheritParams make_forecasts
 #' @inheritParams forecast::forecast
 #'
