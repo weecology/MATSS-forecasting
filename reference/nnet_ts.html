@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MATSSforecasting</title>
+<title>Make forecasts using neural network time series model — nnet_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Make forecasts using neural network time series model — nnet_ts" />
+
+<meta property="og:description" content="nnet_ts fits a neural network time series model with the
+specified parameters" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -97,110 +101,68 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Make forecasts using neural network time series model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-nnet.R'><code>R/forecasting-nnet.R</code></a></small>
+    <div class="hidden name"><code>nnet_ts.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p><code>nnet_ts</code> fits a neural network time series model with the
+specified parameters</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="arima_ts.html">arima_ts()</a></code> <code><a href="arima_ts.html">arima_fracdiff_ts()</a></code> <code><a href="arima_ts.html">randomwalk_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using AR / ARIMA</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ets_ts.html">ets_ts()</a></code> <code><a href="ets_ts.html">sts_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using an exponentially smoothed or structural time
-series mdoel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="expect_NA_warnings.html">expect_NA_warnings()</a></code> </p>
-        </td>
-        <td><p>Check if warnings are expected for a too-short time series</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="expect_forecasts.html">expect_forecasts()</a></code> </p>
-        </td>
-        <td><p>Check if object is in valid forecasts format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gam_ts.html">gam_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using a Generalized Additive Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_ward_data.html">get_ward_data()</a></code> </p>
-        </td>
-        <td><p>Read in a specific database from Ward et al. 2014</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="locreg_ts.html">locreg_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using locally weighted regression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_forecasts.html">make_forecasts()</a></code> </p>
-        </td>
-        <td><p>A wrapper function for forecasting methods</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nnet_ts.html">nnet_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using neural network time series model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plan_ward_data.html">plan_ward_data()</a></code> </p>
-        </td>
-        <td><p>Make a drake plan with all the datasets in Ward et al. 2014</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="reshape_ward_data.html">reshape_ward_data()</a></code> </p>
-        </td>
-        <td><p>Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>nnet_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>timeseries</th>
+      <td><p>the time series to forecast</p></td>
+    </tr>
+    <tr>
+      <th>num_ahead</th>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>Confidence level for prediction intervals.</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>embedding dimension, time delay, forecasting steps</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>number of hidden units in the neural network</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to be passed to <code><a href='https://www.rdocumentation.org/packages/tsDyn/topics/predict.nlar'>predict.nlar</a></code></p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>a data.frame of the mean forecasts, the observed values, and the
+lower and upper CI levels (if an error occurs, then just NA values)</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 
