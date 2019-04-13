@@ -24,7 +24,7 @@ Suggests:
     pkgdown,
     covr
 Remotes: 
-    weecology/matss
+    weecology/MATSS
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
