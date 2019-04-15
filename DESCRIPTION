@@ -26,7 +26,8 @@ Imports:
     mgcv,
     tsDyn,
     locfit,
-    np
+    np,
+    kernlab
 Suggests:
     testthat,
     knitr,

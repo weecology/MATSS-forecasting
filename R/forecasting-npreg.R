@@ -18,7 +18,6 @@ npreg_ts <- function(timeseries, num_ahead = 5, level = 95,
 {
     f <- function(training, observed, level, regtype, bwmethod, gradients)
     {
-        # loop over models
         t <- seq_len(length(training))
         bws <- np::npregbw(training ~ t, regtype = regtype, bwmethod = bwmethod)
         np_model <- np::npreg(bws, gradients = gradients)
@@ -26,7 +25,7 @@ npreg_ts <- function(timeseries, num_ahead = 5, level = 95,
         # predict function requires a new list of predictor variables as newdata
         t_observed <- length(training) + seq_len(length(observed))
         forecasts <- np:::predict.npregression(np_model,
-                                               newdata = list("t" = t_observed),
+                                               newdata = list(t = t_observed),
                                                se.fit = TRUE)
         
         # return
