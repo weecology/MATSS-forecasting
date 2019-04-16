@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make a drake plan with all the datasets in Ward et al. 2014 — plan_ward_data • MATSSforecasting</title>
+<title>Make a drake plan with all the forecasting mehtods in Ward et al. 2014 — build_ward_methods_plan • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,13 @@
 
 
 
-<meta property="og:title" content="Make a drake plan with all the datasets in Ward et al. 2014 — plan_ward_data" />
+<meta property="og:title" content="Make a drake plan with all the forecasting mehtods in Ward et al. 2014 — build_ward_methods_plan" />
 
-<meta property="og:description" content="Make a drake plan with all the datasets in Ward et al. 2014" />
+<meta property="og:description" content="We list out the different forecasting methods (and the parameter
+settings we wish to try) in the form of a drake plan. Note the use of
+link[MATSS]{analysis_wrapper} that takes a function that operates on
+a single time series, and wraps it to run on each time series within a
+dataset." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,41 +106,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make a drake plan with all the datasets in Ward et al. 2014</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/process-ward-data.R'><code>R/process-ward-data.R</code></a></small>
-    <div class="hidden name"><code>plan_ward_data.Rd</code></div>
+    <h1>Make a drake plan with all the forecasting mehtods in Ward et al. 2014</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/build_plans.R'><code>R/build_plans.R</code></a></small>
+    <div class="hidden name"><code>build_ward_methods_plan.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Make a drake plan with all the datasets in Ward et al. 2014</p>
+    <p>We list out the different forecasting methods (and the parameter
+settings we wish to try) in the form of a drake plan. Note the use of
+<code>link[MATSS]{analysis_wrapper}</code> that takes a function that operates on
+a single time series, and wraps it to run on each time series within a
+dataset.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plan_ward_data</span>(<span class='kw'>ward_RDS_file</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/here/topics/here'>here</a></span>(<span class='st'>"analysis"</span>, <span class='st'>"data"</span>,
-  <span class='st'>"ward_fish_data.RDS"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ward_RDS_file</th>
-      <td><p>the location of the RDS file with the combined datasets
-that is produced as a result of running <code><a href='reshape_ward_data.html'>reshape_ward_data</a></code></p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>build_ward_methods_plan</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a drake plan (i.e. a tibble) specifying the targets and commands
-for gathering datasets</p>
+    <p>a drake plan (i.e. a tibble) with the forecasting methods.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
           </ul>

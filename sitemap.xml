@@ -7,6 +7,12 @@
     <loc>https://weecology.github.io/MATSS-forecasting/reference/arima_ts.html</loc>
   </url>
   <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/build_ward_data_plan.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/build_ward_methods_plan.html</loc>
+  </url>
+  <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/ets_ts.html</loc>
   </url>
   <url>
@@ -38,9 +44,6 @@
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://weecology.github.io/MATSS-forecasting/reference/plan_ward_data.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/reshape_ward_data.html</loc>
