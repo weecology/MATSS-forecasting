@@ -1,36 +1,8 @@
-#' @title Make a drake plan with all the datasets in Ward et al. 2014
-#'
-#' @param ward_RDS_file the location of the RDS file with the combined datasets
-#'   that is produced as a result of running \code{\link{reshape_ward_data}}
-#'
-#' @return a drake plan (i.e. a tibble) specifying the targets and commands
-#'   for gathering datasets
-#'
-#' @export
-#'
-plan_ward_data <- function(ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
-{
-    # if ward RDS database doesn't exist, create it
-    if (!file.exists(ward_RDS_file))
-    {
-        ward_database_names <- reshape_ward_data(ward_RDS_file)
-    } else {
-        ward_database_names <- readRDS(ward_RDS_file) %>%
-            dplyr::pull(database)
-    }
-
-    drake::drake_plan(
-        data = target(
-            get_ward_data(ward_database, drake::file_in(!!ward_RDS_file)),
-            transform = map(ward_database = !!ward_database_names)
-        )
-    )
-}
-
 #' @title Read in a specific database from Ward et al. 2014
 #'
 #' @param database_name the name of the database
-#' @inheritParams plan_ward_data
+#' @param ward_RDS_file the location of the RDS file with the combined datasets
+#'   that is produced as a result of running \code{\link{reshape_ward_data}}
 #'
 #' @return the dataset object
 #'
@@ -53,7 +25,7 @@ get_ward_data <- function(database_name, ward_RDS_file)
 #'   formats vignette) The resulting object has the names of the datasets and
 #'   the data objects.
 #'
-#' @inheritParams plan_ward_data
+#' @inheritParams get_ward_data
 #'
 #' @return a character vector with the names of the database
 #'

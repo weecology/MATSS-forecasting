@@ -11,9 +11,3 @@ test_that("Reshape Ward et al. data works", {
         expect_true(MATSS::check_data_format(temp_data))
     }
 })
-
-test_that("Drake plan for Ward et al. databases works", {
-    expect_error(data_plan <- plan_ward_data(data_file), NA)
-    expect_equal(dim(data_plan), c(8, 2))
-    expect_true(all(grepl("data_\\..+\\.", data_plan$target)))
-})

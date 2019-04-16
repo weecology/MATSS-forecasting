@@ -7,8 +7,11 @@ reference:
   - title: "Data Processing"
     contents:
     - get_ward_data
-    - plan_ward_data
     - reshape_ward_data
+  - title: "Build Drake Plans"
+    contents:
+    - build_ward_data_plan
+    - build_ward_methods_plan
   - title: "Forecasting Functions"
     contents:
     - arima_ts

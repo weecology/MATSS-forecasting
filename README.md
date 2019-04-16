@@ -32,8 +32,8 @@ There are two main ways to install the package. You can install it using
 the automated tools in `devtools`:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("weecology/MATSS-forecasting")
+# install.packages("remotes")
+remotes::install_github("weecology/MATSS-forecasting")
 ```
 
 This will automatically install any dependencies, so can be a good way

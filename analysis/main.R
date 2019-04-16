@@ -1,3 +1,11 @@
+# library(MARSS)
+# library(nlts)
+# library(kernlab)
+# library(ltsa)
+# library(timsac)
+# library(randomForest)
+
+
 library(MATSSforecasting)
 library(MATSS)
 library(tidyverse)
@@ -9,70 +17,10 @@ expose_imports(MATSS)
 expose_imports(MATSSforecasting)
 
 ## define the datasets
-datasets <- plan_ward_data()
+datasets <- build_ward_data_plan()
 
-## arima methods
-arima_methods <- drake_plan(
-    arima_001 = analysis_wrapper(arima_ts, order = c(0, 0, 1)), 
-    arima_002 = analysis_wrapper(arima_ts, order = c(0, 0, 2)), 
-    arima_011 = analysis_wrapper(arima_ts, order = c(0, 1, 1)), 
-    arima_012 = analysis_wrapper(arima_ts, order = c(0, 1, 2)), 
-    arima_100 = analysis_wrapper(arima_ts, order = c(1, 0, 0)), 
-    arima_101 = analysis_wrapper(arima_ts, order = c(1, 0, 1)), 
-    arima_102 = analysis_wrapper(arima_ts, order = c(1, 0, 2)), 
-    arima_110 = analysis_wrapper(arima_ts, order = c(1, 1, 0)), 
-    arima_111 = analysis_wrapper(arima_ts, order = c(1, 1, 1)), 
-    arima_112 = analysis_wrapper(arima_ts, order = c(1, 1, 2)),     
-    arima_200 = analysis_wrapper(arima_ts, order = c(2, 0, 0)), 
-    arima_201 = analysis_wrapper(arima_ts, order = c(2, 0, 1)), 
-    arima_202 = analysis_wrapper(arima_ts, order = c(2, 0, 2)), 
-    arima_210 = analysis_wrapper(arima_ts, order = c(2, 1, 0)), 
-    arima_211 = analysis_wrapper(arima_ts, order = c(2, 1, 1)), 
-    arima_212 = analysis_wrapper(arima_ts, order = c(2, 1, 2)), 
-    randomwalk = analysis_wrapper(randomwalk_ts), 
-    randomwalk_drift = analysis_wrapper(randomwalk_ts, drift = TRUE), 
-    autoarima = analysis_wrapper(arima_fracdiff_ts)
-)
-
-## ets methods (I think the frequency parameter doesn't actually do anything?)
-ets_methods <- drake_plan(
-    ets_1 = analysis_wrapper(ets_ts, frequency = 1), 
-    ets_2 = analysis_wrapper(ets_ts, frequency = 2), 
-    ets_3 = analysis_wrapper(ets_ts, frequency = 3), 
-    ets_4 = analysis_wrapper(ets_ts, frequency = 4)
-)
-
-## sts methods (I am not sure why Ward et al. only explore up to frequency = 2 
-##   here, but up to frequency = 4 for ets; this appears to give different 
-##   results for different values of the frequency parameter)
-sts_methods <- drake_plan(
-    sts_1 = analysis_wrapper(sts_ts, frequency = 1), 
-    sts_2 = analysis_wrapper(sts_ts, frequency = 2)
-)
-
-## spline methods
-spline_methods <- drake_plan(
-    gam = analysis_wrapper(gam_ts)
-)
-
-## neural network methods
-nnet_methods <- drake_plan(
-    nnet_1_1 = analysis_wrapper(nnet_ts, m = 1, size = 1), 
-    nnet_1_2 = analysis_wrapper(nnet_ts, m = 1, size = 2), 
-    nnet_2_1 = analysis_wrapper(nnet_ts, m = 2, size = 1), 
-    nnet_2_2 = analysis_wrapper(nnet_ts, m = 2, size = 2), 
-    nnet_3_1 = analysis_wrapper(nnet_ts, m = 3, size = 1), 
-    nnet_3_2 = analysis_wrapper(nnet_ts, m = 3, size = 2)
-)  
-
-## locally weighted regression methods
-locreg_methods <- drake_plan(
-    locreg = analysis_wrapper(locreg_ts)
-)
-
-## full list of methods
-methods <- bind_rows(arima_methods, ets_methods, sts_methods, 
-                     spline_methods, nnet_methods, locreg_methods)
+## define the forecasting methods
+methods <- build_ward_methods_plan()
 
 ## define the analyses (each method x dataset combination)
 analyses <- build_analyses_plan(methods, datasets)
