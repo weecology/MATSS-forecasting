@@ -20,27 +20,16 @@ library(drake)
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-# find results objects
-results_pattern <- "^results_"
-cache_names <- cache$list()
-results_names <- grep(results_pattern, cache_names, value = TRUE)
-
 # load results
-loadd(list = results_names, cache = cache)
+loadd(full_results, cache = cache)
 ```
 
 ## Process results together
 
-We have quite a few results objects loaded. There is one for each analysis method, combining the individual runs on the different datasets.
+We do some cleaning of the dataset names in `full_results`):
 
 ```{r}
-ls(pattern = results_pattern)
-```
-
-Just as in the "autoarima_report", we combine the outputs in each results object using `bind_rows()`, and wrap this all together using `purrr::map_dfr()` (and some cleaning of the dataset names):
-
-```{r}
-full_results <- purrr::map_dfr(mget(results_names), bind_rows) %>%
+full_results <- full_results %>%
         mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
 
 print(full_results)

@@ -23,7 +23,18 @@ datasets <- build_ward_data_plan()
 methods <- build_ward_methods_plan()
 
 ## define the analyses (each method x dataset combination)
-analyses <- build_analyses_plan(methods, datasets)
+analyses <- drake::drake_plan(
+    analysis = target(fun(data),
+                      transform = cross(fun = !!rlang::syms(methods$target),
+                                        data = !!rlang::syms(datasets$target))
+    ),
+    results = target(dplyr::bind_rows(analysis),
+                     transform = combine(analysis, .by = fun)),
+    full_results = target(
+        bind_rows(results), 
+        transform = combine(results)
+    )
+)
 
 ## define a report that summarize the autoarima analysis
 reports <- drake_plan(

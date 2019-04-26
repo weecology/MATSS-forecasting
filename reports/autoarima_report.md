@@ -1,7 +1,7 @@
 autoarima report
 ================
 Hao Ye
-2019-03-22
+2019-04-26
 
 ## Read in the results
 
@@ -15,63 +15,45 @@ results_autoarima <- readd(results_autoarima, character_only = FALSE, cache = ca
 
 ## Process results together
 
-Here, `results_autoarima` is a list with 8 elements, one for each of the
+Here, `results_autoarima` is a list with 5 elements, one for each of the
 datasets that were analyzed. Each individual element is a tibble with
-the same list columns, `results` and `metadata`.
+the same list columns, `results` and
+    `metadata`.
 
 ``` r
 str(results_autoarima, max.level = 2)
 ```
 
-    ## List of 8
-    ##  $ analysis_autoarima_data_.salmon.             :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.salmon."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.RAMlegacy_catch.    :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.RAMlegacy_catch."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.RAMlegacy_ssb.      :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.RAMlegacy_ssb."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.RAMlegacy_recperssb.:Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.RAMlegacy_recperssb."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.Dorner2008.         :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.Dorner2008."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.LPI.                :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.LPI."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.SprSum_Col_Chinook. :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.SprSum_Col_Chinook."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
-    ##  $ analysis_autoarima_data_.PugSound_Chinook.   :Classes 'tbl_df', 'tbl' and 'data.frame':   1 obs. of  5 variables:
-    ##   ..$ results :List of 1
-    ##   ..$ metadata:List of 1
-    ##   ..$ dataset : chr "data_.PugSound_Chinook."
-    ##   ..$ method  : chr "arima_fracdiff_ts"
-    ##   ..$ args    :List of 1
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    8 obs. of  5 variables:
+    ##  $ results :List of 8
+    ##   ..$ :'data.frame': 751 obs. of  5 variables:
+    ##   ..$ :'data.frame': 1340 obs. of  5 variables:
+    ##   ..$ :'data.frame': 1195 obs. of  5 variables:
+    ##   ..$ :'data.frame': 1070 obs. of  5 variables:
+    ##   ..$ :'data.frame': 430 obs. of  5 variables:
+    ##   ..$ :'data.frame': 1280 obs. of  5 variables:
+    ##   ..$ :'data.frame': 110 obs. of  5 variables:
+    ##   ..$ :'data.frame': 110 obs. of  5 variables:
+    ##  $ metadata:List of 8
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##   ..$ :List of 2
+    ##  $ dataset : chr  "data_.salmon." "data_.RAMlegacy_catch." "data_.RAMlegacy_ssb." "data_.RAMlegacy_recperssb." ...
+    ##  $ method  : chr  "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" ...
+    ##  $ args    :List of 8
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
+    ##   ..$ : list()
 
 First, we combine these results together into a single tibble, making
 sure to keep the name of the original dataset, and doing some cleaning

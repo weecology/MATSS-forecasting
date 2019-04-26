@@ -10,52 +10,16 @@ Hao Ye
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
 
-# find results objects
-results_pattern <- "^results_"
-cache_names <- cache$list()
-results_names <- grep(results_pattern, cache_names, value = TRUE)
-
 # load results
-loadd(list = results_names, cache = cache)
+loadd(full_results, cache = cache)
 ```
 
 ## Process results together
 
-We have quite a few results objects loaded. There is one for each
-analysis method, combining the individual runs on the different
-datasets.
+We do some cleaning of the dataset names in `full_results`):
 
 ``` r
-ls(pattern = results_pattern)
-```
-
-    ##  [1] "results_arima_001"        "results_arima_002"       
-    ##  [3] "results_arima_011"        "results_arima_012"       
-    ##  [5] "results_arima_100"        "results_arima_101"       
-    ##  [7] "results_arima_102"        "results_arima_110"       
-    ##  [9] "results_arima_111"        "results_arima_112"       
-    ## [11] "results_arima_200"        "results_arima_201"       
-    ## [13] "results_arima_202"        "results_arima_210"       
-    ## [15] "results_arima_211"        "results_arima_212"       
-    ## [17] "results_autoarima"        "results_ets_1"           
-    ## [19] "results_ets_2"            "results_ets_3"           
-    ## [21] "results_ets_4"            "results_gam"             
-    ## [23] "results_gausspr_1"        "results_gausspr_2"       
-    ## [25] "results_gausspr_3"        "results_gausspr_4"       
-    ## [27] "results_locreg"           "results_names"           
-    ## [29] "results_nnet_1_1"         "results_nnet_1_2"        
-    ## [31] "results_nnet_2_1"         "results_nnet_2_2"        
-    ## [33] "results_nnet_3_1"         "results_nnet_3_2"        
-    ## [35] "results_npreg"            "results_pattern"         
-    ## [37] "results_randomwalk"       "results_randomwalk_drift"
-    ## [39] "results_sts_1"            "results_sts_2"
-
-Just as in the “autoarima\_report”, we combine the outputs in each
-results object using `bind_rows()`, and wrap this all together using
-`purrr::map_dfr()` (and some cleaning of the dataset names):
-
-``` r
-full_results <- purrr::map_dfr(mget(results_names), bind_rows) %>%
+full_results <- full_results %>%
         mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
 
 print(full_results)
@@ -163,4 +127,4 @@ ggplot(data = to_plot,
 
     ## Warning: Removed 8 rows containing missing values (position_stack).
 
-![](forecasting_comparison_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](forecasting_comparison_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
