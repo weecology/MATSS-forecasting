@@ -35,7 +35,7 @@ First, we combine these results together into a single tibble, making sure to ke
 
 ```{r}
 results_autoarima <- bind_rows(results_autoarima) %>%
-    mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
+    mutate(dataset = sub("data_(.+)$", "\\1", dataset))
 
 print(results_autoarima)
 ```

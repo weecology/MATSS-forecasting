@@ -43,7 +43,7 @@ str(results_autoarima, max.level = 2)
     ##   ..$ :List of 2
     ##   ..$ :List of 2
     ##   ..$ :List of 2
-    ##  $ dataset : chr  "data_.salmon." "data_.RAMlegacy_catch." "data_.RAMlegacy_ssb." "data_.RAMlegacy_recperssb." ...
+    ##  $ dataset : chr  "data_salmon" "data_RAMlegacy_catch" "data_RAMlegacy_ssb" "data_RAMlegacy_recperssb" ...
     ##  $ method  : chr  "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" "arima_fracdiff_ts" ...
     ##  $ args    :List of 8
     ##   ..$ : list()
@@ -61,7 +61,7 @@ of the dataset names:
 
 ``` r
 results_autoarima <- bind_rows(results_autoarima) %>%
-    mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
+    mutate(dataset = sub("data_(.+)$", "\\1", dataset))
 
 print(results_autoarima)
 ```

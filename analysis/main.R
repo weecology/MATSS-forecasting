@@ -1,6 +1,5 @@
 # library(MARSS)
 # library(nlts)
-# library(kernlab)
 # library(ltsa)
 # library(timsac)
 # library(randomForest)

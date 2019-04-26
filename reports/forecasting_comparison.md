@@ -20,7 +20,7 @@ We do some cleaning of the dataset names in `full_results`):
 
 ``` r
 full_results <- full_results %>%
-        mutate(dataset = sub("data_\\.(.+)\\.", "\\1", dataset))
+        mutate(dataset = sub("data_(.+)$", "\\1", dataset))
 
 print(full_results)
 ```
