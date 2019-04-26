@@ -1,7 +1,7 @@
 Forecasting Comparison Report
 ================
 Hao Ye
-2019-03-22
+2019-04-26
 
 ## Read in the results
 
@@ -40,9 +40,15 @@ ls(pattern = results_pattern)
     ## [17] "results_autoarima"        "results_ets_1"           
     ## [19] "results_ets_2"            "results_ets_3"           
     ## [21] "results_ets_4"            "results_gam"             
-    ## [23] "results_names"            "results_pattern"         
-    ## [25] "results_randomwalk"       "results_randomwalk_drift"
-    ## [27] "results_sts_1"            "results_sts_2"
+    ## [23] "results_gausspr_1"        "results_gausspr_2"       
+    ## [25] "results_gausspr_3"        "results_gausspr_4"       
+    ## [27] "results_locreg"           "results_names"           
+    ## [29] "results_nnet_1_1"         "results_nnet_1_2"        
+    ## [31] "results_nnet_2_1"         "results_nnet_2_2"        
+    ## [33] "results_nnet_3_1"         "results_nnet_3_2"        
+    ## [35] "results_npreg"            "results_pattern"         
+    ## [37] "results_randomwalk"       "results_randomwalk_drift"
+    ## [39] "results_sts_1"            "results_sts_2"
 
 Just as in the “autoarima\_report”, we combine the outputs in each
 results object using `bind_rows()`, and wrap this all together using
@@ -55,7 +61,7 @@ full_results <- purrr::map_dfr(mget(results_names), bind_rows) %>%
 print(full_results)
 ```
 
-    ## # A tibble: 208 x 5
+    ## # A tibble: 304 x 5
     ##    results                 metadata   dataset             method  args     
     ##    <list>                  <list>     <chr>               <chr>   <list>   
     ##  1 <data.frame [775 × 5]>  <list [2]> salmon              arima_… <list [1…
@@ -68,7 +74,7 @@ print(full_results)
     ##  8 <data.frame [110 × 5]>  <list [2]> PugSound_Chinook    arima_… <list [1…
     ##  9 <data.frame [775 × 5]>  <list [2]> salmon              arima_… <list [1…
     ## 10 <data.frame [1,340 × 5… <list [2]> RAMlegacy_catch     arima_… <list [1…
-    ## # … with 198 more rows
+    ## # … with 294 more rows
 
 Again, we combine the `species_table` from within the `metadata` column,
 and join it with the results:
@@ -94,7 +100,7 @@ results <- full_results %>%
 print(results)
 ```
 
-    ## # A tibble: 162,624 x 10
+    ## # A tibble: 238,304 x 10
     ##    id    observed predicted lower_CI upper_CI dataset method args  species
     ##    <chr>    <dbl>     <dbl>    <dbl>    <dbl> <chr>   <chr>  <lis> <fct>  
     ##  1 62       10.5       9.66     8.34     11.0 salmon  arima… <lis… Chinook
@@ -107,7 +113,7 @@ print(results)
     ##  8 63        8.52      8.61     6.99     10.2 salmon  arima… <lis… Chinook
     ##  9 63        8.26      8.61     6.99     10.2 salmon  arima… <lis… Chinook
     ## 10 63        8.32      8.61     6.99     10.2 salmon  arima… <lis… Chinook
-    ## # … with 162,614 more rows, and 1 more variable: class <fct>
+    ## # … with 238,294 more rows, and 1 more variable: class <fct>
 
 ## Prepare for plotting
 
@@ -137,7 +143,7 @@ ggplot(data = to_plot,
     theme_bw()
 ```
 
-    ## Warning: Removed 245 rows containing non-finite values (stat_density).
+    ## Warning: Removed 1516 rows containing non-finite values (stat_density).
 
     ## Warning: Groups with fewer than two data points have been dropped.
     
@@ -148,7 +154,13 @@ ggplot(data = to_plot,
     ## Warning: Groups with fewer than two data points have been dropped.
     
     ## Warning: Groups with fewer than two data points have been dropped.
+    
+    ## Warning: Groups with fewer than two data points have been dropped.
+    
+    ## Warning: Groups with fewer than two data points have been dropped.
+    
+    ## Warning: Groups with fewer than two data points have been dropped.
 
-    ## Warning: Removed 5 rows containing missing values (position_stack).
+    ## Warning: Removed 8 rows containing missing values (position_stack).
 
 ![](forecasting_comparison_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
