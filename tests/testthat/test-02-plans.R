@@ -10,6 +10,6 @@ test_that("Drake plan for Ward et al. databases works", {
 
 test_that("Drake plan for Ward et al. methods works", {
     expect_error(methods_plan <- build_ward_methods_plan(), NA)
-    expect_equal(dim(methods_plan), c(39, 2))
+    expect_equal(dim(methods_plan), c(40, 2))
     expect_true(all(grepl("MATSS::analysis_wrapper\\(.+\\)", methods_plan$command)))
 })

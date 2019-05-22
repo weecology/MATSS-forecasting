@@ -1,4 +1,4 @@
-context("GAM time series functions")
+context("Generalized Additive Model time series functions")
 
 test_that("gam_ts error checking works for too short time series", {
     w <- capture_warnings(output <- gam_ts(c(1, NA)))

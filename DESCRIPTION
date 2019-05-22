@@ -25,10 +25,7 @@ Imports:
     tibble,
     mgcv,
     tsDyn,
-    locfit,
-    np,
-    kernlab,
-    randomForest
+    locfit
 Suggests:
     testthat,
     knitr,
