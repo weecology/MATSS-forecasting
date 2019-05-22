@@ -27,7 +27,8 @@ Imports:
     tsDyn,
     locfit,
     np,
-    kernlab
+    kernlab,
+    randomForest
 Suggests:
     testthat,
     knitr,

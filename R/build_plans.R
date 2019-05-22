@@ -84,10 +84,15 @@ build_ward_methods_plan <- function()
         gausspr_4 = MATSS::analysis_wrapper(gausspr_ts, frequency = 4)
     )
     
+    ## random forest methods
+    ranfor_methods <- drake::drake_plan(
+        ranfor = MATSS::analysis_wrapper(ranfor_ts)
+    )
+    
     ## full list of methods
     methods <- dplyr::bind_rows(arima_methods, ets_methods, sts_methods, 
                          spline_methods, nnet_methods, locreg_methods, 
-                         npreg_methods, gausspr_methods)
+                         npreg_methods, gausspr_methods, ranfor_methods)
 }
 
 #' @title Make a drake plan with all the datasets in Ward et al. 2014
