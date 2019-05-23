@@ -14,8 +14,8 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    forecast,
-    MATSS (>= 0.0.2)
+    MATSS (>= 0.0.2),
+    magrittr
 Suggests:
     testthat,
     knitr,
