@@ -102,7 +102,8 @@ build_ward_methods_plan <- function()
     
     ## edm methods
     edm_methods <- drake::drake_plan(
-        simplex = MATSS::analysis_wrapper(simplex_ts)
+        simplex = MATSS::analysis_wrapper(simplex_ts), 
+        smap = MATSS::analysis_wrapper(smap_ts)
     )
     
     ## full list of methods
