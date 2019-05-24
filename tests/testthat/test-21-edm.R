@@ -26,16 +26,16 @@ test_that("simplex_ts function works for specified E", {
 
 test_that("smap_ts function works", {
     expect_error(output <- smap_ts(Nile), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"), 
-                     known_hash = "f52f0595c9")
+    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "5461ed855b")
 })
 
 test_that("smap_ts function works for specified E and theta", {
     expect_error(output <- smap_ts(Nile, E = 3), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"), 
-                     known_hash = "5c324e60c3")
+    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "54657b29ea")
     
     expect_error(output <- smap_ts(Nile, E = 3, theta = 1), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"), 
-                     known_hash = "c1e5612339")
+    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "36bf95f751")
 })
