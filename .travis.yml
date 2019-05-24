@@ -10,27 +10,43 @@ r_binary_packages:
   - assertthat
   - backports
   - base64enc
+  - BH
   - bitops
   - brew
   - callr
   - cli
+  - clipr
+  - clisymbols
+  - colorspace
   - commonmark
   - covr
   - crayon
   - curl
+  - data.table
+  - DBI
   - desc
   - digest
+  - dplyr
   - evaluate
   - fansi
+  - forecast
   - fs
+  - ggplot2
+  - gh
+  - git2r
   - glue
+  - gtable
   - highlight
   - highr
   - htmltools
   - httr
+  - igraph
+  - ini
   - jsonlite
   - knitr
+  - labeling
   - lazyeval
+  - lubridate
   - magrittr
   - markdown
   - memoise
@@ -41,6 +57,7 @@ r_binary_packages:
   - pkgbuild
   - pkgconfig
   - pkgload
+  - plyr
   - praise
   - prettyunits
   - processx
@@ -48,8 +65,11 @@ r_binary_packages:
   - purrr
   - R6
   - Rcpp
+  - RcppArmadillo
   - RCurl
+  - RSQLite
   - rematch2
+  - reshape2
   - rex
   - rlang
   - rmarkdown
@@ -57,20 +77,25 @@ r_binary_packages:
   - rprojroot
   - rsconnect
   - rstudioapi
+  - storr
   - stringi
   - stringr
   - sys
   - testthat
   - tibble
+  - tidyr
   - tinytex
+  - tseries
   - utf8
   - vctrs
   - whisker
   - withr
   - xfun
   - xml2
+  - xts
   - yaml
   - zeallot
+  - zoo
 
 addons:
   apt:
