@@ -40,7 +40,6 @@ r_binary_packages:
   - pillar
   - pkgbuild
   - pkgconfig
-  - pkgdown
   - pkgload
   - praise
   - prettyunits
