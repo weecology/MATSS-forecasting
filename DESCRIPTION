@@ -14,7 +14,6 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    MATSS (>= 0.0.2),
     magrittr
 Suggests:
     testthat,

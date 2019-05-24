@@ -5,6 +5,74 @@ sudo: required
 dist: "trusty"
 warnings_are_errors: false
 
+r_binary_packages:
+  - askpass
+  - assertthat
+  - backports
+  - base64enc
+  - bitops
+  - brew
+  - callr
+  - cli
+  - commonmark
+  - covr
+  - crayon
+  - curl
+  - desc
+  - digest
+  - evaluate
+  - fansi
+  - fs
+  - glue
+  - highlight
+  - highr
+  - htmltools
+  - httr
+  - jsonlite
+  - knitr
+  - lazyeval
+  - magrittr
+  - markdown
+  - memoise
+  - mime
+  - openssl
+  - packrat
+  - pillar
+  - pkgbuild
+  - pkgconfig
+  - pkgdown
+  - pkgload
+  - praise
+  - prettyunits
+  - processx
+  - ps
+  - purrr
+  - R6
+  - Rcpp
+  - RCurl
+  - rematch2
+  - rex
+  - rlang
+  - rmarkdown
+  - roxygen2
+  - rprojroot
+  - rsconnect
+  - rstudioapi
+  - stringi
+  - stringr
+  - sys
+  - testthat
+  - tibble
+  - tinytex
+  - utf8
+  - vctrs
+  - whisker
+  - withr
+  - xfun
+  - xml2
+  - yaml
+  - zeallot
+
 addons:
   apt:
     packages:

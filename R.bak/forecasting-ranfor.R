@@ -21,7 +21,7 @@ ranfor_ts <- function(timeseries, num_ahead = 5, level = 95)
     {
         if (length(training) < 6)
         {
-            stop("training data not long enough for fixed embedding dimension of 5")
+            stop("training data is not long enough for fixed embedding dimension of 5")
         }
         n <- length(training)
         ranfor_model <- randomForest::randomForest(y = training[6:n], 

@@ -91,14 +91,20 @@ build_ward_methods_plan <- function()
     
     ## linear regression methods
     lm_methods <- drake::drake_plan(
-        linreg <- MATSS::analysis_wrapper(lm_ts)
+        linreg = MATSS::analysis_wrapper(lm_ts)
+    )
+    
+    ## state space methods
+    marss_methods <- drake::drake_plan(
+        marss_drift = MATSS::analysis_wrapper(marss_ts), 
+        marss_nodrift = MATSS::analysis_wrapper(marss_ts, drift = FALSE)
     )
     
     ## full list of methods
     methods <- dplyr::bind_rows(arima_methods, ets_methods, sts_methods, 
                          spline_methods, nnet_methods, locreg_methods, 
                          npreg_methods, gausspr_methods, ranfor_methods, 
-                         lm_methods)
+                         lm_methods, marss_methods)
 }
 
 #' @title Make a drake plan with all the datasets in Ward et al. 2014
