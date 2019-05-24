@@ -6,14 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects. — reshape_ward_data • MATSSforecasting</title>
+<title>Make forecasts using a Linear Model — lm_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,22 +30,10 @@ the data objects. — reshape_ward_data • MATSSforecasting</title>
 
 
 
-<meta property="og:title" content="Reshape the processed data file from Ward et al. 2014
+<meta property="og:title" content="Make forecasts using a Linear Model — lm_ts" />
 
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects. — reshape_ward_data" />
-
-<meta property="og:description" content="Reshape the processed data file from Ward et al. 2014
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects." />
+<meta property="og:description" content="Fit a Linear Regression for forecasting the time series as a
+linear function over time/years" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,46 +103,42 @@ the data objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/process-ward-data.R'><code>R/process-ward-data.R</code></a></small>
-    <div class="hidden name"><code>reshape_ward_data.Rd</code></div>
+    <h1>Make forecasts using a Linear Model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-lm.R'><code>R/forecasting-lm.R</code></a></small>
+    <div class="hidden name"><code>lm_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Reshape the processed data file from Ward et al. 2014</p>
-<p>The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.</p>
+    <p>Fit a Linear Regression for forecasting the time series as a
+linear function over time/years</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>reshape_ward_data</span>(<span class='kw'>ward_RDS_file</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'>here</span>(<span class='st'>"analysis"</span>, <span class='st'>"data"</span>,
-  <span class='st'>"ward_fish_data.RDS"</span>))</pre>
+    <pre class="usage"><span class='fu'>lm_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ward_RDS_file</th>
-      <td><p>the location of the RDS file with the combined datasets
-that is produced as a result of running <code>reshape_ward_data</code></p></td>
+      <th>timeseries</th>
+      <td><p>the time series to forecast</p></td>
+    </tr>
+    <tr>
+      <th>num_ahead</th>
+      <td><p>the number of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>Confidence level for prediction intervals.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a character vector with the names of the database</p>
+    <p>a data.frame of the mean forecasts, the observed values, and the
+lower and upper CI levels (if an error occurs, then just NA values)</p>
     
 
   </div>
