@@ -19,7 +19,7 @@ lm_ts <- function(timeseries, num_ahead = 5, level = 95)
     {
         # make forecasts
         t <- seq_len(length(training))
-        lm_model <- lm(training ~ t)
+        lm_model <- stats::lm(training ~ t)
         
         # predict function requires a new list of predictor variables as newdata
         t_observed <- length(training) + seq_len(length(observed))
