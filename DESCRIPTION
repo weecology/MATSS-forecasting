@@ -28,7 +28,8 @@ Imports:
     np,
     kernlab,
     randomForest,
-    MARSS
+    MARSS,
+    rEDM (>= 0.7.4)
 Suggests:
     testthat,
     knitr,
@@ -36,7 +37,8 @@ Suggests:
     pkgdown,
     covr
 Remotes: 
-    weecology/MATSS
+    weecology/MATSS, 
+    ha0ye/rEDM
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

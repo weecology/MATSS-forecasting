@@ -100,11 +100,17 @@ build_ward_methods_plan <- function()
         marss_nodrift = MATSS::analysis_wrapper(marss_ts, drift = FALSE)
     )
     
+    ## edm methods
+    edm_methods <- drake::drake_plan(
+        simplex = MATSS::analysis_wrapper(simplex_ts), 
+        smap = MATSS::analysis_wrapper(smap_ts)
+    )
+    
     ## full list of methods
     methods <- dplyr::bind_rows(arima_methods, ets_methods, sts_methods, 
                          spline_methods, nnet_methods, locreg_methods, 
                          npreg_methods, gausspr_methods, ranfor_methods, 
-                         lm_methods, marss_methods)
+                         lm_methods, marss_methods, edm_methods)
 }
 
 #' @title Make a drake plan with all the datasets in Ward et al. 2014
