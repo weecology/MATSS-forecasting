@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using nonparametric kernel regression — npreg_ts • MATSSforecasting</title>
+<title>Make forecasts using a state space model — marss_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Make forecasts using nonparametric kernel regression — npreg_ts" />
+<meta property="og:title" content="Make forecasts using a state space model — marss_ts" />
 
-<meta property="og:description" content="npreg_ts fits a timeseries model using npreg" />
+<meta property="og:description" content="Fit a state-space model using MARSS and
+make forecasts." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,19 +103,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using nonparametric kernel regression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-npreg.R'><code>R/forecasting-npreg.R</code></a></small>
-    <div class="hidden name"><code>npreg_ts.Rd</code></div>
+    <h1>Make forecasts using a state space model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-marss.R'><code>R/forecasting-marss.R</code></a></small>
+    <div class="hidden name"><code>marss_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>npreg_ts</code> fits a timeseries model using <code><a href='https://www.rdocumentation.org/packages/np/topics/np.regression'>npreg</a></code></p>
+    <p>Fit a state-space model using <code><a href='https://www.rdocumentation.org/packages/MARSS/topics/MARSS'>MARSS</a></code> and
+make forecasts.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>npreg_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>regtype</span> <span class='kw'>=</span> <span class='st'>"ll"</span>,
-  <span class='kw'>bwmethod</span> <span class='kw'>=</span> <span class='st'>"cv.aic"</span>, <span class='kw'>gradients</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>marss_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,24 +135,12 @@ forecast</p></td>
       <td><p>Confidence level for prediction intervals.</p></td>
     </tr>
     <tr>
-      <th>regtype</th>
-      <td><p>a character string specifying which type of kernel regression
-    estimator to use. <code>lc</code> specifies a local-constant estimator
-    (Nadaraya-Watson) and <code>ll</code> specifies a local-linear
-    estimator. Defaults to <code>lc</code>.</p></td>
+      <th>drift</th>
+      <td><p>whether the state-space model should include drift or not</p></td>
     </tr>
     <tr>
-      <th>bwmethod</th>
-      <td><p>which method to use to select bandwidths. <code>cv.aic</code> specifies
-    expected Kullback-Leibler cross-validation (Hurvich, Simonoff, and
-    Tsai (1998)), and <code>cv.ls</code> specifies least-squares
-    cross-validation. Defaults to <code>cv.ls</code>.</p></td>
-    </tr>
-    <tr>
-      <th>gradients</th>
-      <td><p>a logical value indicating that you want gradients computed and
-    returned in the resulting <code>npregression</code> object. Defaults to
-    <code>FALSE</code>.</p></td>
+      <th>silent</th>
+      <td><p>TRUE/FALSE Suppresses printing of full error messages, warnings, progress bars and convergence information. Setting silent=2 will produce more verbose error messages and progress information.</p></td>
     </tr>
     </table>
     
