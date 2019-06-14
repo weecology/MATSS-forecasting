@@ -18,15 +18,20 @@ reference:
     - ets_ts
     - gam_ts
     - gausspr_ts
+    - lm_ts
     - locreg_ts
+    - marss_ts
     - nnet_ts
     - npreg_ts
+    - ranfor_ts
+    - simplex_ts
+    - smap_ts
   - title: "Forecasting Utilities"
     contents:
-    - make_forecast
+    - make_forecasts
   - title: "Testing Utilities"
     contents:
     - expect_NA_warnings
-    - expect_forecast
+    - expect_forecasts
     
     

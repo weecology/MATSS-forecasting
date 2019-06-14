@@ -53,7 +53,7 @@ simplex_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
                    level = level, E_list = E_list, silent = silent)
 }
 
-#' @rdname smap_ts
+#' @rdname simplex_ts
 #' 
 #' @description `smap_ts` fits an S-map model using 
 #'   \code{\link[rEDM]{s_map}} and makes forecasts.
