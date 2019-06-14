@@ -1,11 +1,14 @@
 Package: MATSSforecasting
 Title: Analysis and Synthesis of Forecasting Ecological Time Series
-Version: 0.1.1
-Authors@R: 
-    person("Hao", "Ye",
-           email = "hao.ye@weecology.org",
-           role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0002-8630-1458"))
+Version: 0.1.2
+Authors@R: c(
+                person("Hao", "Ye", role = c("aut", "cre"), 
+                       email = "hao.ye@weecology.org",
+                       comment = c(ORCID = "0000-0002-8630-1458")), 
+                person("Frank", "Pennekamp", role = c("aut"), 
+                       email = "Frank.Pennekamp@ieu.uzh.ch",
+                       comment = c(ORCID = "0000-0003-0679-1045"))
+           )
 Description: This project investigates different approaches to forecasting ecological time series. It implements multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
 License: MIT + file LICENSE
 URL: https://github.com/ha0ye/MATSS-forecasting, https://ha0ye.github.io/MATSS-forecasting/
