@@ -2,19 +2,16 @@
 % Please edit documentation in R/process-ward-data.R
 \name{reshape_ward_data}
 \alias{reshape_ward_data}
-\title{Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.}
+\title{Reshape the processed data file from Ward et al. 2014}
 \usage{
-reshape_ward_data(ward_RDS_file = here::here("analysis", "data",
-  "ward_fish_data.RDS"))
+reshape_ward_data(data_file = system.file("extdata", "processed_data",
+  "masterDat_052015.csv", package = "MATSSforecasting", mustWork = TRUE),
+  ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
 }
 \arguments{
+\item{data_file}{the path to the raw CSV file from Ward et al. 2014. (The
+default is bundled with this package.)}
+
 \item{ward_RDS_file}{the location of the RDS file with the combined datasets
 that is produced as a result of running \code{\link{reshape_ward_data}}}
 }
@@ -22,12 +19,10 @@ that is produced as a result of running \code{\link{reshape_ward_data}}}
 a character vector with the names of the database
 }
 \description{
-Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.
+The master data file from Ward et al. 2014 has 8 datasets
+combined together in long form. We do some preprocessing here to correct
+dates, shift all variable names to lowercase characters, and construct a
+separate data object for each dataset. The format follows that of MATSS
+(browse the data formats vignette) The resulting object has the names of
+the datasets and the data objects.
 }
