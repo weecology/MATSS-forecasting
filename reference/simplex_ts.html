@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using a Generalized Additive Model — gam_ts • MATSSforecasting</title>
+<title>Make forecasts using simplex projection or S-maps — simplex_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,12 @@
 
 
 
-<meta property="og:title" content="Make forecasts using a Generalized Additive Model — gam_ts" />
+<meta property="og:title" content="Make forecasts using simplex projection or S-maps — simplex_ts" />
 
-<meta property="og:description" content="Fit a Generalized Additive Model (GAM) using
-gam with a spline over time/years" />
+<meta property="og:description" content="simplex_ts fits a simplex projection model using
+simplex and makes forecasts.
+smap_ts fits an S-map model using
+s_map and makes forecasts." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,19 +105,26 @@ gam with a spline over time/years" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using a Generalized Additive Model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-gam.R'><code>R/forecasting-gam.R</code></a></small>
-    <div class="hidden name"><code>gam_ts.Rd</code></div>
+    <h1>Make forecasts using simplex projection or S-maps</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-edm.R'><code>R/forecasting-edm.R</code></a></small>
+    <div class="hidden name"><code>simplex_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fit a Generalized Additive Model (GAM) using
-<code><a href='https://www.rdocumentation.org/packages/mgcv/topics/gam'>gam</a></code> with a spline over time/years</p>
+    <p><code>simplex_ts</code> fits a simplex projection model using
+<code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>simplex</a></code> and makes forecasts.</p>
+<p><code>smap_ts</code> fits an S-map model using
+<code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>s_map</a></code> and makes forecasts.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gam_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
+    <pre class="usage"><span class='fu'>simplex_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>,
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>smap_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>,
+  <span class='kw'>theta_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1e-04</span>, <span class='fl'>3e-04</span>, <span class='fl'>0.001</span>, <span class='fl'>0.003</span>, <span class='fl'>0.01</span>, <span class='fl'>0.03</span>, <span class='fl'>0.1</span>, <span class='fl'>0.3</span>,
+  <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>1</span>, <span class='fl'>1.5</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>8</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,8 +139,12 @@ gam with a spline over time/years" />
 forecast</p></td>
     </tr>
     <tr>
-      <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
+      <th>E_list</th>
+      <td><p>the values of E to try</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p>prevents warning messages from being printed to the R console</p></td>
     </tr>
     </table>
     

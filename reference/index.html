@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.1</span>
       </span>
     </div>
 
@@ -192,87 +192,6 @@ series mdoel</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="locreg_ts.html">locreg_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using locally weighted regression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nnet_ts.html">nnet_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using neural network time series model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="npreg_ts.html">npreg_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using nonparametric kernel regression</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-forecasting-utilities" class="hasAnchor"><a href="#section-forecasting-utilities" class="anchor"></a>Forecasting Utilities</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="arima_ts.html">arima_ts()</a></code> <code><a href="arima_ts.html">arima_fracdiff_ts()</a></code> <code><a href="arima_ts.html">randomwalk_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using AR / ARIMA</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="build_ward_data_plan.html">build_ward_data_plan()</a></code> </p>
-        </td>
-        <td><p>Make a drake plan with all the datasets in Ward et al. 2014</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="build_ward_methods_plan.html">build_ward_methods_plan()</a></code> </p>
-        </td>
-        <td><p>Make a drake plan with all the forecasting mehtods in Ward et al. 2014</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ets_ts.html">ets_ts()</a></code> <code><a href="ets_ts.html">sts_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using an exponentially smoothed or structural time
-series mdoel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="expect_NA_warnings.html">expect_NA_warnings()</a></code> </p>
-        </td>
-        <td><p>Check if warnings are expected for a too-short time series</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="expect_forecasts.html">expect_forecasts()</a></code> </p>
-        </td>
-        <td><p>Check if object is in valid forecasts format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gam_ts.html">gam_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using a Generalized Additive Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gausspr_ts.html">gausspr_ts()</a></code> </p>
-        </td>
-        <td><p>Make forecasts using gaussian process regression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_ward_data.html">get_ward_data()</a></code> </p>
-        </td>
-        <td><p>Read in a specific database from Ward et al. 2014</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="lm_ts.html">lm_ts()</a></code> </p>
         </td>
         <td><p>Make forecasts using a Linear Model</p></td>
@@ -282,12 +201,6 @@ series mdoel</p></td>
           <p><code><a href="locreg_ts.html">locreg_ts()</a></code> </p>
         </td>
         <td><p>Make forecasts using locally weighted regression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_forecasts.html">make_forecasts()</a></code> </p>
-        </td>
-        <td><p>A wrapper function for forecasting methods</p></td>
       </tr><tr>
         
         <td>
@@ -315,16 +228,23 @@ series mdoel</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="reshape_ward_data.html">reshape_ward_data()</a></code> </p>
+          <p><code><a href="simplex_ts.html">simplex_ts()</a></code> <code><a href="simplex_ts.html">smap_ts()</a></code> </p>
         </td>
-        <td><p>Reshape the processed data file from Ward et al. 2014
-
-The master data file from Ward et al. 2014 has 8 datasets combined together
-in long form. We do some preprocessing here to correct dates, shift all
-variable names to lowercase characters, and construct a separate data
-object for each dataset. The format follows that of MATSS (browse the data
-formats vignette) The resulting object has the names of the datasets and
-the data objects.</p></td>
+        <td><p>Make forecasts using simplex projection or S-maps</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-forecasting-utilities" class="hasAnchor"><a href="#section-forecasting-utilities" class="anchor"></a>Forecasting Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="make_forecasts.html">make_forecasts()</a></code> </p>
+        </td>
+        <td><p>A wrapper function for forecasting methods</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -339,6 +259,12 @@ the data objects.</p></td>
           <p><code><a href="expect_NA_warnings.html">expect_NA_warnings()</a></code> </p>
         </td>
         <td><p>Check if warnings are expected for a too-short time series</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expect_forecasts.html">expect_forecasts()</a></code> </p>
+        </td>
+        <td><p>Check if object is in valid forecasts format</p></td>
       </tr>
     </tbody>
     </table>
