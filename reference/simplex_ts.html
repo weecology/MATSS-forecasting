@@ -66,7 +66,7 @@ s_map and makes forecasts." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MATSSforecasting</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.2</span>
       </span>
     </div>
 
@@ -139,12 +139,20 @@ s_map and makes forecasts." />
 forecast</p></td>
     </tr>
     <tr>
+      <th>level</th>
+      <td><p>Confidence level for prediction intervals.</p></td>
+    </tr>
+    <tr>
       <th>E_list</th>
       <td><p>the values of E to try</p></td>
     </tr>
     <tr>
       <th>silent</th>
       <td><p>prevents warning messages from being printed to the R console</p></td>
+    </tr>
+    <tr>
+      <th>theta_list</th>
+      <td><p>values of theta to test</p></td>
     </tr>
     </table>
     
@@ -168,7 +176,7 @@ lower and upper CI levels (if an error occurs, then just NA values)</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hao Ye.</p>
+  <p>Developed by Hao Ye, Frank Pennekamp.</p>
 </div>
 
 <div class="pkgdown">
