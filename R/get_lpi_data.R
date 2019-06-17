@@ -1,8 +1,12 @@
 #' @title Read in the LPI time series
 #'
 #' @description Import LPI abundance time series that are included with the 
-#'   \code{\link{rlpi}} package
+#'   `rlpi` package
 #' 
+#' @param data_file the path to the zip file with the data from the `rlpi` 
+#'   package
+#' @param min_time_series_length the minimum length for time series to be 
+#'   included
 #' @return list of two dataframes (one with abundance data, the other with 
 #'   covariate data) and one list of metadata.
 #'
