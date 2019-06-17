@@ -33,7 +33,7 @@ get_ward_data <- function(database_name, ward_RDS_file)
 #'
 #' @export
 #'
-reshape_ward_data <- function(data_file = system.file("extdata", "processed_data", "masterDat_052015.csv",
+reshape_ward_data <- function(data_file = system.file("extdata", "processed_data", "masterDat_2019-06-12.csv",
                                                       package = "MATSSforecasting", mustWork = TRUE), 
                               ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
 {

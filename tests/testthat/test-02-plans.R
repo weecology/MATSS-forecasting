@@ -4,7 +4,7 @@ data_file <- file.path(tempdir(), "ward_data.RDS")
 
 test_that("Drake plan for Ward et al. databases works", {
     expect_error(data_plan <- build_ward_data_plan(data_file), NA)
-    expect_equal(dim(data_plan), c(8, 2))
+    expect_equal(dim(data_plan), c(7, 2))
     expect_true(all(grepl("data_.+", data_plan$target)))
 })
 
