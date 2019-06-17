@@ -12,13 +12,9 @@
 #'
 #' @export
 #' 
-get_LPI_data <- function(data_file = system.file("extdata", "example_data.zip", package = "rlpi"), 
-                         min_time_series_length = 25)
+get_LPI_data <- function(min_time_series_length = 25)
 {
-    data_path <- tempdir()
-    utils::unzip(data_file, exdir = data_path)
-    
-    dat <- readr::read_csv(file.path(data_path, "example_data", "LPI_LPR2016data_public.csv")) %>%
+    dat <- readr::read_csv("https://raw.githubusercontent.com/Zoological-Society-of-London/rlpi/master/inst/extdata/example_data/LPI_LPR2016data_public.csv") %>%
         
         # convert "NULL" data to proper NA values
         replace(., . == "NULL", NA) %>%
