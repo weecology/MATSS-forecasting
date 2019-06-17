@@ -7,6 +7,7 @@
 #' 
 #' @param E_list the values of E to try
 #' @inheritParams make_forecasts
+#' @inheritParams forecast::forecast
 #' @inheritParams rEDM::simplex
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -57,6 +58,8 @@ simplex_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
 #' 
 #' @description `smap_ts` fits an S-map model using 
 #'   \code{\link[rEDM]{s_map}} and makes forecasts.
+#'   
+#' @param theta_list values of theta to test
 
 smap_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7, 
                     theta_list = c(0, 1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 
