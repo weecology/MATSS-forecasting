@@ -4,15 +4,14 @@
 \alias{get_LPI_data}
 \title{Read in the LPI time series}
 \usage{
-get_LPI_data(data_file = system.file("extdata", "example_data.zip",
-  package = "rlpi"), min_time_series_length = 25)
+get_LPI_data(min_time_series_length = 25)
 }
 \arguments{
-\item{data_file}{the path to the zip file with the data from the \code{rlpi}
-package}
-
 \item{min_time_series_length}{the minimum length for time series to be
 included}
+
+\item{data_file}{the path to the zip file with the data from the \code{rlpi}
+package}
 }
 \value{
 list of two dataframes (one with abundance data, the other with
