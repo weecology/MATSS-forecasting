@@ -18,9 +18,13 @@ smap_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
 \item{num_ahead}{the number of points at the end of the time series to
 forecast}
 
+\item{level}{Confidence level for prediction intervals.}
+
 \item{E_list}{the values of E to try}
 
 \item{silent}{prevents warning messages from being printed to the R console}
+
+\item{theta_list}{values of theta to test}
 }
 \value{
 a data.frame of the mean forecasts, the observed values, and the

@@ -25,7 +25,7 @@ get_LPI_data <- function(data_file = system.file("extdata", "example_data.zip", 
         
         # convert wide-format years into long-format
         tidyr::gather("Year", "Value", "1950":"2015") %>%
-        dplyr::mutate_at(vars("Year", "Value"), as.numeric) %>%
+        dplyr::mutate_at(dplyr::vars("Year", "Value"), as.numeric) %>%
         
         # count number of observations
         dplyr::group_by(ID) %>%
