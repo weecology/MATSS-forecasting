@@ -11,6 +11,8 @@ expose_imports(MATSSforecasting)
 # file paths
 raw_data_file <- system.file("extdata", "processed_data", "masterDat_052015.csv",
                              package = "MATSSforecasting", mustWork = TRUE)
+raw_data_file <- system.file("extdata", "processed_data", "masterDat_2019-06-12.csv",
+                             package = "MATSSforecasting", mustWork = TRUE)
 processed_data_file <- here::here("analysis", "data", "ward_fish_data.RDS")
 
 ## preprocessing of the datasets
@@ -20,7 +22,12 @@ preprocess_data <- drake_plan(
 )
 
 ## define the datasets
-datasets <- build_ward_data_plan(ward_RDS_file = processed_data_file)
+datasets <- bind_rows(
+    drake_plan(
+        data_LPI = get_LPI_data(data_file = file_in(system.file("extdata", "example_data.zip", package = "rlpi")))
+    ), 
+    build_ward_data_plan(ward_RDS_file = processed_data_file)
+)
 
 ## define the forecasting methods
 methods <- build_ward_methods_plan()

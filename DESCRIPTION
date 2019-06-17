@@ -21,6 +21,7 @@ Imports:
     magrittr,
     forecast,
     drake (>= 7.1.0),
+    readr,
     dplyr,
     tidyr,
     purrr,
@@ -32,16 +33,18 @@ Imports:
     kernlab,
     randomForest,
     MARSS,
-    rEDM (>= 0.7.4)
+    rEDM (>= 0.7.4),
+    rlpi (>= 0.1.0)
 Suggests:
     testthat,
     knitr,
     rmarkdown,
     pkgdown,
     covr
-Remotes: 
-    weecology/MATSS, 
-    ha0ye/rEDM
+Remotes:  
+    weecology/MATSS,
+    ha0ye/rEDM,
+    Zoological-Society-of-London/rlpi
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

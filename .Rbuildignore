@@ -12,3 +12,4 @@
 ^reports$
 ^README\.Rmd$
 ^README-.*\.png$
+^.drake
