@@ -38,7 +38,7 @@ analyses <- drake::drake_plan(
                       transform = cross(fun = !!rlang::syms(methods$target),
                                         data = !!rlang::syms(datasets$target))
     ),
-    results = target(dplyr::bind_rows(analysis),
+    results = target(bind_rows(analysis),
                      transform = combine(analysis, .by = fun)),
     full_results = target(
         bind_rows(results), 
