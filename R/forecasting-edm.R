@@ -32,7 +32,7 @@ simplex_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
         for (i in seq_along(observed))
         {
             out <- rEDM::simplex(time_series = c(input_ts, NA), 
-                                 lib = c(1, length(input_ts)), 
+                                 lib = c(1, length(training)), 
                                  pred = c(length(input_ts) - best_E, length(input_ts) + 1), 
                                  E = best_E, 
                                  stats_only = FALSE, 
@@ -85,7 +85,7 @@ smap_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
         for (i in seq_along(observed))
         {
             out <- rEDM::s_map(time_series = c(input_ts, NA), 
-                               lib = c(1, length(input_ts)), 
+                               lib = c(1, length(training)), 
                                pred = c(length(input_ts) - best_E, length(input_ts) + 1), 
                                E = best_E, 
                                theta = best_theta, 
