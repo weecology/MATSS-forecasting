@@ -16,16 +16,17 @@ raw_data_file <- system.file("extdata", "processed_data", "masterDat_2019-06-12.
 processed_data_file <- here::here("analysis", "data", "ward_fish_data.RDS")
 
 ## preprocessing of the datasets
-preprocess_data <- drake_plan(
-    processed_data = reshape_ward_data(data_file = file_in(!!raw_data_file), 
-                                        ward_RDS_file = file_out(!!processed_data_file))
-)
+reshape_ward_data(data_file = raw_data_file, 
+                  ward_RDS_file = processed_data_file)
 
 ## define the datasets
 datasets <- bind_rows(
     drake_plan(
-        data_LPI = get_LPI_data(data_file = file_in(system.file("extdata", "example_data.zip", package = "rlpi")))
+        data_LPI = get_LPI_data()
     ), 
+    build_datasets_plan(include_retriever_data = TRUE, 
+                        include_bbs_data = TRUE, 
+                        include_gpdd_data = TRUE), 
     build_ward_data_plan(ward_RDS_file = processed_data_file)
 )
 

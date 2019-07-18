@@ -1,9 +1,10 @@
+/inst/doc
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.drake/
 /output/drake-cache.sqlite
 /analysis/data
 /reports/*.html
-/inst/doc
 /docs

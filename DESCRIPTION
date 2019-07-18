@@ -17,7 +17,7 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    MATSS (>= 0.0.3),
+    MATSS (>= 0.1.0),
     magrittr,
     forecast,
     drake (>= 7.1.0),
@@ -33,7 +33,8 @@ Imports:
     kernlab,
     randomForest,
     MARSS,
-    rEDM (>= 0.7.4)
+    rEDM (>= 0.7.4),
+    rlpi (>= 0.1.0)
 Suggests:
     testthat,
     knitr,
@@ -42,7 +43,8 @@ Suggests:
     covr
 Remotes:  
     weecology/MATSS,
-    ha0ye/rEDM
+    ha0ye/rEDM,
+    Zoological-Society-of-London/rlpi
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
