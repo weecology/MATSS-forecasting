@@ -44,7 +44,7 @@ Suggests:
 Remotes:  
     weecology/MATSS,
     ha0ye/rEDM,
-    Zoological-Society-of-London/rlpi
+    ha0ye/rlpi
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -21,30 +21,34 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-MATSSforecasting is a research compendium for investigationg different approaches to forecasting ecological time series. It implements multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
+MATSSforecasting is a research compendium for investigationg different approaches to forecasting ecological time series. 
+
+It implements multiple methods for forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
 
 ## Running the code
 
-This project is set up as an R package compendium. What this means is much of the core functionality is bundled up into functions that are documented, much like an R package would. The recommended way to run the analysis, and/or contribute to the analyses is as follows:
+This project is set up as an R package compendium. What this means is much of the core functionality is bundled into functions that are documented and assembled into an R package, while components of the analysis are stored in a separate folder. This allows the core functions to be installed as an R package, while using a relatively lightweight script and report for the sceintific analysis, which can then be more easily adapted, extended, or changed.
+
+The recommended way to run the analysis, and/or contribute to the analyses is as follows:
 
 ### Installation
 
-There are two main ways to install the package. You can install it using the automated tools in `devtools`:
+There are two main ways to install the package. You can install it using the automated tools in `remotes`:
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("weecology/MATSS-forecasting")
 ```
 
-This will automatically install any dependencies, so can be a good way to start.
+This will automatically install any dependencies, so is a good way to get started.
 
 ### Cloning the repo
 
-However, you will also want the analysis scripts, which are part of this github repo and not part of the package. You will want to clone this repo using Git. Here are [some instructions](https://happygitwithr.com/rstudio-git-github.html) if you are unfamiliar.
+However, you will also want the analysis scripts, which are included in this github repo, but are not part of the package. You will want to clone this repo using Git. Here are [some instructions](https://happygitwithr.com/rstudio-git-github.html) if you are unfamiliar.
 
-This will then enable you to get the most recent version of the code from within RStudio, by opening the project, clicking on the Git pane, and the "Pull" button.
+This will then enable you to get the most recent version of the code, by using the `git pull` command from a command-line terminal, or by using RStudio's Git functionality (on the Git pane, use the "Pull" button).
 
-*Since this project is under active development, the codebase is likely to change rapidly from week to week.*
+*Since this project is under active development, the codebase is likely to change frequently, and with new dependencies. Be aware that re-installing from github regularly may be the easiest way to keep up to date on dependencies.*
 
 ### Re-building the package
 
