@@ -10,11 +10,12 @@ addons:
     packages:
       - libgsl0-dbg
       - libgsl0-dev
-      - "python3.5"
-      - "python3-pip"
-    update: true
 
 before_install:
+  - sudo add-apt-repository ppa:jonathonf/python-3.6
+  - sudo apt-get update
+  - sudo apt-get install python3.6
+  - sudo apt-get install python3-pip
   - sudo pip3 install --upgrade setuptools
   - sudo pip3 install --upgrade git+https://git@github.com/weecology/retriever.git
   - python3 -c 'import retriever'
