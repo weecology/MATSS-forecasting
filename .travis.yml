@@ -7,10 +7,12 @@ warnings_are_errors: false
 
 addons:
   apt:
+    sources
+      - deadsnakes
     packages:
       - libgsl0-dbg
       - libgsl0-dev
-      - "python3.5"
+      - python3.6
       - "python3-pip"
     update: true
 
