@@ -5,8 +5,9 @@
 \title{Reshape the processed data file from Ward et al. 2014}
 \usage{
 reshape_ward_data(data_file = system.file("extdata", "processed_data",
-  "masterDat_052015.csv", package = "MATSSforecasting", mustWork = TRUE),
-  ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
+  "masterDat_2019-06-12.csv", package = "MATSSforecasting", mustWork =
+  TRUE), ward_RDS_file = here::here("analysis", "data",
+  "ward_fish_data.RDS"))
 }
 \arguments{
 \item{data_file}{the path to the raw CSV file from Ward et al. 2014. (The
