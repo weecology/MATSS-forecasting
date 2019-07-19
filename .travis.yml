@@ -12,11 +12,13 @@ addons:
       - libgsl0-dev
       - "python3.6"
       - "python3-pip"
+      
     update: true
 
 before_install:
-  - sudo pip install --upgrade setuptools
-  - sudo pip install --upgrade git+https://git@github.com/weecology/retriever.git
+  - sudo apt update
+  - sudo pip3 install --upgrade setuptools
+  - sudo pip3 install --upgrade git+https://git@github.com/weecology/retriever.git
   - python3 -c 'import retriever;retriever.check_for_updates()'
   
 matrix:
