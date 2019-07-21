@@ -20,7 +20,7 @@ Imports:
     MATSS (>= 0.1.0),
     magrittr,
     forecast,
-    drake (>= 7.1.0),
+    drake (>= 7.4.0),
     readr,
     dplyr,
     tidyr,
@@ -41,7 +41,7 @@ Suggests:
     rmarkdown,
     pkgdown,
     covr
-Remotes:  
+Remotes:
     weecology/MATSS,
     ha0ye/rEDM,
     ha0ye/rlpi
