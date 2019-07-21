@@ -9,9 +9,6 @@ get_LPI_data(min_time_series_length = 25)
 \arguments{
 \item{min_time_series_length}{the minimum length for time series to be
 included}
-
-\item{data_file}{the path to the zip file with the data from the \code{rlpi}
-package}
 }
 \value{
 list of two dataframes (one with abundance data, the other with

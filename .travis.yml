@@ -24,7 +24,7 @@ before_install:
   - conda create -q -n test-environment python=3
   - source activate test-environment
   - conda install -c conda-forge retriever
-  - retriever
+  - retriever -v
   - python -c 'import retriever;retriever.check_for_updates()'
 
 matrix:

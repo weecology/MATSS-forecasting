@@ -8,7 +8,7 @@ compute_subset_range(bounds, n)
 }
 \arguments{
 \item{bounds}{the vector with lower and upper bound, expressed as numeric
-fractions of the time series in \link{0, 1}}
+fractions of the time series in [0, 1]}
 
 \item{n}{the totla length of the vector to subset}
 }

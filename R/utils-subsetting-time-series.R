@@ -1,7 +1,7 @@
 #' @title Compute the indices corresponding to a defined subset
 #' 
 #' @param bounds the vector with lower and upper bound, expressed as numeric
-#'   fractions of the time series in [0, 1]
+#'   fractions of the time series in \[0, 1\]
 #' @param n the totla length of the vector to subset
 #' 
 #' @return the indices corresponding to the subset defined by `bounds` on a 
