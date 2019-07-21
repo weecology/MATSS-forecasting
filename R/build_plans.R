@@ -126,7 +126,7 @@ build_ward_data_plan <- function(ward_RDS_file = here::here("analysis", "data", 
     # if ward RDS database doesn't exist, create it
     if (!file.exists(ward_RDS_file))
     {
-        ward_database_names <- reshape_ward_data(ward_RDS_file)
+        ward_database_names <- reshape_ward_data(ward_RDS_file = ward_RDS_file)
     } else {
         ward_database_names <- readRDS(ward_RDS_file) %>%
             dplyr::pull(database)
