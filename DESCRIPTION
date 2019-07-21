@@ -20,7 +20,21 @@ Imports:
     MATSS (>= 0.1.0),
     magrittr,
     forecast,
-    drake (>= 7.1.0)
+    drake (>= 7.1.0),
+    readr,
+    dplyr,
+    tidyr,
+    purrr,
+    here,
+    mgcv,
+    tsDyn,
+    locfit,
+    np,
+    kernlab,
+    randomForest,
+    MARSS,
+    rEDM (>= 0.7.4),
+    rlpi (>= 0.1.0)
 Suggests:
     testthat,
     knitr,
