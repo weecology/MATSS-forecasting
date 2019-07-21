@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using gaussian process regression — gausspr_ts • MATSSforecasting</title>
+<title>Compute the indices corresponding to a defined subset — compute_subset_range • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Make forecasts using gaussian process regression — gausspr_ts" />
+<meta property="og:title" content="Compute the indices corresponding to a defined subset — compute_subset_range" />
 
-<meta property="og:description" content="gausspr_ts fits a timeseries model using gausspr" />
+<meta property="og:description" content="Compute the indices corresponding to a defined subset" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,83 +102,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using gaussian process regression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-gausspr.R'><code>R/forecasting-gausspr.R</code></a></small>
-    <div class="hidden name"><code>gausspr_ts.Rd</code></div>
+    <h1>Compute the indices corresponding to a defined subset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-subsetting-time-series.R'><code>R/utils-subsetting-time-series.R</code></a></small>
+    <div class="hidden name"><code>compute_subset_range.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>gausspr_ts</code> fits a timeseries model using <code>gausspr</code></p>
+    <p>Compute the indices corresponding to a defined subset</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gausspr_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>kernel</span> <span class='kw'>=</span> <span class='st'>"rbfdot"</span>, <span class='kw'>kpar</span> <span class='kw'>=</span> <span class='st'>"automatic"</span>)</pre>
+    <pre class="usage"><span class='fu'>compute_subset_range</span>(<span class='no'>bounds</span>, <span class='no'>n</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>timeseries</th>
-      <td><p>the time series to forecast</p></td>
+      <th>bounds</th>
+      <td><p>the vector with lower and upper bound, expressed as numeric
+fractions of the time series in [0, 1]</p></td>
     </tr>
     <tr>
-      <th>num_ahead</th>
-      <td><p>the number of points at the end of the time series to
-forecast</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
-    </tr>
-    <tr>
-      <th>frequency</th>
-      <td><p>the number of observations per unit of time.</p></td>
-    </tr>
-    <tr>
-      <th>kernel</th>
-      <td><p>the kernel function used in training and predicting.
-    This parameter can be set to any function, of class kernel, which computes a dot product between two
-    vector arguments. kernlab provides the most popular kernel functions
-    which can be used by setting the kernel parameter to the following
-    strings:</p><ul>
-<li><p><code>rbfdot</code> Radial Basis kernel function "Gaussian"</p></li>
-<li><p><code>polydot</code> Polynomial kernel function</p></li>
-<li><p><code>vanilladot</code> Linear kernel function</p></li>
-<li><p><code>tanhdot</code> Hyperbolic tangent kernel function</p></li>
-<li><p><code>laplacedot</code> Laplacian kernel function</p></li>
-<li><p><code>besseldot</code> Bessel kernel function</p></li>
-<li><p><code>anovadot</code> ANOVA RBF kernel function</p></li>
-<li><p><code>splinedot</code> Spline kernel</p></li>
-</ul><p>The kernel parameter can also be set to a user defined function of
-    class kernel by passing the function name as an argument.</p></td>
-    </tr>
-    <tr>
-      <th>kpar</th>
-      <td><p>the list of hyper-parameters (kernel parameters).
-    This is a list which contains the parameters to be used with the
-    kernel function. Valid parameters for existing kernels are :</p><ul>
-<li><p><code>sigma</code> inverse kernel width for the Radial Basis
-      kernel function "rbfdot" and the Laplacian kernel "laplacedot".</p></li>
-<li><p><code>degree, scale, offset</code> for the Polynomial kernel "polydot"</p></li>
-<li><p><code>scale, offset</code> for the Hyperbolic tangent kernel
-      function "tanhdot"</p></li>
-<li><p><code>sigma, order, degree</code> for the Bessel kernel "besseldot".</p></li>
-<li><p><code>sigma, degree</code> for the ANOVA kernel "anovadot".</p></li>
-</ul>
-   
-<p>Hyper-parameters for user defined kernels can be passed through the
-    kpar parameter as well.</p></td>
+      <th>n</th>
+      <td><p>the totla length of the vector to subset</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of the mean forecasts, the observed values, and the
-lower and upper CI levels (if an error occurs, then just NA values)</p>
+    <p>the indices corresponding to the subset defined by <code>bounds</code> on a
+vector of length n</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>compute_subset_range</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0.5</span>), <span class='fl'>10</span>) <span class='co'># 1:5</span></div><div class='output co'>#&gt; [1] 1 2 3 4 5</div><div class='input'><span class='fu'>compute_subset_range</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>), <span class='fl'>10</span>) <span class='co'># 6:10</span></div><div class='output co'>#&gt; [1]  6  7  8  9 10</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -186,7 +145,9 @@ lower and upper CI levels (if an error occurs, then just NA values)</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

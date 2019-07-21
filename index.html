@@ -80,26 +80,28 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>MATSSforecasting is a research compendium for investigationg different approaches to forecasting ecological time series. It implements multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.</p>
+<p>MATSSforecasting is a research compendium for investigationg different approaches to forecasting ecological time series.</p>
+<p>It implements multiple methods for forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.</p>
 </div>
 <div id="running-the-code" class="section level2">
 <h2 class="hasAnchor">
 <a href="#running-the-code" class="anchor"></a>Running the code</h2>
-<p>This project is set up as an R package compendium. What this means is much of the core functionality is bundled up into functions that are documented, much like an R package would. The recommended way to run the analysis, and/or contribute to the analyses is as follows:</p>
+<p>This project is set up as an R package compendium. What this means is much of the core functionality is bundled into functions that are documented and assembled into an R package, while components of the analysis are stored in a separate folder. This allows the core functions to be installed as an R package, while using a relatively lightweight script and report for the sceintific analysis, which can then be more easily adapted, extended, or changed.</p>
+<p>The recommended way to run the analysis, and/or contribute to the analyses is as follows:</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>There are two main ways to install the package. You can install it using the automated tools in <code>devtools</code>:</p>
+<p>There are two main ways to install the package. You can install it using the automated tools in <code>remotes</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"weecology/MATSS-forecasting"</span>)</a></code></pre></div>
-<p>This will automatically install any dependencies, so can be a good way to start.</p>
+<p>This will automatically install any dependencies, so is a good way to get started.</p>
 </div>
 <div id="cloning-the-repo" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cloning-the-repo" class="anchor"></a>Cloning the repo</h3>
-<p>However, you will also want the analysis scripts, which are part of this github repo and not part of the package. You will want to clone this repo using Git. Here are <a href="https://happygitwithr.com/rstudio-git-github.html">some instructions</a> if you are unfamiliar.</p>
-<p>This will then enable you to get the most recent version of the code from within RStudio, by opening the project, clicking on the Git pane, and the “Pull” button.</p>
-<p><em>Since this project is under active development, the codebase is likely to change rapidly from week to week.</em></p>
+<p>However, you will also want the analysis scripts, which are included in this github repo, but are not part of the package. You will want to clone this repo using Git. Here are <a href="https://happygitwithr.com/rstudio-git-github.html">some instructions</a> if you are unfamiliar.</p>
+<p>This will then enable you to get the most recent version of the code, by using the <code>git pull</code> command from a command-line terminal, or by using RStudio’s Git functionality (on the Git pane, use the “Pull” button).</p>
+<p><em>Since this project is under active development, the codebase is likely to change frequently, and with new dependencies. Be aware that re-installing from github regularly may be the easiest way to keep up to date on dependencies.</em></p>
 </div>
 <div id="re-building-the-package" class="section level3">
 <h3 class="hasAnchor">
