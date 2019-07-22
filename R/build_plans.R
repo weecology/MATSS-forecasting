@@ -133,7 +133,7 @@ build_ward_data_plan <- function(ward_RDS_file = here::here("analysis", "data", 
     }
     
     drake::drake_plan(
-        data = target(
+        data = drake::target(
             get_ward_data(ward_database, drake::file_in(!!ward_RDS_file)),
             transform = map(ward_database = !!ward_database_names)
         )
