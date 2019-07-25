@@ -6,7 +6,7 @@
 #'   \code{\link[rEDM]{simplex}} and makes forecasts.
 #' 
 #' @param E_list the values of E to try
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #' @inheritParams rEDM::simplex
 #'
@@ -50,7 +50,7 @@ simplex_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
                    upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
     
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, E_list = E_list, silent = silent)
 }
 
@@ -104,7 +104,7 @@ smap_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
                    upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
     
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, E_list = E_list, theta_list = theta_list, 
                    silent = silent)
 }

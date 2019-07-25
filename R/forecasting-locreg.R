@@ -8,7 +8,7 @@
 #'
 #' @inheritParams locfit::locfit
 #' @inheritParams locfit::lp
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -52,6 +52,6 @@ locreg_ts <- function(timeseries, num_ahead = 5, level = 95,
                    upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, nn = nn, deg = deg)
 }

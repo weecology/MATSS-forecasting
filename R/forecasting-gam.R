@@ -4,7 +4,7 @@
 #' @description Fit a Generalized Additive Model (GAM) using 
 #'   \code{\link[mgcv]{gam}} with a spline over time/years
 #' 
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -34,6 +34,6 @@ gam_ts <- function(timeseries, num_ahead = 5, level = 95)
                    upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
     
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    order = order, level = level)
 }

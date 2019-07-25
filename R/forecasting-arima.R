@@ -7,7 +7,7 @@
 #' @description `arima_ts` fits an arima model using \code{link{arima}}
 #'
 #' @inheritParams stats::arima
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -33,7 +33,7 @@ arima_ts <- function(timeseries, num_ahead = 5, level = 95,
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, order = order)
 }
 
@@ -59,7 +59,7 @@ arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                      level = level)
 }
 
@@ -87,6 +87,6 @@ randomwalk_ts <- function(timeseries, num_ahead = 5, level = 95,
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, drift = drift)
 }

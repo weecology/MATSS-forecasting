@@ -1,4 +1,4 @@
-#' @title Make a drake plan with all the forecasting mehtods in Ward et al. 2014
+#' @title Make a drake plan with all the forecasting methods in Ward et al. 2014
 #'
 #' @description We list out the different forecasting methods (and the parameter 
 #'   settings we wish to try) in the form of a drake plan. Note the use of 

@@ -1,11 +1,11 @@
-#' @title A wrapper function for forecasting methods
+#' @title A wrapper function for one-step forecasting with a static model (no refitting)
 #'
 #' @description This function faciliates the forecasting approach in Ward et al.
-#'   2014:
+#'   2014. It has two operating modes. If `num_ahead` is set, then it forecasts 
+#'   the last `num_ahead` points of the time series:
 #'   \enumerate{
 #'     \item fit the model to all but the last `num_ahead` time points
-#'     \item make 1-step ahead forecasts, and feed each forecast in as the
-#'           observed, until `num_ahead` total forecasts are made
+#'     \item make 1-step ahead forecasts for the `num_ahead` time points
 #'   }
 #'
 #' @param fun a function for doing the forecasting. It should have arguments:
@@ -27,7 +27,7 @@
 #'
 #' @importFrom utils head tail
 #' @export
-make_forecasts <- function(fun, timeseries, num_ahead = 5, ...)
+forecast_one_step_static <- function(fun, timeseries, num_ahead = 5, ...)
 {
     tryCatch(
         {

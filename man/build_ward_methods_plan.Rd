@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_plans.R
 \name{build_ward_methods_plan}
 \alias{build_ward_methods_plan}
-\title{Make a drake plan with all the forecasting mehtods in Ward et al. 2014}
+\title{Make a drake plan with all the forecasting methods in Ward et al. 2014}
 \usage{
 build_ward_methods_plan()
 }

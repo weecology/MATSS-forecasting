@@ -1,5 +1,5 @@
 ---
-title: "Forecasting Comparison Report"
+title: "Ward et al. 2014 Reproduction Report"
 author: "Hao Ye"
 date: "`r Sys.Date()`"
 output: github_document

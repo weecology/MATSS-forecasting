@@ -28,7 +28,7 @@ reference:
     - smap_ts
   - title: "Forecasting Utilities"
     contents:
-    - make_forecasts
+    - forecast_one_step_static
   - title: "Testing Utilities"
     contents:
     - expect_NA_warnings

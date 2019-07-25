@@ -10,7 +10,7 @@
 #'     \code{link[forecast]{ets}}
 #'
 #' @inheritParams stats::ts
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -33,7 +33,7 @@ ets_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, frequency = frequency)
 }
 
@@ -60,6 +60,6 @@ sts_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, frequency = frequency)
 }

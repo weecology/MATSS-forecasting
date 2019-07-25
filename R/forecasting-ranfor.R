@@ -7,7 +7,7 @@
 #'   using \code{\link[randomForest]{randomForest}} to estimate the forecast 
 #'   function.
 #' 
-#' @inheritParams make_forecasts
+#' @inheritParams forecast_one_step_static
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
@@ -51,6 +51,6 @@ ranfor_ts <- function(timeseries, num_ahead = 5, level = 95)
                    upper_CI = NA)
     }
 
-    make_forecasts(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level)
 }
