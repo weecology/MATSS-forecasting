@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A wrapper function for forecasting methods — make_forecasts • MATSSforecasting</title>
+<title>A wrapper function for one-step forecasting with a static model (no refitting) — forecast_one_step_static • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,13 @@
 
 
 
-<meta property="og:title" content="A wrapper function for forecasting methods — make_forecasts" />
+<meta property="og:title" content="A wrapper function for one-step forecasting with a static model (no refitting) — forecast_one_step_static" />
 
 <meta property="og:description" content="This function faciliates the forecasting approach in Ward et al.
-2014:
+2014. It has two operating modes. If num_ahead is set, then it forecasts
+the last num_ahead points of the time series:
 fit the model to all but the last num_ahead time points
-make 1-step ahead forecasts, and feed each forecast in as the
-observed, until num_ahead total forecasts are made
+make 1-step ahead forecasts for the num_ahead time points
 " />
 <meta name="twitter:card" content="summary" />
 
@@ -107,23 +107,23 @@ observed, until num_ahead total forecasts are made
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A wrapper function for forecasting methods</h1>
+    <h1>A wrapper function for one-step forecasting with a static model (no refitting)</h1>
     <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-utils.R'><code>R/forecasting-utils.R</code></a></small>
-    <div class="hidden name"><code>make_forecasts.Rd</code></div>
+    <div class="hidden name"><code>forecast_one_step_static.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p>This function faciliates the forecasting approach in Ward et al.
-2014:</p><ol>
+2014. It has two operating modes. If <code>num_ahead</code> is set, then it forecasts
+the last <code>num_ahead</code> points of the time series:</p><ol>
 <li><p>fit the model to all but the last <code>num_ahead</code> time points</p></li>
-<li><p>make 1-step ahead forecasts, and feed each forecast in as the
-observed, until <code>num_ahead</code> total forecasts are made</p></li>
+<li><p>make 1-step ahead forecasts for the <code>num_ahead</code> time points</p></li>
 </ol>
     
     </div>
 
-    <pre class="usage"><span class='fu'>make_forecasts</span>(<span class='no'>fun</span>, <span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>forecast_one_step_static</span>(<span class='no'>fun</span>, <span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
