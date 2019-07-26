@@ -9,8 +9,6 @@ expose_imports(MATSS)
 expose_imports(MATSSforecasting)
 
 # file paths
-raw_data_file <- system.file("extdata", "processed_data", "masterDat_052015.csv",
-                             package = "MATSSforecasting", mustWork = TRUE)
 raw_data_file <- system.file("extdata", "processed_data", "masterDat_2019-06-12.csv",
                              package = "MATSSforecasting", mustWork = TRUE)
 processed_data_file <- here::here("analysis", "data", "ward_fish_data.RDS")
@@ -24,9 +22,7 @@ datasets <- bind_rows(
     drake_plan(
         data_LPI = get_LPI_data()
     ), 
-    build_datasets_plan(include_retriever_data = TRUE, 
-                        include_bbs_data = TRUE, 
-                        include_gpdd_data = TRUE), 
+    build_datasets_plan(include_retriever_data = TRUE), 
     build_ward_data_plan(ward_RDS_file = processed_data_file)
 )
 
@@ -53,12 +49,12 @@ reports <- drake_plan(
         knitr_in("reports/autoarima_report.Rmd")
     ),
     forecasting_comparison = rmarkdown::render(
-        knitr_in("reports/forecasting_comparison.Rmd")
+        knitr_in("reports/ward_2014_repro.Rmd")
     )
 )
 
 ## create a master plan
-pipeline <- bind_rows(preprocess_data, datasets, methods, analyses, reports)
+pipeline <- bind_rows(datasets, methods, analyses, reports)
 
 ## Set up the cache and config
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
