@@ -40,7 +40,9 @@ Suggests:
     knitr,
     rmarkdown,
     pkgdown,
-    covr
+    covr, 
+    networkD3, 
+    visNetwork
 Remotes:
     weecology/MATSS,
     ha0ye/rEDM,
