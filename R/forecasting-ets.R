@@ -7,7 +7,7 @@
 #'   data is set a priori, as opposed to estimating the parameter from the data.
 #'
 #'   \code{ets_ts} fits an exponentially smoothed time series model using 
-#'     \code{link[forecast]{ets}}
+#'     \code{\link[forecast]{ets}}
 #'
 #' @inheritParams stats::ts
 #' @inheritParams forecast_iterated
@@ -41,7 +41,7 @@ ets_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
 #' @rdname ets_ts
 #'
 #' @description \code{sts_ts} fits a structural model for a time series by
-#'   maximum likelihood using \code{link{StructTS}}
+#'   maximum likelihood using \code{\link{StructTS}}
 #'
 #' @export
 #'

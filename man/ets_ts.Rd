@@ -29,8 +29,8 @@ Fit a time series model and make forecasts. The frequency of the
 data is set a priori, as opposed to estimating the parameter from the data.
 
 \code{ets_ts} fits an exponentially smoothed time series model using
-\code{link[forecast]{ets}}
+\code{\link[forecast]{ets}}
 
 \code{sts_ts} fits a structural model for a time series by
-maximum likelihood using \code{link{StructTS}}
+maximum likelihood using \code{\link{StructTS}}
 }

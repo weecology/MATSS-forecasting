@@ -1,6 +1,6 @@
 #' Forecase using a random walk model
 #'
-#' @description Fits a random walk model using \code{link[forecast]{rwf}}
+#' @description Fits a random walk model using \code{\link[forecast]{rwf}}
 #'
 #' @inheritParams forecast::rwf
 #' @inheritParams forecast_iterated

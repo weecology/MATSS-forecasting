@@ -14,9 +14,8 @@ naive_one_step <- function(timeseries, ...)
     {
         # return
         data.frame(observed = as.numeric(observed),
-                   predicted = utils::tail(training, 1),
-                   lower_CI = as.numeric(forecasts$lower),
-                   upper_CI = as.numeric(forecasts$upper))
+                   predicted = utils::tail(training, 1), 
+                   naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
     }
     hindcast(fun = f, timeseries = timeseries, ...)
 }

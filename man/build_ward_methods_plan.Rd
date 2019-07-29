@@ -12,7 +12,7 @@ a drake plan (i.e. a tibble) with the forecasting methods.
 \description{
 We list out the different forecasting methods (and the parameter
 settings we wish to try) in the form of a drake plan. Note the use of
-\code{link[MATSS]{analysis_wrapper}} that takes a function that operates on
+\code{\link[MATSS]{analysis_wrapper}} that takes a function that operates on
 a single time series, and wraps it to run on each time series within a
 dataset.
 }

@@ -83,7 +83,34 @@ autoarima_one_step <- function(timeseries, level = 95, ...)
         data.frame(observed = as.numeric(observed),
                    predicted = as.numeric(forecasts$mean),
                    lower_CI = as.numeric(forecasts$lower),
-                   upper_CI = as.numeric(forecasts$upper))
+                   upper_CI = as.numeric(forecasts$upper), 
+                   training_naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
     }
+    hindcast(fun = f, timeseries = timeseries, level = level, ...)
+}
+
+#' @rdname arima_ts
+#'
+#' @description `arfima_one_step` use \code{\link[forecast]{arfima}} to 
+#'   fit an fractionally-differentiated ARIMA model.
+#'
+#' @export
+#'
+arfima_one_step <- function(timeseries, level = 95, ...)
+{
+    f <- function(training, observed = NA, level)
+    {
+        # make forecasts
+        arima_model <- forecast::arfima(training)
+        forecasts <- forecast::forecast(arima_model, 1, level = level)
+        
+        # return
+        data.frame(observed = as.numeric(observed),
+                   predicted = as.numeric(forecasts$mean),
+                   lower_CI = as.numeric(forecasts$lower),
+                   upper_CI = as.numeric(forecasts$upper), 
+                   training_naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
+    }
+    
     hindcast(fun = f, timeseries = timeseries, level = level, ...)
 }

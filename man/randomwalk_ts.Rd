@@ -17,5 +17,5 @@ forecast}
 \item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }
 \description{
-Fits a random walk model using \code{link[forecast]{rwf}}
+Fits a random walk model using \code{\link[forecast]{rwf}}
 }

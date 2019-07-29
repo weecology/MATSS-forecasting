@@ -5,6 +5,7 @@
 \alias{arfima_ts,}
 \alias{autoarima_one_step}
 \alias{arfima_ts}
+\alias{arfima_one_step}
 \title{Make forecasts using AR / ARIMA}
 \usage{
 arima_ts(timeseries, num_ahead = 5, level = 95, order = c(1, 0, 0))
@@ -12,6 +13,8 @@ arima_ts(timeseries, num_ahead = 5, level = 95, order = c(1, 0, 0))
 arfima_ts(timeseries, num_ahead = 5, level = 95)
 
 autoarima_one_step(timeseries, level = 95, ...)
+
+arfima_one_step(timeseries, level = 95, ...)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -39,4 +42,7 @@ auto-arima using \code{\link[forecast]{arfima}}
 
 \code{autoarima_one_step} use \code{\link[forecast]{auto.arima}} to
 fit an ARIMA model. \code{auto.arima} does model selection on the ARIMA params
+
+\code{arfima_one_step} use \code{\link[forecast]{arfima}} to
+fit an fractionally-differentiated ARIMA model.
 }
