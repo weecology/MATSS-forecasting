@@ -32,7 +32,7 @@ build_ward_methods_plan <- function()
         arima_212 = MATSS::analysis_wrapper(arima_ts, order = c(2, 1, 2)), 
         randomwalk = MATSS::analysis_wrapper(randomwalk_ts), 
         randomwalk_drift = MATSS::analysis_wrapper(randomwalk_ts, drift = TRUE), 
-        autoarima = MATSS::analysis_wrapper(arima_fracdiff_ts)
+        arfima = MATSS::analysis_wrapper(arfima_ts)
     )
     
     ## ets methods (I think the frequency parameter doesn't actually do anything?)

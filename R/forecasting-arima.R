@@ -1,6 +1,6 @@
 #' @name arima_ts
 #' @title Make forecasts using AR / ARIMA
-#' @aliases randomwalk_ts, arima_fracdiff_ts
+#' @aliases arfima_ts
 #'
 #' @rdname arima_ts
 #'
@@ -39,12 +39,12 @@ arima_ts <- function(timeseries, num_ahead = 5, level = 95,
 
 #' @rdname arima_ts
 #'
-#' @description `arima_fracdiff_ts` fits a step-wise fractionally differenced
+#' @description `arfima_ts` fits a step-wise fractionally differenced
 #'   auto-arima using \code{link{arfima}}
 #'
 #' @export
 #'
-arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
+arfima_ts <- function(timeseries, num_ahead = 5, level = 95)
 {
     f <- function(training, observed, level)
     {
@@ -63,30 +63,3 @@ arima_fracdiff_ts <- function(timeseries, num_ahead = 5, level = 95)
                      level = level)
 }
 
-#' @rdname arima_ts
-#'
-#' @description `randomwalk_ts` fits a random walk model using 
-#'   \code{link[forecast]{rwf}}
-#'
-#' @inheritParams forecast::rwf
-#'
-#' @export
-#'
-randomwalk_ts <- function(timeseries, num_ahead = 5, level = 95,
-                          drift = FALSE)
-{
-    f <- function(training, observed, level, drift)
-    {
-        # make forecasts
-        forecasts <- forecast::rwf(training, NROW(observed), drift = drift, level = level)
-
-        # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$mean),
-                   lower_CI = as.numeric(forecasts$lower),
-                   upper_CI = as.numeric(forecasts$upper))
-    }
-
-    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
-                   level = level, drift = drift)
-}

@@ -2,16 +2,12 @@
 % Please edit documentation in R/forecasting-arima.R
 \name{arima_ts}
 \alias{arima_ts}
-\alias{randomwalk_ts,}
-\alias{arima_fracdiff_ts}
-\alias{randomwalk_ts}
+\alias{arfima_ts}
 \title{Make forecasts using AR / ARIMA}
 \usage{
 arima_ts(timeseries, num_ahead = 5, level = 95, order = c(1, 0, 0))
 
-arima_fracdiff_ts(timeseries, num_ahead = 5, level = 95)
-
-randomwalk_ts(timeseries, num_ahead = 5, level = 95, drift = FALSE)
+arfima_ts(timeseries, num_ahead = 5, level = 95)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -24,8 +20,6 @@ forecast}
 \item{order}{A specification of the non-seasonal part of the ARIMA
     model: the three integer components \eqn{(p, d, q)} are the AR order, the
     degree of differencing, and the MA order.}
-
-\item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }
 \value{
 a data.frame of the mean forecasts, the observed values, and the
@@ -34,9 +28,6 @@ lower and upper CI levels (if an error occurs, then just NA values)
 \description{
 \code{arima_ts} fits an arima model using \code{link{arima}}
 
-\code{arima_fracdiff_ts} fits a step-wise fractionally differenced
+\code{arfima_ts} fits a step-wise fractionally differenced
 auto-arima using \code{link{arfima}}
-
-\code{randomwalk_ts} fits a random walk model using
-\code{link[forecast]{rwf}}
 }
