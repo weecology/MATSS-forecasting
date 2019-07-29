@@ -27,25 +27,25 @@ test_that("compute_hindcast_method works", {
     expect_equal(compute_hindcast_method(10, "pred_start", pred_start = 7), 4)
 })
 
-test_that("forecast_one_step_static handles an error from `fun`", {
+test_that("forecast_iterated handles an error from `fun`", {
     fun <- function(training, observed)
     {
         stop("This error will be converted into a warning.")
     }
-    w <- capture_warnings(forecast_one_step_static(fun, rnorm(100)))
+    w <- capture_warnings(forecast_iterated(fun, rnorm(100)))
     expect_match(w, "Error in fun\\(training = utils::head\\(timeseries, -num_ahead\\), ")
     expect_match(w, "observed = utils::tail\\(timeseries, : ")
     expect_match(w, "This error will be converted into a warning.")
     expect_match(w, "returning an NA object.")    
 })
 
-test_that("forecast_one_step_static handles errors in `ts`", {
+test_that("forecast_iterated handles errors in `ts`", {
     fun <- function(training, observed) {1}
-    w <- capture_warnings(forecast_one_step_static(fun, seq(3)))
+    w <- capture_warnings(forecast_iterated(fun, seq(3)))
     expect_NA_warnings(w)
 })
 
-test_that("forecast_one_step_static works", {
+test_that("forecast_iterated works", {
     fun <- function(training, observed)
     {
         c(num_training = NROW(training), 
@@ -53,29 +53,30 @@ test_that("forecast_one_step_static works", {
           num_finite_training = sum(is.finite(training)), 
           num_finite_observed = sum(is.finite(observed)))
     }
-    expect_error(out <- forecast_one_step_static(fun, c(NA, seq(12), NA)), NA)
+    expect_error(out <- forecast_iterated(fun, c(NA, seq(12), NA)), NA)
     expect_equivalent(out, c(7, 5, 7, 5))
     
-    expect_error(out <- forecast_one_step_static(fun, c(NA, seq(12), NA), num_ahead = 7), NA)
+    expect_error(out <- forecast_iterated(fun, c(NA, seq(12), NA), num_ahead = 7), NA)
     expect_equivalent(out, c(5, 7, 5, 7))
     
-    expect_error(out <- forecast_one_step_static(fun, c(NA, 1, NA, 2, NA, 3, NA, 4, NA, 5, NA, 6, NA, 7, NA, 8, NA)), NA)
+    expect_error(out <- forecast_iterated(fun, c(NA, 1, NA, 2, NA, 3, NA, 4, NA, 5, NA, 6, NA, 7, NA, 8, NA)), NA)
     expect_equivalent(out, c(10, 5, 5, 3))
 })
 
 test_that("hindcast handles an error from `fun`", {
-    fun <- function(training)
+    fun <- function(training, observed)
     {
         stop("This error will be converted into a warning.")
     }
     w <- capture_warnings(hindcast(fun, rnorm(100)))
-    expect_match(w, "Error in fun\\(training = timeseries\\[1:m\\], \\.\\.\\.): ")
+    expect_match(w, "Error in fun\\(training = timeseries\\[1:m\\], ")
+    expect_match(w, "observed = timeseries\\[m \\+ 1\\], : ")
     expect_match(w, "This error will be converted into a warning.")
     expect_match(w, "returning an NA object.")
 })
 
 test_that("hindcast works", {
-    fun <- function(training)
+    fun <- function(training, observed)
     {
         data.frame(num_training = NROW(training), 
                    num_finite_training = sum(is.finite(training)))

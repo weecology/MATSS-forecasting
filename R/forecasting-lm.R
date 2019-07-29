@@ -4,13 +4,12 @@
 #' @description Fit a Linear Regression for forecasting the time series as a 
 #'   linear function over time/years
 #' 
-#' @inheritParams forecast_one_step_static
+#' @inheritParams forecast_iterated
 #' @inheritParams forecast::forecast
 #'
 #' @return a data.frame of the mean forecasts, the observed values, and the
 #'   lower and upper CI levels (if an error occurs, then just NA values)
 #' 
-#' @importFrom stats qnorm
 #' @export
 #'
 lm_ts <- function(timeseries, num_ahead = 5, level = 95)
@@ -30,10 +29,10 @@ lm_ts <- function(timeseries, num_ahead = 5, level = 95)
         # return
         data.frame(observed = as.numeric(observed),
                    predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+                   lower_CI = as.numeric(stats::qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
+                   upper_CI = as.numeric(stats::qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
     }
     
-    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    order = order, level = level)
 }

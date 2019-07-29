@@ -11,6 +11,7 @@ hindcast(fun, timeseries, hindcast_method = c("pred_frac", "last_n",
 \item{fun}{a function for doing the forecasting. It should have arguments:
 \describe{
 \item{training}{the data for training the model}
+\item{observed}{optional observation of the next point}
 \item{...}{any optional arguments}
 } and should return a data.frame with at least the predicted forecast (in
 a column named \code{predicted}). Other columns are optional, and may be

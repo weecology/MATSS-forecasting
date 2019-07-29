@@ -28,7 +28,8 @@ reference:
     - smap_ts
   - title: "Forecasting Utilities"
     contents:
-    - forecast_one_step_static
+    - forecast_iterated
+    - hindcast
   - title: "Testing Utilities"
     contents:
     - expect_NA_warnings

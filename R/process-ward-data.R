@@ -37,7 +37,7 @@ reshape_ward_data <- function(data_file = system.file("extdata", "processed_data
                                                       package = "MATSSforecasting", mustWork = TRUE), 
                               ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS"))
 {
-    dat <- read.csv(data_file)
+    dat <- utils::read.csv(data_file)
     
     reshape_data <- function(df)
     {

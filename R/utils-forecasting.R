@@ -27,6 +27,7 @@
 #' @param fun a function for doing the forecasting. It should have arguments:
 #'   \describe{
 #'     \item{training}{the data for training the model}
+#'     \item{observed}{optional observation of the next point}
 #'     \item{...}{any optional arguments}
 #'   } and should return a data.frame with at least the predicted forecast (in 
 #'   a column named `predicted`). Other columns are optional, and may be 
@@ -71,6 +72,7 @@ hindcast <- function(fun, timeseries,
             training_end_idx <- seq(to = length(timeseries) - 1, length.out = last_n)
             purrr::map_dfr(training_end_idx, function(m) {
                 fun(training = timeseries[1:m], 
+                    observed = timeseries[m + 1], 
                     ...)
             })
         }, error = function(e) {
@@ -80,7 +82,7 @@ hindcast <- function(fun, timeseries,
         })
 }
 
-#' @title One-step forecasting with a static model (no refitting)
+#' @title Iterated one-step forecasting (no refitting)
 #'
 #' @description This function faciliates the forecasting approach in Ward et al.
 #'   2014. It forecasts the last `num_ahead` points of the time series:
@@ -107,7 +109,7 @@ hindcast <- function(fun, timeseries,
 #'   the observed and predicted
 #'
 #' @export
-forecast_one_step_static <- function(fun, timeseries, num_ahead = 5, ...)
+forecast_iterated <- function(fun, timeseries, num_ahead = 5, ...)
 {
     tryCatch(
         {

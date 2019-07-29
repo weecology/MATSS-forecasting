@@ -5,7 +5,7 @@
 #'   make forecasts.
 #' 
 #' @param drift whether the state-space model should include drift or not
-#' @inheritParams forecast_one_step_static
+#' @inheritParams forecast_iterated
 #' @inheritParams forecast::forecast
 #' @inheritParams MARSS::MARSS
 #'
@@ -49,6 +49,6 @@ marss_ts <- function(timeseries, num_ahead = 5, level = 95, drift = TRUE,
         model <- NULL
     }
     
-    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    level = level, method = "BFGS", model = model, silent = silent)
 }

@@ -5,7 +5,7 @@
 #'   \code{\link[tsDyn]{nnetTs}}
 #'
 #' @inheritParams tsDyn::nnetTs
-#' @inheritParams forecast_one_step_static
+#' @inheritParams forecast_iterated
 #' @inheritParams forecast::forecast
 #' @param ... arguments to be passed to \code{\link[tsDyn]{predict.nlar}}
 #'
@@ -43,6 +43,6 @@ nnet_ts <- function(timeseries, num_ahead = 5, level = 95,
                    upper_CI = as.numeric(forecasts$upper))
     }
 
-    forecast_one_step_static(fun = f, timeseries = timeseries, num_ahead = num_ahead,
+    forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                    order = order, level = level, ...)
 }

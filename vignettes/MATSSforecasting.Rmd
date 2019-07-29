@@ -59,17 +59,17 @@ arima_ts <- function(ts, num_ahead = 5, order = c(1, 0, 0), level = 95)
                    upper_CI = as.numeric(forecasts$upper))
     }
     
-    forecast_one_step_static(fun = f, ts = ts, num_ahead = num_ahead, 
-                             order = order, level = level)
+    forecast_iterated(fun = f, ts = ts, num_ahead = num_ahead, 
+                      order = order, level = level)
 }
 ```
 
 * `arima_ts` is a function that operates on a single time series, with arguments for `num_ahead` (required), and `order` and `level`, which are optional.
   - Inside `arima_ts`, we define a function, `f`, that takes in the training and observed time series portions, along with any model arguments.
     + `f` trains the model and makes forecasts, and these are returned as a data.frame, which must have at least the `observed` and `predicted` columns, though many of the functions will also include `lower_95` and `upper_95` columns for the 95% predictive bounds.
-  - `f` is passed to `forecast_one_step_static`, a function which performs the necessary splitting of the data into `training` and `observed` portions, runs `f`, and handles any errors gracefully (returning NAs) if necessary.
+  - `f` is passed to `forecast_iterated`, a function which performs the necessary splitting of the data into `training` and `observed` portions, runs `f`, and handles any errors gracefully (returning NAs) if necessary.
 
-We use this (admittedly) convoluted coding structure so that `forecast_one_step_static` provides a consistent wrapper for handling any kind of forecast model, and so that each defined forecasting function (e.g. `arima_ts`) can be used on individual time series, with optional arguments passed in without issue. 
+We use this (admittedly) convoluted coding structure so that `forecast_iterated` provides a consistent wrapper for handling any kind of forecast model, and so that each defined forecasting function (e.g. `arima_ts`) can be used on individual time series, with optional arguments passed in without issue. 
 
 ## Scaling up forecasting
 
