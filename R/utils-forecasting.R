@@ -73,7 +73,8 @@ hindcast <- function(fun, timeseries,
             purrr::map_dfr(training_end_idx, function(m) {
                 fun(training = timeseries[1:m], 
                     observed = timeseries[m + 1], 
-                    ...)
+                    ...) %>%
+                    dplyr::mutate(training_naive_error = mean(timeseries[2:m] - timeseries[1:(m - 1)]))
             })
         }, error = function(e) {
             warning(e, "  returning an NA object.")

@@ -83,8 +83,7 @@ autoarima_one_step <- function(timeseries, level = 95, ...)
         data.frame(observed = as.numeric(observed),
                    predicted = as.numeric(forecasts$mean),
                    lower_CI = as.numeric(forecasts$lower),
-                   upper_CI = as.numeric(forecasts$upper), 
-                   training_naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
+                   upper_CI = as.numeric(forecasts$upper))
     }
     hindcast(fun = f, timeseries = timeseries, level = level, ...)
 }
@@ -108,8 +107,7 @@ arfima_one_step <- function(timeseries, level = 95, ...)
         data.frame(observed = as.numeric(observed),
                    predicted = as.numeric(forecasts$mean),
                    lower_CI = as.numeric(forecasts$lower),
-                   upper_CI = as.numeric(forecasts$upper), 
-                   training_naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
+                   upper_CI = as.numeric(forecasts$upper))
     }
     
     hindcast(fun = f, timeseries = timeseries, level = level, ...)
