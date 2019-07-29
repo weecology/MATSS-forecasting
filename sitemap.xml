@@ -40,6 +40,9 @@
     <loc>https://weecology.github.io/MATSS-forecasting/reference/get_ward_data.html</loc>
   </url>
   <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/hindcast.html</loc>
+  </url>
+  <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/lm_ts.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/randomwalk_ts.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/ranfor_ts.html</loc>

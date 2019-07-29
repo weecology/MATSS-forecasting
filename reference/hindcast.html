@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using AR / ARIMA — arima_ts • MATSSforecasting</title>
+<title>Hindcasting with one-step forecasts — hindcast • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,29 @@
 
 
 
-<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
+<meta property="og:title" content="Hindcasting with one-step forecasts — hindcast" />
 
-<meta property="og:description" content="arima_ts fits an arima model using link{arima}
-arfima_ts fits a step-wise fractionally differenced
-auto-arima using link{arfima}" />
+<meta property="og:description" content="This function performs hindcasting over a specified segment of
+the time series. The hindcasting is intended to simulate the use of a
+forecasting method in practice. For a given time series of length m,
+suppose that the last n points are used for forecast evaluation, then
+the procedure is:
+fit the model to the first m - n time points
+make a 1-step ahead forecast
+add the next observation to the training data, refit the model,
+and make another forecast
+repeat for the n forecasts
+" />
+
+<meta property="og:description" content="The value of n is determined in one of several ways, depending on the
+hindcast_selection argument:
+last_nmake hindcasts for the last last_n points of the time
+series
+pred_fracmake hindcasts for the last pred_frac fraction of
+the time series
+pred_startmake hindcasts starting with the pred_start point
+of the time series
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,51 +122,86 @@ auto-arima using link{arfima}" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using AR / ARIMA</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-arima.R'><code>R/forecasting-arima.R</code></a></small>
-    <div class="hidden name"><code>arima_ts.Rd</code></div>
+    <h1>Hindcasting with one-step forecasts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-forecasting.R'><code>R/utils-forecasting.R</code></a></small>
+    <div class="hidden name"><code>hindcast.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>arima_ts</code> fits an arima model using <code>link{arima}</code></p>
-<p><code>arfima_ts</code> fits a step-wise fractionally differenced
-auto-arima using <code>link{arfima}</code></p>
+    <p>This function performs hindcasting over a specified segment of
+the time series. The hindcasting is intended to simulate the use of a
+forecasting method in practice. For a given time series of length <code>m</code>,
+suppose that the last <code>n</code> points are used for forecast evaluation, then
+the procedure is:</p><ol>
+<li><p>fit the model to the first <code>m - n</code> time points</p></li>
+<li><p>make a 1-step ahead forecast</p></li>
+<li><p>add the next observation to the training data, refit the model,
+and make another forecast</p></li>
+<li><p>repeat for the <code>n</code> forecasts</p></li>
+</ol>
+
+    <p>The value of <code>n</code> is determined in one of several ways, depending on the
+<code>hindcast_selection</code> argument:</p><dl class='dl-horizontal'>
+<dt><code>last_n</code></dt><dd><p>make hindcasts for the last <code>last_n</code> points of the time
+series</p></dd>
+<dt><code>pred_frac</code></dt><dd><p>make hindcasts for the last <code>pred_frac</code> fraction of
+the time series</p></dd>
+<dt><code>pred_start</code></dt><dd><p>make hindcasts starting with the <code>pred_start</code> point
+of the time series</p></dd>
+</dl>
     
     </div>
 
-    <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
-
-<span class='fu'>arfima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
+    <pre class="usage"><span class='fu'>hindcast</span>(<span class='no'>fun</span>, <span class='no'>timeseries</span>, <span class='kw'>hindcast_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"pred_frac"</span>, <span class='st'>"last_n"</span>,
+  <span class='st'>"pred_start"</span>), <span class='kw'>pred_frac</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>last_n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>pred_start</span> <span class='kw'>=</span> <span class='fl'>31</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>fun</th>
+      <td><p>a function for doing the forecasting. It should have arguments:</p><dl class='dl-horizontal'>
+<dt>training</dt><dd><p>the data for training the model</p></dd>
+<dt>...</dt><dd><p>any optional arguments</p></dd>
+</dl><p>and should return a data.frame with at least the predicted forecast (in
+a column named <code>predicted</code>). Other columns are optional, and may be
+specific to the forecasting method.</p></td>
+    </tr>
+    <tr>
       <th>timeseries</th>
       <td><p>the time series to forecast</p></td>
     </tr>
     <tr>
-      <th>num_ahead</th>
+      <th>pred_frac</th>
+      <td><p>the fraction of points at the end of the time series to
+forecast</p></td>
+    </tr>
+    <tr>
+      <th>last_n</th>
       <td><p>the number of points at the end of the time series to
 forecast</p></td>
     </tr>
     <tr>
-      <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
+      <th>...</th>
+      <td><p>arguments to pass to <code>fun</code></p></td>
     </tr>
     <tr>
-      <th>order</th>
-      <td><p>A specification of the non-seasonal part of the ARIMA
-    model: the three integer components \((p, d, q)\) are the AR order, the
-    degree of differencing, and the MA order.</p></td>
+      <th>hindcast_selection</th>
+      <td><p>the method for determining # of hindcasts</p></td>
+    </tr>
+    <tr>
+      <th>from_start</th>
+      <td><p>the index of the point of the time series at which to
+begin forecasts</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of the mean forecasts, the observed values, and the
-lower and upper CI levels (if an error occurs, then just NA values)</p>
+    <p>a data.frame of the observed and predicted values, with any other
+remaining values returned by <code>fun</code>. If any error occurs, then NA values for
+the observed and predicted</p>
     
 
   </div>

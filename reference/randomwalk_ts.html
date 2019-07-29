@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using AR / ARIMA — arima_ts • MATSSforecasting</title>
+<title>Forecase using a random walk model — randomwalk_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
+<meta property="og:title" content="Forecase using a random walk model — randomwalk_ts" />
 
-<meta property="og:description" content="arima_ts fits an arima model using link{arima}
-arfima_ts fits a step-wise fractionally differenced
-auto-arima using link{arfima}" />
+<meta property="og:description" content="Fits a random walk model using link[forecast]{rwf}" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,22 +102,18 @@ auto-arima using link{arfima}" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using AR / ARIMA</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-arima.R'><code>R/forecasting-arima.R</code></a></small>
-    <div class="hidden name"><code>arima_ts.Rd</code></div>
+    <h1>Forecase using a random walk model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-random-walk.R'><code>R/forecasting-random-walk.R</code></a></small>
+    <div class="hidden name"><code>randomwalk_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>arima_ts</code> fits an arima model using <code>link{arima}</code></p>
-<p><code>arfima_ts</code> fits a step-wise fractionally differenced
-auto-arima using <code>link{arfima}</code></p>
+    <p>Fits a random walk model using <code>link[forecast]{rwf}</code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
-
-<span class='fu'>arfima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
+    <pre class="usage"><span class='fu'>randomwalk_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,20 +129,13 @@ forecast</p></td>
     </tr>
     <tr>
       <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
+      <td><p>Confidence levels for prediction intervals.</p></td>
     </tr>
     <tr>
-      <th>order</th>
-      <td><p>A specification of the non-seasonal part of the ARIMA
-    model: the three integer components \((p, d, q)\) are the AR order, the
-    degree of differencing, and the MA order.</p></td>
+      <th>drift</th>
+      <td><p>Logical flag. If TRUE, fits a random walk with drift model.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a data.frame of the mean forecasts, the observed values, and the
-lower and upper CI levels (if an error occurs, then just NA values)</p>
     
 
   </div>
@@ -156,9 +143,7 @@ lower and upper CI levels (if an error occurs, then just NA values)</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

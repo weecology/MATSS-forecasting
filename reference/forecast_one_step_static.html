@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A wrapper function for one-step forecasting with a static model (no refitting) — forecast_one_step_static • MATSSforecasting</title>
+<title>One-step forecasting with a static model (no refitting) — forecast_one_step_static • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,10 @@
 
 
 
-<meta property="og:title" content="A wrapper function for one-step forecasting with a static model (no refitting) — forecast_one_step_static" />
+<meta property="og:title" content="One-step forecasting with a static model (no refitting) — forecast_one_step_static" />
 
 <meta property="og:description" content="This function faciliates the forecasting approach in Ward et al.
-2014. It has two operating modes. If num_ahead is set, then it forecasts
-the last num_ahead points of the time series:
+2014. It forecasts the last num_ahead points of the time series:
 fit the model to all but the last num_ahead time points
 make 1-step ahead forecasts for the num_ahead time points
 " />
@@ -107,16 +106,15 @@ make 1-step ahead forecasts for the num_ahead time points
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A wrapper function for one-step forecasting with a static model (no refitting)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-utils.R'><code>R/forecasting-utils.R</code></a></small>
+    <h1>One-step forecasting with a static model (no refitting)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-forecasting.R'><code>R/utils-forecasting.R</code></a></small>
     <div class="hidden name"><code>forecast_one_step_static.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p>This function faciliates the forecasting approach in Ward et al.
-2014. It has two operating modes. If <code>num_ahead</code> is set, then it forecasts
-the last <code>num_ahead</code> points of the time series:</p><ol>
+2014. It forecasts the last <code>num_ahead</code> points of the time series:</p><ol>
 <li><p>fit the model to all but the last <code>num_ahead</code> time points</p></li>
 <li><p>make 1-step ahead forecasts for the <code>num_ahead</code> time points</p></li>
 </ol>
@@ -135,8 +133,8 @@ the last <code>num_ahead</code> points of the time series:</p><ol>
 <dt>observed</dt><dd><p>the observed values to be forecasted</p></dd>
 <dt>...</dt><dd><p>any optional arguments</p></dd>
 </dl><p>and should return a data.frame with at least the observed and predicted
-values (other columns are optional, and may be specific to the forecasting
-method)</p></td>
+values (with the column names <code>observed</code> and <code>predicted</code>). Other columns
+are optional, and may be specific to the forecasting method)</p></td>
     </tr>
     <tr>
       <th>timeseries</th>
@@ -156,7 +154,7 @@ forecast</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a data.frame of the observed and predicted values, with any other
-remaining values returned by <code>fun</code>. If and error occurs, then NA values for
+remaining values returned by <code>fun</code>. If any error occurs, then NA values for
 the observed and predicted</p>
     
 
