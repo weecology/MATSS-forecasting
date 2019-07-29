@@ -32,9 +32,11 @@
 
 <meta property="og:title" content="Make forecasts using AR / ARIMA — arima_ts" />
 
-<meta property="og:description" content="arima_ts fits an arima model using link{arima}
+<meta property="og:description" content="arima_ts fits an arima model using arima
 arfima_ts fits a step-wise fractionally differenced
-auto-arima using link{arfima}" />
+auto-arima using arfima
+autoarima_one_step use auto.arima to
+fit an ARIMA model. auto.arima does model selection on the ARIMA params" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,15 +113,19 @@ auto-arima using link{arfima}" />
 
     <div class="ref-description">
     
-    <p><code>arima_ts</code> fits an arima model using <code>link{arima}</code></p>
+    <p><code>arima_ts</code> fits an arima model using <code><a href='https://www.rdocumentation.org/packages/stats/topics/arima'>arima</a></code></p>
 <p><code>arfima_ts</code> fits a step-wise fractionally differenced
-auto-arima using <code>link{arfima}</code></p>
+auto-arima using <code><a href='https://www.rdocumentation.org/packages/forecast/topics/arfima'>arfima</a></code></p>
+<p><code>autoarima_one_step</code> use <code><a href='https://www.rdocumentation.org/packages/forecast/topics/auto.arima'>auto.arima</a></code> to
+fit an ARIMA model. <code>auto.arima</code> does model selection on the ARIMA params</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>arima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
 
-<span class='fu'>arfima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
+<span class='fu'>arfima_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)
+
+<span class='fu'>autoarima_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,6 +148,10 @@ forecast</p></td>
       <td><p>A specification of the non-seasonal part of the ARIMA
     model: the three integer components \((p, d, q)\) are the AR order, the
     degree of differencing, and the MA order.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to pass to <code>fun</code></p></td>
     </tr>
     </table>
     

@@ -25,7 +25,7 @@
     <loc>https://weecology.github.io/MATSS-forecasting/reference/expect_forecasts.html</loc>
   </url>
   <url>
-    <loc>https://weecology.github.io/MATSS-forecasting/reference/forecast_one_step_static.html</loc>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/forecast_iterated.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/gam_ts.html</loc>
@@ -50,6 +50,9 @@
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/marss_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/naive_one_step.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/nnet_ts.html</loc>

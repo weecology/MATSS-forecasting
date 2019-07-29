@@ -121,8 +121,8 @@
 <a class="sourceLine" id="cb2-14" data-line-number="14">                   <span class="dt">upper_CI =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(forecasts<span class="op">$</span>upper))</a>
 <a class="sourceLine" id="cb2-15" data-line-number="15">    }</a>
 <a class="sourceLine" id="cb2-16" data-line-number="16">    </a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">    <span class="kw"><a href="../reference/forecast_one_step_static.html">forecast_one_step_static</a></span>(<span class="dt">fun =</span> f, <span class="dt">ts =</span> ts, <span class="dt">num_ahead =</span> num_ahead, </a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">                             <span class="dt">order =</span> order, <span class="dt">level =</span> level)</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">    <span class="kw"><a href="../reference/forecast_iterated.html">forecast_iterated</a></span>(<span class="dt">fun =</span> f, <span class="dt">ts =</span> ts, <span class="dt">num_ahead =</span> num_ahead, </a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">                      <span class="dt">order =</span> order, <span class="dt">level =</span> level)</a>
 <a class="sourceLine" id="cb2-19" data-line-number="19">}</a></code></pre></div>
 <ul>
 <li>
@@ -135,11 +135,11 @@
 </ul>
 </li>
 <li>
-<code>f</code> is passed to <code>forecast_one_step_static</code>, a function which performs the necessary splitting of the data into <code>training</code> and <code>observed</code> portions, runs <code>f</code>, and handles any errors gracefully (returning NAs) if necessary.</li>
+<code>f</code> is passed to <code>forecast_iterated</code>, a function which performs the necessary splitting of the data into <code>training</code> and <code>observed</code> portions, runs <code>f</code>, and handles any errors gracefully (returning NAs) if necessary.</li>
 </ul>
 </li>
 </ul>
-<p>We use this (admittedly) convoluted coding structure so that <code>forecast_one_step_static</code> provides a consistent wrapper for handling any kind of forecast model, and so that each defined forecasting function (e.g. <code>arima_ts</code>) can be used on individual time series, with optional arguments passed in without issue.</p>
+<p>We use this (admittedly) convoluted coding structure so that <code>forecast_iterated</code> provides a consistent wrapper for handling any kind of forecast model, and so that each defined forecasting function (e.g. <code>arima_ts</code>) can be used on individual time series, with optional arguments passed in without issue.</p>
 </div>
 <div id="scaling-up-forecasting" class="section level2">
 <h2 class="hasAnchor">

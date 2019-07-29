@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hindcasting with one-step forecasts — hindcast • MATSSforecasting</title>
+<title>Iterated one-step forecasting (no refitting) — forecast_iterated • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,28 +30,12 @@
 
 
 
-<meta property="og:title" content="Hindcasting with one-step forecasts — hindcast" />
+<meta property="og:title" content="Iterated one-step forecasting (no refitting) — forecast_iterated" />
 
-<meta property="og:description" content="This function performs hindcasting over a specified segment of
-the time series. The hindcasting is intended to simulate the use of a
-forecasting method in practice. For a given time series of length m,
-suppose that the last n points are used for forecast evaluation, then
-the procedure is:
-fit the model to the first m - n time points
-make a 1-step ahead forecast
-add the next observation to the training data, refit the model,
-and make another forecast
-repeat for the n forecasts
-" />
-
-<meta property="og:description" content="The value of n is determined in one of several ways, depending on the
-hindcast_selection argument:
-last_nmake hindcasts for the last last_n points of the time
-series
-pred_fracmake hindcasts for the last pred_frac fraction of
-the time series
-pred_startmake hindcasts starting with the pred_start point
-of the time series
+<meta property="og:description" content="This function faciliates the forecasting approach in Ward et al.
+2014. It forecasts the last num_ahead points of the time series:
+fit the model to all but the last num_ahead time points
+make 1-step ahead forecasts for the num_ahead time points
 " />
 <meta name="twitter:card" content="summary" />
 
@@ -122,39 +106,22 @@ of the time series
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hindcasting with one-step forecasts</h1>
+    <h1>Iterated one-step forecasting (no refitting)</h1>
     <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/utils-forecasting.R'><code>R/utils-forecasting.R</code></a></small>
-    <div class="hidden name"><code>hindcast.Rd</code></div>
+    <div class="hidden name"><code>forecast_iterated.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function performs hindcasting over a specified segment of
-the time series. The hindcasting is intended to simulate the use of a
-forecasting method in practice. For a given time series of length <code>m</code>,
-suppose that the last <code>n</code> points are used for forecast evaluation, then
-the procedure is:</p><ol>
-<li><p>fit the model to the first <code>m - n</code> time points</p></li>
-<li><p>make a 1-step ahead forecast</p></li>
-<li><p>add the next observation to the training data, refit the model,
-and make another forecast</p></li>
-<li><p>repeat for the <code>n</code> forecasts</p></li>
+    <p>This function faciliates the forecasting approach in Ward et al.
+2014. It forecasts the last <code>num_ahead</code> points of the time series:</p><ol>
+<li><p>fit the model to all but the last <code>num_ahead</code> time points</p></li>
+<li><p>make 1-step ahead forecasts for the <code>num_ahead</code> time points</p></li>
 </ol>
-
-    <p>The value of <code>n</code> is determined in one of several ways, depending on the
-<code>hindcast_selection</code> argument:</p><dl class='dl-horizontal'>
-<dt><code>last_n</code></dt><dd><p>make hindcasts for the last <code>last_n</code> points of the time
-series</p></dd>
-<dt><code>pred_frac</code></dt><dd><p>make hindcasts for the last <code>pred_frac</code> fraction of
-the time series</p></dd>
-<dt><code>pred_start</code></dt><dd><p>make hindcasts starting with the <code>pred_start</code> point
-of the time series</p></dd>
-</dl>
     
     </div>
 
-    <pre class="usage"><span class='fu'>hindcast</span>(<span class='no'>fun</span>, <span class='no'>timeseries</span>, <span class='kw'>hindcast_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"pred_frac"</span>, <span class='st'>"last_n"</span>,
-  <span class='st'>"pred_start"</span>), <span class='kw'>pred_frac</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>, <span class='kw'>last_n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>pred_start</span> <span class='kw'>=</span> <span class='fl'>31</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>forecast_iterated</span>(<span class='no'>fun</span>, <span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,38 +130,24 @@ of the time series</p></dd>
       <th>fun</th>
       <td><p>a function for doing the forecasting. It should have arguments:</p><dl class='dl-horizontal'>
 <dt>training</dt><dd><p>the data for training the model</p></dd>
-<dt>observed</dt><dd><p>optional observation of the next point</p></dd>
+<dt>observed</dt><dd><p>the observed values to be forecasted</p></dd>
 <dt>...</dt><dd><p>any optional arguments</p></dd>
-</dl><p>and should return a data.frame with at least the predicted forecast (in
-a column named <code>predicted</code>). Other columns are optional, and may be
-specific to the forecasting method.</p></td>
+</dl><p>and should return a data.frame with at least the observed and predicted
+values (with the column names <code>observed</code> and <code>predicted</code>). Other columns
+are optional, and may be specific to the forecasting method)</p></td>
     </tr>
     <tr>
       <th>timeseries</th>
       <td><p>the time series to forecast</p></td>
     </tr>
     <tr>
-      <th>pred_frac</th>
-      <td><p>the fraction of points at the end of the time series to
-forecast</p></td>
-    </tr>
-    <tr>
-      <th>last_n</th>
+      <th>num_ahead</th>
       <td><p>the number of points at the end of the time series to
 forecast</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>arguments to pass to <code>fun</code></p></td>
-    </tr>
-    <tr>
-      <th>hindcast_selection</th>
-      <td><p>the method for determining # of hindcasts</p></td>
-    </tr>
-    <tr>
-      <th>from_start</th>
-      <td><p>the index of the point of the time series at which to
-begin forecasts</p></td>
     </tr>
     </table>
     
