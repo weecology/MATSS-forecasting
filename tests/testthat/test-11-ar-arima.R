@@ -34,8 +34,9 @@ test_that("arfima_ts function works", {
 
 test_that("autoarima_one_step function works", {
     expect_error(output <- autoarima_one_step(Nile), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "eef202f66a")    
+    expect_forecasts(round(output, 4), 
+                     c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
+                     known_hash = "53a119e5fe")    
 })
 
 test_that("arfima_one_step function works", {

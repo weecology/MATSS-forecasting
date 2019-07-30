@@ -82,11 +82,17 @@ test_that("hindcast works", {
                    num_finite_training = sum(is.finite(training)))
     }
     expect_error(out <- hindcast(fun, c(NA, seq(12), NA)), NA)
-    expect_equivalent(out, data.frame(num_training = 8:11, num_finite_training = 8:11))
+    expect_equivalent(out, data.frame(num_training = 8:11, 
+                                      num_finite_training = 8:11, 
+                                      training_naive_error = 1))
     
     expect_error(out <- hindcast(fun, c(NA, seq(12), NA), hindcast_method = "last_n", last_n = 7), NA)
-    expect_equivalent(out, data.frame(num_training = 5:11, num_finite_training = 5:11))
+    expect_equivalent(out, data.frame(num_training = 5:11, 
+                                      num_finite_training = 5:11, 
+                                      training_naive_error = 1))
     
     expect_error(out <- hindcast(fun, c(NA, 1, NA, 2, NA, 3, NA, 4, NA, 5, NA, 6, NA, 7, NA, 8, NA)), NA)
-    expect_equivalent(out, data.frame(num_training = 10:14, num_finite_training = c(5, 6, 6, 7, 7)))
+    expect_equivalent(out, data.frame(num_training = 10:14, 
+                                      num_finite_training = c(5, 6, 6, 7, 7), 
+                                      training_naive_error = as.numeric(NA)))
 })
