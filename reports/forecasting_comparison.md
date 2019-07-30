@@ -1,7 +1,7 @@
-Forecasting Comparison Report
+Forecasting Method Evaluation
 ================
 Hao Ye
-2019-04-26
+2019-07-30
 
 ## Read in the results
 
@@ -14,34 +14,86 @@ cache <- storr::storr_dbi("datatable", "keystable", db)
 loadd(full_results, cache = cache)
 ```
 
-## Process results together
+## Examine the output structure
 
-We do some cleaning of the dataset names in `full_results`):
+``` r
+full_results
+```
+
+    ## # A tibble: 14 x 5
+    ##    results          metadata       dataset           method        args    
+    ##    <list>           <list>         <chr>             <chr>         <list>  
+    ##  1 <df[,6] [1,770 … <named list [… data_salmon       autoarima_on… <list […
+    ##  2 <df[,6] [4,175 … <named list [… data_RAMlegacy_c… autoarima_on… <list […
+    ##  3 <df[,6] [3,587 … <named list [… data_RAMlegacy_s… autoarima_on… <list […
+    ##  4 <df[,6] [3,219 … <named list [… data_RAMlegacy_r… autoarima_on… <list […
+    ##  5 <df[,6] [1,083 … <named list [… data_Dorner2008   autoarima_on… <list […
+    ##  6 <df[,6] [336 × … <named list [… data_SprSum_Col_… autoarima_on… <list […
+    ##  7 <df[,6] [299 × … <named list [… data_PugSound_Ch… autoarima_on… <list […
+    ##  8 <df[,5] [1,770 … <named list [… data_salmon       naive_one_st… <list […
+    ##  9 <df[,5] [4,175 … <named list [… data_RAMlegacy_c… naive_one_st… <list […
+    ## 10 <df[,5] [3,587 … <named list [… data_RAMlegacy_s… naive_one_st… <list […
+    ## 11 <df[,5] [3,219 … <named list [… data_RAMlegacy_r… naive_one_st… <list […
+    ## 12 <df[,5] [1,083 … <named list [… data_Dorner2008   naive_one_st… <list […
+    ## 13 <df[,5] [336 × … <named list [… data_SprSum_Col_… naive_one_st… <list […
+    ## 14 <df[,5] [299 × … <named list [… data_PugSound_Ch… naive_one_st… <list […
+
+`full_results` is a tibble with 14 rows, corresponding to the
+combinations of different `dataset` and `method`.
+
+First, let’s do some cleaning of the dataset names:
 
 ``` r
 full_results <- full_results %>%
         mutate(dataset = sub("data_(.+)$", "\\1", dataset))
-
-print(full_results)
 ```
 
-    ## # A tibble: 304 x 5
-    ##    results                 metadata   dataset             method  args     
-    ##    <list>                  <list>     <chr>               <chr>   <list>   
-    ##  1 <data.frame [775 × 5]>  <list [2]> salmon              arima_… <list [1…
-    ##  2 <data.frame [1,340 × 5… <list [2]> RAMlegacy_catch     arima_… <list [1…
-    ##  3 <data.frame [1,195 × 5… <list [2]> RAMlegacy_ssb       arima_… <list [1…
-    ##  4 <data.frame [1,070 × 5… <list [2]> RAMlegacy_recperssb arima_… <list [1…
-    ##  5 <data.frame [450 × 5]>  <list [2]> Dorner2008          arima_… <list [1…
-    ##  6 <data.frame [1,280 × 5… <list [2]> LPI                 arima_… <list [1…
-    ##  7 <data.frame [110 × 5]>  <list [2]> SprSum_Col_Chinook  arima_… <list [1…
-    ##  8 <data.frame [110 × 5]>  <list [2]> PugSound_Chinook    arima_… <list [1…
-    ##  9 <data.frame [775 × 5]>  <list [2]> salmon              arima_… <list [1…
-    ## 10 <data.frame [1,340 × 5… <list [2]> RAMlegacy_catch     arima_… <list [1…
-    ## # … with 294 more rows
+If we had all of the results in one long-table, that would allows us to
+then compute group summaries as we wish. Here, we can ignore the `args`
+column, since we don’t specify any optional arguments to the methods
+that we need to track.
 
-Again, we combine the `species_table` from within the `metadata` column,
-and join it with the results:
+### Merging results and metadata
+
+Taking a look at the `results` and `metadata` columns:
+
+``` r
+head(full_results[[1, "results"]])
+```
+
+    ##   id observed predicted lower_CI upper_CI training_naive_error
+    ## 1 62 10.18112  9.350246 8.005280 10.69521            0.5820469
+    ## 2 62 10.22001 10.015382 8.646983 11.38378            0.6288405
+    ## 3 62 10.93525 10.021401 8.672140 11.37066            0.6109633
+    ## 4 62 10.80714 10.047511 8.684199 11.41082            0.6140301
+    ## 5 62 10.59376 10.278505 8.947784 11.60923            0.6001467
+    ## 6 62 10.12218 10.234645 8.919308 11.54998            0.5894032
+
+``` r
+head(full_results[[1, "metadata"]])
+```
+
+    ## $species_table
+    ## # A tibble: 155 x 3
+    ##       id species class         
+    ##    <int> <fct>   <fct>         
+    ##  1    62 Chinook Actinopterygii
+    ##  2    63 Chinook Actinopterygii
+    ##  3    64 Chinook Actinopterygii
+    ##  4    65 Chinook Actinopterygii
+    ##  5    66 Chinook Actinopterygii
+    ##  6    67 Chinook Actinopterygii
+    ##  7    68 Chinook Actinopterygii
+    ##  8    69 Chinook Actinopterygii
+    ##  9    70 Chinook Actinopterygii
+    ## 10    71 Chinook Actinopterygii
+    ## # … with 145 more rows
+    ## 
+    ## $timename
+    ## [1] "year"
+
+We might want the species information, so let’s join the `species_table`
+element of `metadata` to each `results` df:
 
 ``` r
 # function to combine elements from the three columns
@@ -59,38 +111,30 @@ results <- full_results %>%
     pmap(process_row) %>%
     bind_rows() %>%
     as_tibble()
-
-# what is the structure of results?
-print(results)
 ```
 
-    ## # A tibble: 238,304 x 10
-    ##    id    observed predicted lower_CI upper_CI dataset method args  species
-    ##    <chr>    <dbl>     <dbl>    <dbl>    <dbl> <chr>   <chr>  <lis> <fct>  
-    ##  1 62       10.5       9.66     8.34     11.0 salmon  arima… <lis… Chinook
-    ##  2 62       10.5      10.0      8.65     11.4 salmon  arima… <lis… Chinook
-    ##  3 62       11.2      10.0      8.65     11.4 salmon  arima… <lis… Chinook
-    ##  4 62       11.2      10.0      8.65     11.4 salmon  arima… <lis… Chinook
-    ##  5 62       11.0      10.0      8.65     11.4 salmon  arima… <lis… Chinook
-    ##  6 63        8.52      8.84     7.32     10.4 salmon  arima… <lis… Chinook
-    ##  7 63        7.88      8.61     6.99     10.2 salmon  arima… <lis… Chinook
-    ##  8 63        8.52      8.61     6.99     10.2 salmon  arima… <lis… Chinook
-    ##  9 63        8.26      8.61     6.99     10.2 salmon  arima… <lis… Chinook
-    ## 10 63        8.32      8.61     6.99     10.2 salmon  arima… <lis… Chinook
-    ## # … with 238,294 more rows, and 1 more variable: class <fct>
+### Processing results
 
-## Prepare for plotting
+To compute Mean Absolute Scaled Error, we use the definition from
+\[@Hyndman\_2019\]:
 
-What we want to plot is a summary of the results for each time series
-(represented by unique combinations of `id` x `dataset`). Since the
-observed and predicted values are going to have very different scales
-across each time series, let’s just count the fraction of times the
-observed value fell within the predicted 95% range:
+\[q_j = \frac{e_j}{\frac{1}{T-1}\sum_{t = 2}^T |y_t - y_t-1|}\]
+
+and since the denominator is already computed for us as
+`training_naive_error`, we need only compute `observed` - `predicted` to
+get \(e_j\).
 
 ``` r
-to_plot <- results %>%
-    group_by(id, dataset, method) %>%
-    summarize(frac_correct = sum(observed > lower_CI & observed < upper_CI) / n(), 
+results <- results %>%
+    mutate(error = observed - predicted)
+```
+
+We then need to summarize over each set of predictions:
+
+``` r
+summary_results <- results %>%
+    group_by(dataset, method, id) %>%
+    summarize(MASE = mean(abs(error) / training_naive_error), 
               species = first(species), 
               class = first(class))
 ```
@@ -100,31 +144,20 @@ to_plot <- results %>%
 For each level of `class`, produce a histogram for `frac_correct`:
 
 ``` r
-ggplot(data = to_plot, 
-       mapping = aes(x = frac_correct, fill = class)) + 
-    facet_wrap(~method, scales = "free_y") + 
+ggplot(data = summary_results, 
+       mapping = aes(x = MASE, fill = class)) + 
+    facet_grid(method~class, scales = "free_y") + 
     geom_density(position = "stack") + 
+    geom_vline(aes(xintercept = 1), linetype = 2) + 
     theme_bw()
 ```
 
-    ## Warning: Removed 1516 rows containing non-finite values (stat_density).
+    ## Warning: Removed 24 rows containing non-finite values (stat_density).
 
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
-    
-    ## Warning: Groups with fewer than two data points have been dropped.
+![](forecasting_comparison_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-    ## Warning: Removed 8 rows containing missing values (position_stack).
+## Cleanup
 
-![](forecasting_comparison_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+``` r
+DBI::dbDisconnect(db)
+```

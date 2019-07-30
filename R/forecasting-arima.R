@@ -64,8 +64,8 @@ arfima_ts <- function(timeseries, num_ahead = 5, level = 95)
 
 #' @rdname arima_ts
 #'
-#' @description `autoarima_one_step` use \code{\link[forecast]{auto.arima}} to 
-#'   fit an ARIMA model. `auto.arima` does model selection on the ARIMA params
+#' @description `autoarima_one_step` uses \code{\link[forecast]{auto.arima}} to 
+#'   fit an ARIMA model and make a single one-step forecast. 
 #'
 #' @inheritParams hindcast
 #' 
@@ -90,8 +90,9 @@ autoarima_one_step <- function(timeseries, level = 95, ...)
 
 #' @rdname arima_ts
 #'
-#' @description `arfima_one_step` use \code{\link[forecast]{arfima}} to 
-#'   fit an fractionally-differentiated ARIMA model.
+#' @description `arfima_one_step` uses \code{\link[forecast]{arfima}} to 
+#'   fit an fractionally-differentiated ARIMA model and make a single one-step 
+#'   forecast. 
 #'
 #' @export
 #'

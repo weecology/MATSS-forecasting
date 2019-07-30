@@ -1,0 +1,113 @@
+---
+title: "Forecasting Method Evaluation"
+author: "Hao Ye"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(MATSSforecasting)
+library(tidyverse)
+library(drake)
+```
+
+## Read in the results
+
+```{r load the results}
+# define where the cache is located
+db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
+cache <- storr::storr_dbi("datatable", "keystable", db)
+
+# load results
+loadd(full_results, cache = cache)
+```
+
+## Examine the output structure
+
+```{r}
+full_results
+```
+
+`full_results` is a tibble with `r NROW(full_results)` rows, corresponding to the combinations of different `dataset` and `method`.
+
+First, let's do some cleaning of the dataset names:
+
+```{r}
+full_results <- full_results %>%
+        mutate(dataset = sub("data_(.+)$", "\\1", dataset))
+```
+
+If we had all of the results in one long-table, that would allows us to then compute group summaries as we wish. Here, we can ignore the `args` column, since we don't specify any optional arguments to the methods that we need to track.
+
+### Merging results and metadata
+
+Taking a look at the `results` and `metadata` columns:
+```{r}
+head(full_results[[1, "results"]])
+head(full_results[[1, "metadata"]])
+```
+
+We might want the species information, so let's join the `species_table` element of `metadata` to each `results` df:
+
+```{r}
+# function to combine elements from the three columns
+process_row <- function(results, metadata, dataset, method, args) {
+    results %>%
+        mutate(dataset = dataset, 
+               method = method, 
+               args = list(args)) %>%
+        left_join(mutate(metadata$species_table, id = as.character(id)), 
+                  by = "id")
+}
+
+# apply process_row to each dataset, then combine into a single tibble
+results <- full_results %>%
+    pmap(process_row) %>%
+    bind_rows() %>%
+    as_tibble()
+```
+
+### Processing results
+
+To compute Mean Absolute Scaled Error, we use the definition from [@Hyndman_2019]:
+
+$$q_j = \frac{e_j}{\frac{1}{T-1}\sum_{t = 2}^T |y_t - y_t-1|}$$
+
+and since the denominator is already computed for us as `training_naive_error`, we need only compute `observed` - `predicted` to get $e_j$.
+
+```{r}
+results <- results %>%
+    mutate(error = observed - predicted)
+```
+
+We then need to summarize over each set of predictions:
+
+```{r}
+summary_results <- results %>%
+    group_by(dataset, method, id) %>%
+    summarize(MASE = mean(abs(error) / training_naive_error), 
+              species = first(species), 
+              class = first(class))
+```
+
+## Plot
+
+For each level of `class`, produce a histogram for `frac_correct`:
+    
+```{r}
+ggplot(data = summary_results, 
+       mapping = aes(x = MASE, fill = class)) + 
+    facet_grid(method~class, scales = "free_y") + 
+    geom_density(position = "stack") + 
+    geom_vline(aes(xintercept = 1), linetype = 2) + 
+    theme_bw()
+```
+
+## Cleanup
+
+```{r}
+DBI::dbDisconnect(db)
+```
+

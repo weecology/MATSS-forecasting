@@ -1,3 +1,27 @@
+####------------------------------------------------------------------------####
+# July 2019
+#   This is the central processing script for performing the analyses for a 
+# forecasting comparison, as described in 
+# https://github.com/weecology/MATSS-forecasting/issues/16
+#
+# Perform forecasts using the following procedure:
+# 1. start forecasting for the last 1/3 of the time series
+#    - train a 1-step ahead model on the first 2/3, make a forecast, note actual
+#      observation
+#    - re-train the model, including the new observation, make another 1-step 
+#      ahead forecast
+# 2. Repeat the procedure for a variety of models:
+#    - linear autoregressive models (autoarima and arfima)
+#    - nonlinear time-delay embedding (simplex, s-map, and GP)
+#    - random walk / state-space (MARSS)
+#    - linear / quadratic / splined functions of time
+# 3. Compute time series properties:
+#    - complexity (weighted permutation entropy)
+#    - time series length and sampling frequency
+#    - life history characteristics
+# 4. Analysis?
+####------------------------------------------------------------------------####
+
 library(MATSSforecasting)
 library(MATSS)
 library(tidyverse)
@@ -7,6 +31,7 @@ library(drake)
 ##   as dependencies
 expose_imports(MATSS)
 expose_imports(MATSSforecasting)
+options(drake_make_menu = FALSE) # disable check for `make` vs `r_make`
 
 # file paths
 raw_data_file <- system.file("extdata", "processed_data", "masterDat_2019-06-12.csv",
@@ -19,15 +44,18 @@ reshape_ward_data(data_file = raw_data_file,
 
 ## define the datasets
 datasets <- bind_rows(
-    drake_plan(
-        data_LPI = get_LPI_data()
-    ), 
-    build_datasets_plan(include_retriever_data = TRUE), 
+    # drake_plan(
+    #     data_LPI = get_LPI_data()
+    # ), 
+    # build_datasets_plan(include_retriever_data = TRUE), 
     build_ward_data_plan(ward_RDS_file = processed_data_file)
 )
 
 ## define the forecasting methods
-methods <- build_ward_methods_plan()
+methods <- drake_plan(
+    autoarima = MATSS::analysis_wrapper(autoarima_one_step), 
+    naive = MATSS::analysis_wrapper(naive_one_step)
+)
 
 ## define the analyses (each method x dataset combination)
 analyses <- drake::drake_plan(
@@ -45,11 +73,8 @@ analyses <- drake::drake_plan(
 
 ## define a report that summarize the autoarima analysis
 reports <- drake_plan(
-    autoarima_report = rmarkdown::render(
-        knitr_in("reports/autoarima_report.Rmd")
-    ),
     forecasting_comparison = rmarkdown::render(
-        knitr_in("reports/ward_2014_repro.Rmd")
+        knitr_in("reports/forecasting_comparison.Rmd")
     )
 )
 
@@ -65,11 +90,13 @@ if (interactive())
 {
     config <- drake_config(pipeline, cache = cache)
     sankey_drake_graph(config, build_times = "none")  # requires "networkD3" package
-    vis_drake_graph(config, build_times = "none")     # requires "visNetwork" package
+    vis_drake_graph(config, build_times = "none", targets_only = TRUE)     # requires "visNetwork" package
 }
 
 ## Run the pipeline
 make(pipeline, cache = cache)
+
+DBI::dbDisconnect(db)
 
 ## Run the pipeline (parallelized)
 # future::plan(future::multiprocess)
