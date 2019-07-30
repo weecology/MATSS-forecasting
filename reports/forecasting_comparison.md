@@ -20,7 +20,7 @@ loadd(full_results, cache = cache)
 full_results
 ```
 
-    ## # A tibble: 14 x 5
+    ## # A tibble: 28 x 5
     ##    results          metadata       dataset           method        args    
     ##    <list>           <list>         <chr>             <chr>         <list>  
     ##  1 <df[,6] [1,770 … <named list [… data_salmon       autoarima_on… <list […
@@ -33,12 +33,9 @@ full_results
     ##  8 <df[,5] [1,770 … <named list [… data_salmon       naive_one_st… <list […
     ##  9 <df[,5] [4,175 … <named list [… data_RAMlegacy_c… naive_one_st… <list […
     ## 10 <df[,5] [3,587 … <named list [… data_RAMlegacy_s… naive_one_st… <list […
-    ## 11 <df[,5] [3,219 … <named list [… data_RAMlegacy_r… naive_one_st… <list […
-    ## 12 <df[,5] [1,083 … <named list [… data_Dorner2008   naive_one_st… <list […
-    ## 13 <df[,5] [336 × … <named list [… data_SprSum_Col_… naive_one_st… <list […
-    ## 14 <df[,5] [299 × … <named list [… data_PugSound_Ch… naive_one_st… <list […
+    ## # … with 18 more rows
 
-`full_results` is a tibble with 14 rows, corresponding to the
+`full_results` is a tibble with 28 rows, corresponding to the
 combinations of different `dataset` and `method`.
 
 First, let’s do some cleaning of the dataset names:
@@ -152,7 +149,7 @@ ggplot(data = summary_results,
     theme_bw()
 ```
 
-    ## Warning: Removed 24 rows containing non-finite values (stat_density).
+    ## Warning: Removed 48 rows containing non-finite values (stat_density).
 
 ![](forecasting_comparison_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 

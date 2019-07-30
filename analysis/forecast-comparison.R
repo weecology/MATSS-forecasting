@@ -54,7 +54,9 @@ datasets <- bind_rows(
 ## define the forecasting methods
 methods <- drake_plan(
     autoarima = MATSS::analysis_wrapper(autoarima_one_step), 
-    naive = MATSS::analysis_wrapper(naive_one_step)
+    naive = MATSS::analysis_wrapper(naive_one_step), 
+    simplex = MATSS::analysis_wrapper(simplex_one_step), 
+    smap = MATSS::analysis_wrapper(smap_one_step)
 )
 
 ## define the analyses (each method x dataset combination)
