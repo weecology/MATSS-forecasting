@@ -36,11 +36,11 @@ test_that("autoarima_one_step function works", {
     expect_error(output <- autoarima_one_step(Nile), NA)
     expect_forecasts(round(output, 4), 
                      c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "53a119e5fe")    
+                     known_hash = "591137c192")    
 })
 
 test_that("arfima_one_step function works", {
     expect_error(output <- arfima_one_step(Nile), NA)
     expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "0c96ed9d0e")    
+                     known_hash = "5169a7e256")    
 })
