@@ -17,40 +17,9 @@
 simplex_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7, 
                        silent = TRUE)
 {
-    f <- function(training, observed, level, E_list, silent = silent)
-    {
-        # fit simplex model
-        training_model <- rEDM::simplex(training, E = E_list, silent = silent)
-        best_E <- training_model$E[which.min(training_model$mae)]
-        
-        # make 1-step ahead forecasts and propagate those values to make 
-        #   subsequent forecasts
-        forecasts <- data.frame(fit = numeric(length(observed)), 
-                                se.fit = numeric(length(observed)))
-        input_ts <- training
-        for (i in seq_along(observed))
-        {
-            out <- rEDM::simplex(time_series = c(input_ts, NA), 
-                                 lib = c(1, length(training)), 
-                                 pred = c(length(input_ts) - best_E, length(input_ts) + 1), 
-                                 E = best_E, 
-                                 stats_only = FALSE, 
-                                 silent = silent)
-            pred_row <- out$model_output[[1]][best_E + 1, ]
-            forecasts$fit[i] <- pred_row$pred
-            forecasts$se.fit[i] <- sqrt(pred_row$pred_var)
-            input_ts <- c(input_ts, pred_row$pred)
-        }
-        
-        # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
-    }
-    
-    forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
-                      level = level, E_list = E_list, silent = silent)
+    forecast_iterated(fun = simplex_helper, timeseries = timeseries, 
+                      num_ahead = num_ahead, level = level, E_list = E_list, 
+                      silent = silent)
 }
 
 #' @rdname simplex_ts
@@ -66,47 +35,9 @@ smap_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
                                    0.1, 0.3, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8), 
                     silent = TRUE)
 {
-    f <- function(training, observed, level, E_list, theta_list, silent = silent)
-    {
-        # fit simplex model
-        training_model <- rEDM::simplex(training, E = E_list, silent = silent)
-        best_E <- training_model$E[which.min(training_model$mae)]
-        
-        # fit s-map model
-        training_model <- rEDM::s_map(training, E = best_E, theta = theta_list, 
-                                      silent = silent)
-        best_theta <- training_model$theta[which.min(training_model$mae)]
-        
-        # make 1-step ahead forecasts and propagate those values to make 
-        #   subsequent forecasts
-        forecasts <- data.frame(fit = numeric(length(observed)), 
-                                se.fit = numeric(length(observed)))
-        input_ts <- training
-        for (i in seq_along(observed))
-        {
-            out <- rEDM::s_map(time_series = c(input_ts, NA), 
-                               lib = c(1, length(training)), 
-                               pred = c(length(input_ts) - best_E, length(input_ts) + 1), 
-                               E = best_E, 
-                               theta = best_theta, 
-                               stats_only = FALSE, 
-                               silent = silent)
-            pred_row <- out$model_output[[1]][best_E + 1, ]
-            forecasts$fit[i] <- pred_row$pred
-            forecasts$se.fit[i] <- sqrt(pred_row$pred_var)
-            input_ts <- c(input_ts, pred_row$pred)
-        }
-        
-        # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
-    }
-    
-    forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
-                      level = level, E_list = E_list, theta_list = theta_list, 
-                      silent = silent)
+    forecast_iterated(fun = smap_helper, timeseries = timeseries, 
+                      num_ahead = num_ahead, level = level, E_list = E_list, 
+                      theta_list = theta_list, silent = silent)
 }
 
 #' @rdname simplex_ts
@@ -117,30 +48,8 @@ smap_ts <- function(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
 #' @export
 simplex_one_step <- function(timeseries, level = 95, E_list = 1:7, silent = TRUE)
 {
-    f <- function(training, observed = NA, level, E_list, silent = silent)
-    {
-        # fit simplex model
-        training_model <- rEDM::simplex(training, E = E_list, silent = silent)
-        best_E <- training_model$E[which.min(training_model$mae)]
-        
-        # make a 1-step ahead forecast
-        out <- rEDM::simplex(time_series = c(training, NA), 
-                             lib = c(1, length(training)), 
-                             pred = c(length(training) - best_E, length(training) + 1), 
-                             E = best_E, 
-                             stats_only = FALSE, 
-                             silent = silent)
-        pred_row <- out$model_output[[1]][best_E + 1, ]
-        
-        # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(pred_row$pred),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, pred_row$pred, sd = sqrt(pred_row$pred_var))),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, pred_row$pred, sd = sqrt(pred_row$pred_var))))
-    }
-    
-    hindcast(fun = f, timeseries = timeseries, level = level, E_list = E_list, 
-             silent = silent)
+    hindcast(fun = simplex_helper, timeseries = timeseries, 
+             level = level, E_list = E_list, silent = silent)
 }
 
 #' @rdname simplex_ts
@@ -154,34 +63,70 @@ smap_one_step <- function(timeseries, level = 95, E_list = 1:7,
                                          0.1, 0.3, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8), 
                           silent = TRUE)
 {
-    f <- function(training, observed = NA, level, E_list, theta_list, silent = silent)
+    hindcast(fun = smap_helper, timeseries = timeseries, level = level, 
+             E_list = E_list, theta_list = theta_list, silent = silent)
+}
+
+simplex_helper <- function(training, observed, level, E_list, silent = silent)
+{
+    # fit simplex model
+    training_model <- rEDM::simplex(training, E = E_list, silent = silent)
+    best_E <- training_model$E[which.min(training_model$mae)]
+    
+    # make 1-step ahead forecasts and propagate those values to make 
+    #   subsequent forecasts
+    edm_forecast_loop(training, observed, level, silent, 
+                      "simplex", E = best_E)
+}
+
+smap_helper <- function(training, observed, level, E_list, theta_list, silent = silent)
+{
+    # fit simplex model
+    training_model <- rEDM::simplex(training, E = E_list, silent = silent)
+    best_E <- training_model$E[which.min(training_model$mae)]
+    
+    # fit s-map model
+    training_model <- rEDM::s_map(training, E = best_E, theta = theta_list, 
+                                  silent = silent)
+    best_theta <- training_model$theta[which.min(training_model$mae)]
+    
+    edm_forecast_loop(training, observed, level, silent, 
+                      "s-map", E = best_E, theta = best_theta)
+}
+
+edm_forecast_loop <- function(training, observed, level = 95, silent, 
+                              fun = c("simplex", "s-map"), E = 1, theta = 1)
+{
+    fun <- match.arg(fun)
+    
+    forecasts <- data.frame(fit = numeric(length(observed)), 
+                            se.fit = numeric(length(observed)))
+    input_ts <- training
+    for (i in seq_along(observed))
     {
-        # fit simplex model
-        training_model <- rEDM::simplex(training, E = E_list, silent = silent)
-        best_E <- training_model$E[which.min(training_model$mae)]
-        
-        # fit s-map model
-        training_model <- rEDM::s_map(training, E = best_E, theta = theta_list, 
-                                      silent = silent)
-        best_theta <- training_model$theta[which.min(training_model$mae)]
-        
-        # make a 1-step ahead forecast
-        out <- rEDM::s_map(time_series = c(training, NA), 
-                           lib = c(1, length(training)), 
-                           pred = c(length(training) - best_E, length(training) + 1), 
-                           E = best_E, 
-                           theta = best_theta, 
-                           stats_only = FALSE, 
-                           silent = silent)
-        pred_row <- out$model_output[[1]][best_E + 1, ]
-        
-        # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(pred_row$pred),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, pred_row$pred, sd = sqrt(pred_row$pred_var))),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, pred_row$pred, sd = sqrt(pred_row$pred_var))))
+        out <- switch(fun, 
+               "simplex" = rEDM::simplex(time_series = c(input_ts, NA), 
+                             lib = c(1, length(training)), 
+                             pred = c(length(input_ts) - E, length(input_ts) + 1), 
+                             E = E, 
+                             stats_only = FALSE, 
+                             silent = silent), 
+               "s-map" = rEDM::s_map(time_series = c(input_ts, NA), 
+                                     lib = c(1, length(training)), 
+                                     pred = c(length(input_ts) - E, length(input_ts) + 1), 
+                                     E = E, 
+                                     theta = theta, 
+                                     stats_only = FALSE, 
+                                     silent = silent))
+        pred_row <- out$model_output[[1]][E + 1, ]
+        forecasts$fit[i] <- pred_row$pred
+        forecasts$se.fit[i] <- sqrt(pred_row$pred_var)
+        input_ts <- c(input_ts, pred_row$pred)
     }
     
-    hindcast(fun = f, timeseries = timeseries, level = level, E_list = E_list, 
-             theta_list = theta_list, silent = silent)
+    # return
+    data.frame(observed = as.numeric(observed),
+               predicted = as.numeric(forecasts$fit),
+               lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
+               upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
 }
