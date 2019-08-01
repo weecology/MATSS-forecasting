@@ -3,6 +3,8 @@
 \name{simplex_ts}
 \alias{simplex_ts}
 \alias{smap_ts}
+\alias{simplex_one_step}
+\alias{smap_one_step}
 \title{Make forecasts using simplex projection or S-maps}
 \usage{
 simplex_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
@@ -11,6 +13,12 @@ simplex_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
 smap_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
   theta_list = c(0, 1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3,
   0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8), silent = TRUE)
+
+simplex_one_step(timeseries, level = 95, E_list = 1:7, silent = TRUE)
+
+smap_one_step(timeseries, level = 95, E_list = 1:7, theta_list = c(0,
+  1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.5, 0.75, 1, 1.5, 2,
+  3, 4, 6, 8), silent = TRUE)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -31,9 +39,15 @@ a data.frame of the mean forecasts, the observed values, and the
 lower and upper CI levels (if an error occurs, then just NA values)
 }
 \description{
-\code{simplex_ts} fits a simplex projection model using
-\code{\link[rEDM]{simplex}} and makes forecasts.
+\code{simplex_ts} uses \code{\link[rEDM]{simplex}} to fit a
+simplex projection model and make forecasts.
 
-\code{smap_ts} fits an S-map model using
-\code{\link[rEDM]{s_map}} and makes forecasts.
+\code{smap_ts} uses \code{\link[rEDM]{s_map}} to fit an S-map model
+and make forecasts.
+
+\code{simplex_one_step} uses \code{\link[rEDM]{simplex}} to fit a
+simplex projection model and make a single one-step forecast.
+
+\code{smap_one_step} uses \code{\link[rEDM]{s_map}} to fit an S-map
+model and make a single one-step forecast.
 }

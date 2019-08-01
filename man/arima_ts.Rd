@@ -40,9 +40,10 @@ lower and upper CI levels (if an error occurs, then just NA values)
 \code{arfima_ts} fits a step-wise fractionally differenced
 auto-arima using \code{\link[forecast]{arfima}}
 
-\code{autoarima_one_step} use \code{\link[forecast]{auto.arima}} to
-fit an ARIMA model. \code{auto.arima} does model selection on the ARIMA params
+\code{autoarima_one_step} uses \code{\link[forecast]{auto.arima}} to
+fit an ARIMA model and make a single one-step forecast.
 
-\code{arfima_one_step} use \code{\link[forecast]{arfima}} to
-fit an fractionally-differentiated ARIMA model.
+\code{arfima_one_step} uses \code{\link[forecast]{arfima}} to
+fit an fractionally-differentiated ARIMA model and make a single one-step
+forecast.
 }
