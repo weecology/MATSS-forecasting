@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using simplex projection or S-maps — simplex_ts • MATSSforecasting</title>
+<title>Structural time series model — sts_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,16 +30,10 @@
 
 
 
-<meta property="og:title" content="Make forecasts using simplex projection or S-maps — simplex_ts" />
+<meta property="og:title" content="Structural time series model — sts_ts" />
 
-<meta property="og:description" content="simplex_ts uses simplex to fit a
-simplex projection model and make forecasts.
-smap_ts uses s_map to fit an S-map model
-and make forecasts.
-simplex_one_step uses simplex to fit a
-simplex projection model and make a single one-step forecast.
-smap_one_step uses s_map to fit an S-map
-model and make a single one-step forecast." />
+<meta property="og:description" content="Fit a time series model using StructTS and
+make forecasts." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,36 +103,19 @@ model and make a single one-step forecast." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using simplex projection or S-maps</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-edm.R'><code>R/forecasting-edm.R</code></a></small>
-    <div class="hidden name"><code>simplex_ts.Rd</code></div>
+    <h1>Structural time series model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-sts.R'><code>R/forecasting-sts.R</code></a></small>
+    <div class="hidden name"><code>sts_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>simplex_ts</code> uses <code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>simplex</a></code> to fit a
-simplex projection model and make forecasts.</p>
-<p><code>smap_ts</code> uses <code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>s_map</a></code> to fit an S-map model
-and make forecasts.</p>
-<p><code>simplex_one_step</code> uses <code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>simplex</a></code> to fit a
-simplex projection model and make a single one-step forecast.</p>
-<p><code>smap_one_step</code> uses <code><a href='https://www.rdocumentation.org/packages/rEDM/topics/simplex'>s_map</a></code> to fit an S-map
-model and make a single one-step forecast.</p>
+    <p>Fit a time series model using <code><a href='https://www.rdocumentation.org/packages/stats/topics/StructTS'>StructTS</a></code> and
+make forecasts.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>simplex_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>smap_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>,
-  <span class='kw'>theta_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1e-04</span>, <span class='fl'>3e-04</span>, <span class='fl'>0.001</span>, <span class='fl'>0.003</span>, <span class='fl'>0.01</span>, <span class='fl'>0.03</span>, <span class='fl'>0.1</span>, <span class='fl'>0.3</span>,
-  <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>1</span>, <span class='fl'>1.5</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>8</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>simplex_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>smap_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>E_list</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>theta_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,
-  <span class='fl'>1e-04</span>, <span class='fl'>3e-04</span>, <span class='fl'>0.001</span>, <span class='fl'>0.003</span>, <span class='fl'>0.01</span>, <span class='fl'>0.03</span>, <span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>1</span>, <span class='fl'>1.5</span>, <span class='fl'>2</span>,
-  <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>8</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>sts_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,16 +134,8 @@ forecast</p></td>
       <td><p>Confidence level for prediction intervals.</p></td>
     </tr>
     <tr>
-      <th>E_list</th>
-      <td><p>the values of E to try</p></td>
-    </tr>
-    <tr>
-      <th>silent</th>
-      <td><p>prevents warning messages from being printed to the R console</p></td>
-    </tr>
-    <tr>
-      <th>theta_list</th>
-      <td><p>values of theta to test</p></td>
+      <th>frequency</th>
+      <td><p>the number of observations per unit of time.</p></td>
     </tr>
     </table>
     
