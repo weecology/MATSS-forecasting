@@ -74,8 +74,8 @@ hindcast <- function(fun, timeseries,
                 fun(training = timeseries[1:m], 
                     observed = timeseries[m + 1], 
                     ...) %>%
-                    dplyr::mutate(training_naive_error = 
-                                      mean(abs(timeseries[2:m] - timeseries[1:(m - 1)])))
+                    dplyr::mutate(time = m) %>%
+                    dplyr::select(.data$time, dplyr::everything())
             })
         }, error = function(e) {
             warning(e, "  returning an NA object.")

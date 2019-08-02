@@ -30,3 +30,4 @@ sts_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
     forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
                       level = level, frequency = frequency)
 }
+

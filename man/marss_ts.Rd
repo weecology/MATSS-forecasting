@@ -2,9 +2,13 @@
 % Please edit documentation in R/forecasting-marss.R
 \name{marss_ts}
 \alias{marss_ts}
+\alias{marss_rw_one_step}
 \title{Make forecasts using a state space model}
 \usage{
 marss_ts(timeseries, num_ahead = 5, level = 95, drift = TRUE,
+  silent = TRUE)
+
+marss_rw_one_step(timeseries, level = 95, drift = TRUE,
   silent = TRUE)
 }
 \arguments{
@@ -26,4 +30,7 @@ lower and upper CI levels (if an error occurs, then just NA values)
 \description{
 Fit a state-space model using \code{\link[MARSS]{MARSS}} and
 make forecasts.
+
+\code{marss_rw_one_step} uses \code{\link[MARSS]{MARSS}} to fit a
+state-space model and make a single one-step forecast.
 }

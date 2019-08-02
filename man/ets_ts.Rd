@@ -2,9 +2,12 @@
 % Please edit documentation in R/forecasting-ets.R
 \name{ets_ts}
 \alias{ets_ts}
+\alias{ets_one_step}
 \title{Exponentially smoothed time series model}
 \usage{
 ets_ts(timeseries, num_ahead = 5, level = 95, frequency = 1)
+
+ets_one_step(timeseries, level = 95)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -24,4 +27,8 @@ lower and upper CI levels (if an error occurs, then just NA values)
 Fit a time series model using \code{\link[forecast]{ets}} and
 make forecasts. The frequency of the data is set a priori, as opposed to
 estimating the parameter from the data.
+
+\code{ets_one_step} uses \code{\link[forecast]{ets}} to fit an
+exponential-smoothing time series model and make a single one-step
+forecast.
 }

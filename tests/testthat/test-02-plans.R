@@ -13,3 +13,9 @@ test_that("Drake plan for Ward et al. methods works", {
     expect_equal(dim(methods_plan), c(44, 2))
     expect_true(all(grepl("MATSS::analysis_wrapper\\(.+\\)", methods_plan$command)))
 })
+
+test_that("Plan for forecasting comparison methods works", {
+    expect_error(methods_plan <- build_methods_plan(), NA)
+    expect_equal(dim(methods_plan), c(10, 2))
+    expect_true(all(grepl("MATSS::analysis_wrapper\\(.+\\)", methods_plan$command)))
+})

@@ -1,3 +1,49 @@
+#' @title Make a drake plan with forecasting methods to be compared
+#'
+#' @description We list out the different forecasting methods (and the parameter 
+#'   settings we wish to try) in the form of a drake plan. Note the use of 
+#'   \code{\link[MATSS]{analysis_wrapper}} that takes a function that operates on
+#'   a single time series, and wraps it to run on each time series within a 
+#'   dataset.
+#'
+#' @return a drake plan (i.e. a tibble) with the forecasting methods.
+#'
+#' @export
+#'
+build_methods_plan <- function()
+{
+    ## arima methods
+    arima_methods <- drake::drake_plan(
+        autoarima = MATSS::analysis_wrapper(autoarima_one_step), 
+        arfima = MATSS::analysis_wrapper(arfima_one_step), 
+        ets = MATSS::analysis_wrapper(ets_one_step)
+    )
+    
+    ## EDM methods
+    edm_methods <- drake::drake_plan(
+        simplex = MATSS::analysis_wrapper(simplex_one_step), 
+        smap = MATSS::analysis_wrapper(smap_one_step)
+    )
+    
+    ## State-space / random-walk methods
+    random_walk_methods <- drake::drake_plan(
+        randomwalk = MATSS::analysis_wrapper(randomwalk_one_step, drift = FALSE), 
+        randomwalk_drift = MATSS::analysis_wrapper(randomwalk_one_step, drift = TRUE), 
+        marss_rw = MATSS::analysis_wrapper(marss_rw_one_step, drift = FALSE), 
+        marss_rw_drift = MATSS::analysis_wrapper(marss_rw_one_step, drift = TRUE)
+    )
+    
+    ## Naive forecasting model for comparison
+    baseline_methods <- drake::drake_plan(
+        naive = MATSS::analysis_wrapper(naive_one_step)
+    )
+    
+    methods <- dplyr::bind_rows(arima_methods, 
+                                edm_methods, 
+                                random_walk_methods, 
+                                baseline_methods)
+}
+
 #' @title Make a drake plan with all the forecasting methods in Ward et al. 2014
 #'
 #' @description We list out the different forecasting methods (and the parameter 

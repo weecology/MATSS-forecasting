@@ -1,4 +1,7 @@
+#' @name ets_ts
 #' @title Exponentially smoothed time series model
+#'
+#' @aliases ets_one_step
 #'
 #' @description Fit a time series model using \code{\link[forecast]{ets}} and 
 #'   make forecasts. The frequency of the data is set a priori, as opposed to 
@@ -32,3 +35,28 @@ ets_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
                    level = level, frequency = frequency)
 }
 
+#' @rdname ets_ts
+#'
+#' @description `ets_one_step` uses \code{\link[forecast]{ets}} to fit an 
+#'   exponential-smoothing time series model and make a single one-step 
+#'   forecast. 
+#'
+#' @export
+#'
+ets_one_step <- function(timeseries, level = 95)
+{
+    f <- function(training, observed, level, frequency)
+    {
+        # make forecasts
+        ts_model <- forecast::ets(training)
+        forecasts <- forecast::forecast(ts_model, 1, level = level)
+        
+        # return
+        data.frame(observed = as.numeric(observed),
+                   predicted = as.numeric(forecasts$mean),
+                   lower_CI = as.numeric(forecasts$lower),
+                   upper_CI = as.numeric(forecasts$upper))
+    }
+    
+    hindcast(fun = f, timeseries = timeseries, level = level)
+}

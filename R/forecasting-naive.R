@@ -12,10 +12,9 @@ naive_one_step <- function(timeseries, ...)
 {
     f <- function(training, observed = NA, level)
     {
-        # return
         data.frame(observed = as.numeric(observed),
                    predicted = utils::tail(training, 1), 
-                   naive_error = mean(utils::tail(training, -1) - utils::head(training, -1)))
+                   naive_error = mean(abs(utils::tail(training, -1) - utils::head(training, -1))))
     }
     hindcast(fun = f, timeseries = timeseries, ...)
 }

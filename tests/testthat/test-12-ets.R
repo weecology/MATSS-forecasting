@@ -15,3 +15,10 @@ test_that("ets_ts function works", {
     expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI"), 
                      known_hash = "0aa8554faf")
 })
+
+test_that("ets_one_step function works", {
+    expect_error(output <- ets_one_step(Nile), NA)
+    expect_forecasts(output, 
+                     c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "5545053a24")
+})

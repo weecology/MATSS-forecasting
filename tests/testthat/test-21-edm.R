@@ -42,28 +42,28 @@ test_that("smap_ts function works for specified E and theta", {
 
 test_that("simplex_one_step function works", {
     expect_error(output <- simplex_one_step(Nile), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "503df3bc48")
+    expect_forecasts(output, c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "7ca30a402b")
 })
 
 test_that("simplex_one_step function works for specified E", {
     expect_error(output <- simplex_one_step(Nile, E_list = 3), NA)
-    expect_forecasts(output, c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "046eff57a0")
+    expect_forecasts(output, c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "ac43f126fb")
 })
 
 test_that("smap_one_step function works", {
     expect_error(output <- smap_one_step(Nile), NA)
-    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "37c8686d84")
+    expect_forecasts(output, c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "1f9f7fd2f7")
 })
 
 test_that("smap_one_step function works for specified E and theta", {
     expect_error(output <- smap_one_step(Nile, E = 3), NA)
-    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "6380784ee4")
+    expect_forecasts(output, c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "733ed773b9")
     
     expect_error(output <- smap_one_step(Nile, E = 3, theta = 1), NA)
-    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI", "training_naive_error"), 
-                     known_hash = "95b371216a")
+    expect_forecasts(round(output, 4), c("time", "observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "431d965599")
 })

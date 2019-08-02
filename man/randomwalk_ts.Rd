@@ -2,9 +2,12 @@
 % Please edit documentation in R/forecasting-random-walk.R
 \name{randomwalk_ts}
 \alias{randomwalk_ts}
-\title{Forecase using a random walk model}
+\alias{randomwalk_one_step}
+\title{Forecast using a random walk model}
 \usage{
 randomwalk_ts(timeseries, num_ahead = 5, level = 95, drift = FALSE)
+
+randomwalk_one_step(timeseries, level = 95, drift = FALSE)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}
@@ -17,5 +20,10 @@ forecast}
 \item{drift}{Logical flag. If TRUE, fits a random walk with drift model.}
 }
 \description{
-Fits a random walk model using \code{\link[forecast]{rwf}}
+\code{randomwalk_ts} fits a random walk model using
+\code{\link[forecast]{rwf}}
+
+\code{randomwalk_one_step} uses \code{\link[forecast]{rwf}} to fit a
+random walk model (with or without drift) and make a single one-step
+forecast.
 }
