@@ -26,13 +26,13 @@ get_LPI_data <- function(min_time_series_length = 25)
         dplyr::mutate_at(dplyr::vars("Year", "Value"), as.numeric) %>%
         
         # count number of observations
-        dplyr::group_by(ID) %>%
-        dplyr::filter(is.finite(Value)) %>%
+        dplyr::group_by(.data$ID) %>%
+        dplyr::filter(is.finite(.data$Value)) %>%
         dplyr::mutate(num_obs = dplyr::n()) %>%
         dplyr::ungroup() %>%
         
         # keep only the species with at least 25 observations
-        dplyr::filter(num_obs >= min_time_series_length) %>%
+        dplyr::filter(.data$num_obs >= min_time_series_length) %>%
         
         # rename variables to be all lowercase
         dplyr::rename_all(tolower) %>%
@@ -42,23 +42,25 @@ get_LPI_data <- function(min_time_series_length = 25)
     
     # spread species to separate columns
     abundance_table <- dat %>%
-        dplyr::select(id, year, value) %>%
-        tidyr::spread(id, value)
+        dplyr::select(c("id", "year", "value")) %>%
+        tidyr::spread(.data$id, .data$value)
     
     data_LPI <- list(abundance = abundance_table %>%
-                         dplyr::select(-year), 
+                         dplyr::select(-.data$year), 
                      covariates = abundance_table %>% 
-                         dplyr::select(year), 
+                         dplyr::select(.data$year), 
                      metadata = list(species_table = dat %>%
-                                         dplyr::select(id, Species_name = binomial, 
-                                                       class, order, family, genus, species, subspecies, 
-                                                       location, country, region, 
-                                                       latitude, longitude, 
-                                                       system, t_realm, t_biome, fw_realm, fw_biome, m_realm, m_ocean, m_biome, 
-                                                       units, method) %>%
-                                         dplyr::distinct(id, .keep_all = TRUE), 
+                                         dplyr::select(c("id", "Species_name" = "binomial", 
+                                                         "class", "order", "family", "genus", "species", "subspecies", 
+                                                         "location", "country", "region", 
+                                                         "latitude", "longitude", 
+                                                         "system", "t_realm", 
+                                                         "t_biome", "fw_realm", "fw_biome", 
+                                                         "m_realm", "m_ocean", "m_biome", 
+                                                         "units", "method")) %>%
+                                         dplyr::distinct(.data$id, .keep_all = TRUE), 
                                      timename = "year")
+                     
     )
-    
     return(data_LPI)
 }

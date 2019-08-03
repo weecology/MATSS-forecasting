@@ -33,7 +33,7 @@ ranfor_ts <- function(timeseries, num_ahead = 5, level = 95)
         
         # we assume that the `observed`` portion of the time series immediately 
         #   follows the `training` portion of the time series
-        newdata <- tail(training, n = 5)
+        newdata <- utils::tail(training, n = 5)
         predicted <- numeric(length(observed))
         
         # make 1-step ahead forecasts and propagate those values to make 
@@ -41,7 +41,7 @@ ranfor_ts <- function(timeseries, num_ahead = 5, level = 95)
         for (i in seq_along(observed))
         {
             predicted[i] <- randomForest:::predict.randomForest(ranfor_model, newdata = newdata)
-            newdata <- c(tail(newdata, n = -1), predicted[i])
+            newdata <- c(utils::tail(newdata, n = -1), predicted[i])
         }
         
         # return

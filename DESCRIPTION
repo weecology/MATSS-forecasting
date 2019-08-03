@@ -19,6 +19,7 @@ LazyData: true
 Imports: 
     MATSS (>= 0.1.0),
     magrittr,
+    rlang, 
     forecast,
     drake (>= 7.4.0),
     readr,

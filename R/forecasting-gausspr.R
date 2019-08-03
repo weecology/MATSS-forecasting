@@ -34,10 +34,7 @@ gausspr_ts <- function(timeseries, num_ahead = 5, level = 95,
         )
 
         # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+        return_forecasts(observed, forecasts, level)
     }
 
     forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,

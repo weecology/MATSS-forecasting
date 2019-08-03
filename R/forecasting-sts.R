@@ -17,7 +17,7 @@ sts_ts <- function(timeseries, num_ahead = 5, level = 95, frequency = 1)
     f <- function(training, observed, level, frequency)
     {
         # make forecasts
-        ts_model <- stats::StructTS(ts(training, frequency = frequency))
+        ts_model <- stats::StructTS(stats::ts(training, frequency = frequency))
         forecasts <- forecast::forecast(ts_model, NROW(observed), level = level)
         
         # return

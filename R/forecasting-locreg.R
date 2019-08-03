@@ -32,26 +32,23 @@ locreg_ts <- function(timeseries, num_ahead = 5, level = 95,
         }
         model_matrix <- params %>%
             dplyr::mutate(mse = purrr::pmap_dbl(., locmse)) %>%
-            dplyr::arrange(mse)
-
+            dplyr::arrange(.data$mse)
+        
         # select best model
         locreg <- locfit::locfit(training ~ locfit::lp(t,
                                                        nn = model_matrix$nn[1],
                                                        deg = model_matrix$deg[1]))
-
+        
         # predict function requires a new list of predictor variables as newdata
         t_observed <- length(training) + seq_len(length(observed))
         forecasts <- locfit:::predict.locfit(locreg,
                                              newdata = list(t = t_observed),
                                              se.fit = TRUE)
-
+        
         # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+        return_forecasts(observed, forecasts, level)
     }
-
+    
     forecast_iterated(fun = f, timeseries = timeseries, num_ahead = num_ahead,
-                   level = level, nn = nn, deg = deg)
+                      level = level, nn = nn, deg = deg)
 }

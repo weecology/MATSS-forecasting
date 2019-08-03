@@ -33,12 +33,12 @@
 #'   a column named `predicted`). Other columns are optional, and may be 
 #'   specific to the forecasting method.
 #' @param timeseries the time series to forecast
-#' @param hindcast_selection the method for determining # of hindcasts
+#' @param hindcast_method the method for determining # of hindcasts
 #' @param pred_frac the fraction of points at the end of the time series to 
 #'   forecast
 #' @param last_n the number of points at the end of the time series to
 #'   forecast
-#' @param from_start the index of the point of the time series at which to 
+#' @param pred_start the index of the point of the time series at which to 
 #'   begin forecasts
 #' @param ... arguments to pass to `fun`
 #'
@@ -174,3 +174,11 @@ compute_hindcast_method <- function(ts_length,
     )
 }
 
+#' @noRd
+return_forecasts <- function(observed, forecasts, level = 95)
+{
+    data.frame(observed = as.numeric(observed),
+               predicted = as.numeric(forecasts$fit),
+               lower_CI = as.numeric(stats::qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
+               upper_CI = as.numeric(stats::qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+}

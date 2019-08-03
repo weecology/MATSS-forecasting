@@ -19,18 +19,18 @@ specific to the forecasting method.}
 
 \item{timeseries}{the time series to forecast}
 
+\item{hindcast_method}{the method for determining # of hindcasts}
+
 \item{pred_frac}{the fraction of points at the end of the time series to
 forecast}
 
 \item{last_n}{the number of points at the end of the time series to
 forecast}
 
-\item{...}{arguments to pass to \code{fun}}
-
-\item{hindcast_selection}{the method for determining # of hindcasts}
-
-\item{from_start}{the index of the point of the time series at which to
+\item{pred_start}{the index of the point of the time series at which to
 begin forecasts}
+
+\item{...}{arguments to pass to \code{fun}}
 }
 \value{
 a data.frame of the observed and predicted values, with any other

@@ -32,14 +32,11 @@ marss_ts <- function(timeseries, num_ahead = 5, level = 95, drift = TRUE,
             drift_dev <- seq_along(observed) * as.vector(model_param_U)
         }
         
-        forecasts <- data.frame(fit = tail(marss_model$states[1, ], n = 1) + drift_dev, 
+        forecasts <- data.frame(fit = utils::tail(marss_model$states[1, ], n = 1) + drift_dev, 
                                 se.fit = sqrt(seq_along(observed) * as.vector(marss_model$par$Q)))
         
         # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+        return_forecasts(observed, forecasts, level)
     }
     
     if (!drift) # override any default model setting
@@ -77,14 +74,11 @@ marss_rw_one_step <- function(timeseries, level = 95, drift = TRUE, silent = TRU
             drift_dev <- as.vector(model_param_U)
         }
         
-        forecasts <- data.frame(fit = tail(marss_model$states[1, ], n = 1) + drift_dev, 
+        forecasts <- data.frame(fit = utils::tail(marss_model$states[1, ], n = 1) + drift_dev, 
                                 se.fit = sqrt(as.vector(marss_model$par$Q)))
         
         # return
-        data.frame(observed = as.numeric(observed),
-                   predicted = as.numeric(forecasts$fit),
-                   lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-                   upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+        return_forecasts(observed, forecasts, level)
     }
     
     if (!drift) # override any default model setting

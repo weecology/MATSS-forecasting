@@ -11,8 +11,8 @@
 get_ward_data <- function(database_name, ward_RDS_file)
 {
     readRDS(ward_RDS_file) %>%
-        dplyr::filter(database == database_name) %>%
-        dplyr::pull(dataset) %>%
+        dplyr::filter(.data$database == database_name) %>%
+        dplyr::pull(.data$dataset) %>%
         dplyr::first()
 }
 
@@ -42,19 +42,19 @@ reshape_ward_data <- function(data_file = system.file("extdata", "processed_data
     reshape_data <- function(df)
     {
         temp_data <- df %>%
-            dplyr::select(id, year, species, class, value) %>%
-            dplyr::mutate(year = ifelse(year < 1800, year + 1900, year))
+            dplyr::select(c("id", "year", "species", "class", "value")) %>%
+            dplyr::mutate(year = ifelse(.data$year < 1800, .data$year + 1900, .data$year))
         
         species_table <- temp_data %>%
-            dplyr::select(id, species, class) %>%
+            dplyr::select(c("id", "species", "class")) %>%
             dplyr::distinct()
         
         temp_data <- temp_data %>%
-            dplyr::select(id, year, value) %>%
-            tidyr::spread(id, value)
+            dplyr::select(c("id", "year", "value")) %>%
+            tidyr::spread(.data$id, .data$value)
         
-        covariates <- dplyr::select(temp_data, year)
-        abundance <- dplyr::select(temp_data, -year)
+        covariates <- dplyr::select(temp_data, .data$year)
+        abundance <- dplyr::select(temp_data, -.data$year)
         
         list(abundance = abundance,
              covariates = covariates,
@@ -63,15 +63,15 @@ reshape_ward_data <- function(data_file = system.file("extdata", "processed_data
     
     dat <- dat %>%
         dplyr::rename_all(tolower) %>%
-        dplyr::group_by(database) %>% # split datasets by source
+        dplyr::group_by(.data$database) %>% # split datasets by source
         tidyr::nest() %>%
-        dplyr::mutate(dataset = purrr::map(data, reshape_data)) %>% # reshape int common data format
-        dplyr::select(database, dataset) %>%
-        dplyr::mutate(database = sub("\\.", "_", database))
+        dplyr::mutate(dataset = purrr::map(.data$data, reshape_data)) %>% # reshape int common data format
+        dplyr::select(c("database", "dataset")) %>%
+        dplyr::mutate(database = sub("\\.", "_", .data$database))
     
     ## save resulting tibble
     saveRDS(dat, file = ward_RDS_file)
     
     ## return names of databases
-    return(dplyr::pull(dat, database))
+    return(dplyr::pull(dat, .data$database))
 }

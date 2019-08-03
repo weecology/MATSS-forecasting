@@ -125,8 +125,5 @@ edm_forecast_loop <- function(training, observed, level = 95, silent,
     }
     
     # return
-    data.frame(observed = as.numeric(observed),
-               predicted = as.numeric(forecasts$fit),
-               lower_CI = as.numeric(qnorm(0.5 - level/200, forecasts$fit, forecasts$se.fit)),
-               upper_CI = as.numeric(qnorm(0.5 + level/200, forecasts$fit, forecasts$se.fit)))
+    return_forecasts(observed, forecasts, level)
 }
