@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Forecase using a random walk model — randomwalk_ts • MATSSforecasting</title>
+<title>Forecast using a random walk model — randomwalk_ts • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,13 @@
 
 
 
-<meta property="og:title" content="Forecase using a random walk model — randomwalk_ts" />
+<meta property="og:title" content="Forecast using a random walk model — randomwalk_ts" />
 
-<meta property="og:description" content="Fits a random walk model using rwf" />
+<meta property="og:description" content="randomwalk_ts fits a random walk model using
+rwf
+randomwalk_one_step uses rwf to fit a
+random walk model (with or without drift) and make a single one-step
+forecast." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,18 +106,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Forecase using a random walk model</h1>
+    <h1>Forecast using a random walk model</h1>
     <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-random-walk.R'><code>R/forecasting-random-walk.R</code></a></small>
     <div class="hidden name"><code>randomwalk_ts.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fits a random walk model using <code><a href='https://www.rdocumentation.org/packages/forecast/topics/naive'>rwf</a></code></p>
+    <p><code>randomwalk_ts</code> fits a random walk model using
+<code><a href='https://www.rdocumentation.org/packages/forecast/topics/naive'>rwf</a></code></p>
+<p><code>randomwalk_one_step</code> uses <code><a href='https://www.rdocumentation.org/packages/forecast/topics/naive'>rwf</a></code> to fit a
+random walk model (with or without drift) and make a single one-step
+forecast.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>randomwalk_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>randomwalk_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>randomwalk_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

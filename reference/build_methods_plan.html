@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make forecasts using a state space model — marss_ts • MATSSforecasting</title>
+<title>Make a drake plan with forecasting methods to be compared — build_methods_plan • MATSSforecasting</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,13 @@
 
 
 
-<meta property="og:title" content="Make forecasts using a state space model — marss_ts" />
+<meta property="og:title" content="Make a drake plan with forecasting methods to be compared — build_methods_plan" />
 
-<meta property="og:description" content="Fit a state-space model using MARSS and
-make forecasts.
-marss_rw_one_step uses MARSS to fit a
-state-space model and make a single one-step forecast." />
+<meta property="og:description" content="We list out the different forecasting methods (and the parameter
+settings we wish to try) in the form of a drake plan. Note the use of
+analysis_wrapper that takes a function that operates on
+a single time series, and wraps it to run on each time series within a
+dataset." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,63 +106,32 @@ state-space model and make a single one-step forecast." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make forecasts using a state space model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/forecasting-marss.R'><code>R/forecasting-marss.R</code></a></small>
-    <div class="hidden name"><code>marss_ts.Rd</code></div>
+    <h1>Make a drake plan with forecasting methods to be compared</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/build_plans.R'><code>R/build_plans.R</code></a></small>
+    <div class="hidden name"><code>build_methods_plan.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fit a state-space model using <code><a href='https://www.rdocumentation.org/packages/MARSS/topics/MARSS'>MARSS</a></code> and
-make forecasts.</p>
-<p><code>marss_rw_one_step</code> uses <code><a href='https://www.rdocumentation.org/packages/MARSS/topics/MARSS'>MARSS</a></code> to fit a
-state-space model and make a single one-step forecast.</p>
+    <p>We list out the different forecasting methods (and the parameter
+settings we wish to try) in the form of a drake plan. Note the use of
+<code><a href='https://www.rdocumentation.org/packages/MATSS/topics/analysis_wrapper'>analysis_wrapper</a></code> that takes a function that operates on
+a single time series, and wraps it to run on each time series within a
+dataset.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>marss_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>marss_rw_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>drift</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>timeseries</th>
-      <td><p>the time series to forecast</p></td>
-    </tr>
-    <tr>
-      <th>num_ahead</th>
-      <td><p>the number of points at the end of the time series to
-forecast</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>Confidence level for prediction intervals.</p></td>
-    </tr>
-    <tr>
-      <th>drift</th>
-      <td><p>whether the state-space model should include drift or not</p></td>
-    </tr>
-    <tr>
-      <th>silent</th>
-      <td><p>TRUE/FALSE Suppresses printing of full error messages, warnings, progress bars and convergence information. Setting silent=2 will produce more verbose error messages and progress information.</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>build_methods_plan</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of the mean forecasts, the observed values, and the
-lower and upper CI levels (if an error occurs, then just NA values)</p>
+    <p>a drake plan (i.e. a tibble) with the forecasting methods.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
           </ul>

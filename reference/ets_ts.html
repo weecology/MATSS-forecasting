@@ -34,7 +34,10 @@
 
 <meta property="og:description" content="Fit a time series model using ets and
 make forecasts. The frequency of the data is set a priori, as opposed to
-estimating the parameter from the data." />
+estimating the parameter from the data.
+ets_one_step uses ets to fit an
+exponential-smoothing time series model and make a single one-step
+forecast." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,10 +117,15 @@ estimating the parameter from the data." />
     <p>Fit a time series model using <code><a href='https://www.rdocumentation.org/packages/forecast/topics/ets'>ets</a></code> and
 make forecasts. The frequency of the data is set a priori, as opposed to
 estimating the parameter from the data.</p>
+<p><code>ets_one_step</code> uses <code><a href='https://www.rdocumentation.org/packages/forecast/topics/ets'>ets</a></code> to fit an
+exponential-smoothing time series model and make a single one-step
+forecast.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>ets_ts</span>(<span class='no'>timeseries</span>, <span class='kw'>num_ahead</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='fu'>ets_one_step</span>(<span class='no'>timeseries</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
