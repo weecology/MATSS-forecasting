@@ -12,9 +12,9 @@ test_that("marss_ts function works", {
                      known_hash = "c7a47fabf3")
 })
 
-test_that("marss_ts function works without drift", {
-    expect_error(output <- marss_ts(Nile[1:30], drift = FALSE), NA)
-    expect_forecasts(round(output, 2), c("observed", "predicted", "lower_CI", "upper_CI"), 
-                     known_hash = "d8d87aaa9e")
-})
+# test_that("marss_ts function works without drift", {
+#     expect_error(output <- marss_ts(Nile[1:30], drift = FALSE), NA)
+#     expect_forecasts(round(output, 2), c("observed", "predicted", "lower_CI", "upper_CI"), 
+#                      known_hash = "d8d87aaa9e")
+# })
 
