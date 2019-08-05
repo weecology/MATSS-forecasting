@@ -14,7 +14,7 @@ test_that("marss_ts function works", {
 
 test_that("marss_ts function works without drift", {
     expect_error(output <- marss_ts(Nile[1:30], drift = FALSE), NA)
-    expect_forecasts(round(output, 4), c("observed", "predicted", "lower_CI", "upper_CI"), 
-                     known_hash = "efa4d38b20")
+    expect_forecasts(round(output, 2), c("observed", "predicted", "lower_CI", "upper_CI"), 
+                     known_hash = "d8d87aaa9e")
 })
 
