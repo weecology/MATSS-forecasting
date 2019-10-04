@@ -1,36 +1,44 @@
-
-
-#' Check time series for some important features
+#' @name Check time series for potentially problematic features
 #'
-#' @param x A time series of real numbers.
+#' @description Some of the analysis methods have issues handling NA values, duplicated 
+#' values or consecutive segments of identical values. This function spits out 
+#' some warnings on those.
+#'
+#' @param x A time series of real numbers, represented as a numeric or integer 
+#'   vector.
 #' @return nothing
+#' 
 #' @examples
 #' x <- rnorm(1000)
-#' 
-Check_time_series <- function(x) {
+#' @export
+check_time_series <- function(x)
+{
   n <- length(x)
-  print("Warning: Many time series analysis methods assume equally spaced time series, please be careful!")
-  if(any(is.na(x)))
+  message("Many time series analysis methods assume equally spaced time series, please be careful!")
+  if (any(is.na(x)))
     warning("Your time series contains some NAs. Be careful, as some analyses / functions deal well with NAs, and some don't.")
-  if(any(duplicated(x)))
+  if (any(duplicated(x)))
     warning("Your time series contains some identical values, if there are many, and if they appear consecutively, this could cause problems.")
-  if( sum( (x[1:(n-1)] - x[2:n] )==0) > 0)
+  if ( sum( (x[1:(n-1)] - x[2:n] ) == 0) > 0)
     warning("Your time series has some identical consecutive values; this could cause problems.")
   ## check for long series of zeros (same values?)
-  NULL
+  invisible(NULL)
 }
 
 
-
-#' Check time series for some important features
+#' Embed a time series
 #'
 #' @param x the time series, observed at regular intervals.
 #' @param m the number of dimensions to embed x into.
 #' @param d the time delay
-#' @param as.embed: logical; should we return the embedded time series in the order that embed() would?
-#' @return data.frame of embedings
-#' 
-embedd <- function(x, m, d = 1, indices = FALSE, as.embed = TRUE) {
+#' @param as.matrix: logical; whether to convert a 1-dimensional embedding to a 
+#'   column matrix 
+#' @param as.embed: logical; should we return the embedded time series in the 
+#'   order that embed() would?
+#' @return matrix of the embedded time series
+#' @export
+embedd <- function(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
+{
   n <- length(x) - (m-1)*d
   X <- seq_along(x)
   if(n <= 0)
@@ -38,7 +46,7 @@ embedd <- function(x, m, d = 1, indices = FALSE, as.embed = TRUE) {
   out <- matrix(rep(X[seq_len(n)], m), ncol = m)
   out[,-1] <- out[,-1, drop = FALSE] + rep(seq_len(m - 1) * d, each = nrow(out))
   if(as.embed)
-    out <- out[, seq_len(ncol(out))]
+    out <- out[, rev(seq_len(ncol(out)))]
   if(!indices)
     out <- matrix(x[out], ncol = m)
   out
@@ -47,9 +55,9 @@ embedd <- function(x, m, d = 1, indices = FALSE, as.embed = TRUE) {
 
 # calculate the entropy in bits
 entropy <- function(wd){
-
--sum(wd * log2(wd))
-
+  
+  -sum(wd * log2(wd))
+  
 }
 
 
@@ -111,6 +119,7 @@ weighted_word_distribution <- function(x_emb, tie_method) {
 #' x <- rnorm(1000)
 #' wd <- word_distribution(x, 3, 1, order)
 #' PE(wd)
+#' @export
 PE <- function(x, weighted, word_length, tau, tie_method, noise_amount=NA) {
   
   ## check if the time series contains all very very similar values

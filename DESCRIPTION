@@ -1,53 +1,50 @@
 Package: MATSSforecasting
 Title: Analysis and Synthesis of Forecasting Ecological Time Series
 Version: 0.1.2
-Authors@R: c(
-                person("Hao", "Ye", role = c("aut", "cre"), 
-                       email = "hao.ye@weecology.org",
-                       comment = c(ORCID = "0000-0002-8630-1458")), 
-                person("Frank", "Pennekamp", role = c("aut"), 
-                       email = "Frank.Pennekamp@ieu.uzh.ch",
-                       comment = c(ORCID = "0000-0003-0679-1045"))
-           )
-Description: This project investigates different approaches to forecasting ecological time series. It implements multiple methods to forecasting single time series, as well as metrics of time series complexity, with the goal of synthesizing the results to provide guidance on forecasting methods.
+Authors@R: 
+    c(person(given = "Hao",
+             family = "Ye",
+             role = c("aut", "cre"),
+             email = "hao.ye@weecology.org",
+             comment = c(ORCID = "0000-0002-8630-1458")),
+      person(given = "Frank",
+             family = "Pennekamp",
+             role = "aut",
+             email = "Frank.Pennekamp@ieu.uzh.ch",
+             comment = c(ORCID = "0000-0003-0679-1045")))
+Description: This project investigates different approaches to forecasting
+    ecological time series. It implements multiple methods to forecasting
+    single time series, as well as metrics of time series complexity, with
+    the goal of synthesizing the results to provide guidance on
+    forecasting methods.
 License: MIT + file LICENSE
-URL: https://github.com/ha0ye/MATSS-forecasting, https://ha0ye.github.io/MATSS-forecasting/
+URL: https://github.com/ha0ye/MATSS-forecasting,
+    https://ha0ye.github.io/MATSS-forecasting/
 BugReports: https://github.com/ha0ye/MATSS-forecasting/issues
+Imports: 
+    dplyr,
+    drake (>= 7.4.0),
+    forecast,
+    here,
+    kernlab,
+    locfit,
+    magrittr
+Suggests:
+    covr,
+    knitr,
+    networkD3,
+    pkgdown,
+    rmarkdown,
+    testthat,
+    visNetwork
+VignetteBuilder: 
+    knitr
+Remotes:
+    ha0ye/rEDM,
+    ha0ye/rlpi,
+    weecology/MATSS
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    MATSS (>= 0.1.0),
-    magrittr,
-    rlang, 
-    forecast,
-    drake (>= 7.4.0),
-    readr,
-    dplyr,
-    tidyr,
-    purrr,
-    here,
-    mgcv,
-    tsDyn,
-    locfit,
-    np,
-    kernlab,
-    randomForest,
-    MARSS,
-    rEDM (>= 0.7.4),
-    rlpi (>= 0.1.0)
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown,
-    pkgdown,
-    covr, 
-    networkD3, 
-    visNetwork
-Remotes:
-    weecology/MATSS,
-    ha0ye/rEDM,
-    ha0ye/rlpi
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
