@@ -38,7 +38,10 @@ Imports:
     randomForest,
     readr,
     rEDM (>= 0.7.4),
-    rlang
+    rlang,
+    rlpi (>= 0.1.0),
+    tidyr,
+    tsDyn
 Suggests:
     covr,
     knitr,

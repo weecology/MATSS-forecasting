@@ -2,34 +2,32 @@
 % Please edit documentation in R/pe_code.R
 \name{word_distribution}
 \alias{word_distribution}
-\title{Get the unweighted distribution of "word"s in a time series.}
+\alias{weighted_word_distribution}
+\title{#' Weighted distribution of "word"s in a time series.
+#'
+#' @param x A time series of real numbers.
+#' @param word_length The word length, also known as the permutation order.
+#' @param tau Time lag (not implemented).
+#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
+#' function of the base package. Use "average" to treat ties as the same value,
+#' "first" to treat ties as different with first value being treated as larger than second,
+#' "last" to treat ties as different with last value being treated as larger than second,
+#' "random" to give ties random rank,
+#' "noise" to add some noise to the time series to break ties.
+#' @param noise_amount How much noise to add to the time series; only used for method "noise".
+#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
+#'  @return The word distribution.}
 \usage{
-word_distribution(x_emb, tie_method)
+word_distribution(x_emb, ties.method = "first", weighted = TRUE)
+
+weighted_word_distribution(x_emb, ties.method)
 }
 \arguments{
-\item{tie_method}{The method for dealing with tied values; these are the methods used by the rank()
-function of the base package. Use "average" to treat ties as the same value,
-"first" to treat ties as different with first value being treated as larger than second,
-"last" to treat ties as different with last value being treated as larger than second,
-"random" to give ties random rank.
-@return The word distribution.}
-
-\item{x}{A time series of real numbers.}
-
-\item{word_length}{The word length, also known as the permutation order.}
-
-\item{tau}{Time lag (not implemented).}
+\item{x_emb}{A time series of real numbers.}
+}
+\value{
+a table of the word distribution
 }
 \description{
-Get the unweighted distribution of "word"s in a time series.
-}
-\examples{
-\dontrun{
-x <- rnorm(1000)
-word_distribution(x, 3, 1, order)
-word_distribution <- function(x_emb, tie_method) {
-  words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method=tie_method)), collapse="-"))
-  table(words)/nrow(x_emb)
-}
-}
+Compute the distribution of "word"s in a time series.
 }

@@ -36,14 +36,14 @@ check_time_series <- function(x)
 #' @param x the time series, observed at regular intervals.
 #' @param m the number of dimensions to embed x into.
 #' @param d the time delay
-#' @param as.matrix logical; whether to convert a 1-dimensional embedding to a 
-#'   column matrix 
+#' @param indices logical; whether to return the raw values or the time series 
+#'   indices
 #' @param as.embed logical; should we return the embedded time series in the 
 #'   order that embed() would?
 #' @return matrix of the embedded time series
 #' 
 #' @export
-embedd <- function(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
+embedd <- function(x, m, d = 1, indices = FALSE, as.embed = FALSE)
 {
   n <- length(x) - (m - 1)*d
   X <- seq_along(x)
@@ -53,7 +53,7 @@ embedd <- function(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
   out[,-1] <- out[,-1, drop = FALSE] + rep(seq_len(m - 1) * d, each = nrow(out))
   if (as.embed)
     out <- out[, rev(seq_len(ncol(out)))]
-  if (!as.matrix)
+  if (!indices)
     out <- matrix(x[out], ncol = m)
   out
 }
@@ -68,53 +68,50 @@ entropy <- function(wd)
   -sum(wd * log2(wd))
 }
 
-#' Get the unweighted distribution of "word"s in a time series.
+#' #' Weighted distribution of "word"s in a time series.
+#' #' 
+#' #' @param x A time series of real numbers.
+#' #' @param word_length The word length, also known as the permutation order.
+#' #' @param tau Time lag (not implemented).
+#' #' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
+#' #' function of the base package. Use "average" to treat ties as the same value,
+#' #' "first" to treat ties as different with first value being treated as larger than second,
+#' #' "last" to treat ties as different with last value being treated as larger than second,
+#' #' "random" to give ties random rank,
+#' #' "noise" to add some noise to the time series to break ties.
+#' #' @param noise_amount How much noise to add to the time series; only used for method "noise".
+#' #' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
+#' #'  @return The word distribution.
+#' 
+
+#' Compute the distribution of "word"s in a time series.
+#' @aliases weighted_word_distribution
 #'
-#' @param x A time series of real numbers.
-#' @param word_length The word length, also known as the permutation order.
-#' @param tau Time lag (not implemented).
-#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
-#' function of the base package. Use "average" to treat ties as the same value,
-#' "first" to treat ties as different with first value being treated as larger than second,
-#' "last" to treat ties as different with last value being treated as larger than second,
-#' "random" to give ties random rank.
-#'  @return The word distribution.
-#' @examples
-#' \dontrun{
-#' x <- rnorm(1000)
-#' word_distribution(x, 3, 1, order)
-#' word_distribution <- function(x_emb, tie_method) {
-#'   words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method=tie_method)), collapse="-"))
-#'   table(words)/nrow(x_emb)
-#' }
-#' }
-word_distribution <- function(x_emb, tie_method)
+#' @param x_emb A time series of real numbers.
+#' @inheritParams rank
+#' @weighted whether to weight by the variance in each word
+#' @return a table of the word distribution
+#' @export
+
+word_distribution <- function(x_emb, ties.method = "first", weighted = TRUE)
 {
-  words <-  unlist(lapply(lapply(1:nrow(x_emb), function(x) (rev(rank(-x_emb[x,])))), paste, collapse="-"))
-  table(words)/nrow(x_emb)
+  words <- apply(x_emb, 1, 
+                 function(x) paste(rev(rank(x, ties.method = ties.method)), collapse = "-"))
+  if (weighted)
+  {
+    weights <- apply(x_emb, 1, function(x) var(x))
+    return(aggregate(weights, list(words), sum)$x / sum(weights))
+  } else {
+    return(table(words)/nrow(x_emb))
+  }
 }
 
-
-#' Weighted distribution of "word"s in a time series.
-#'
-#' @param x A time series of real numbers.
-#' @param word_length The word length, also known as the permutation order.
-#' @param tau Time lag (not implemented).
-#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
-#' function of the base package. Use "average" to treat ties as the same value,
-#' "first" to treat ties as different with first value being treated as larger than second,
-#' "last" to treat ties as different with last value being treated as larger than second,
-#' "random" to give ties random rank,
-#' "noise" to add some noise to the time series to break ties.
-#' @param noise_amount How much noise to add to the time series; only used for method "noise".
-#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
-#'  @return The word distribution.
-weighted_word_distribution <- function(x_emb, tie_method) {
-  words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method = tie_method)), collapse="-"))
-  weights <- apply(x_emb, 1, function(x) var(x))
-  aggregate(weights, list(words), sum)$x / sum(weights)
-  
+#' @rdname word_distribution
+weighted_word_distribution <- function(x_emb, ties.method)
+{
+  word_distribution(x_emb = x_emb, ties.method = ties.method, weighted = TRUE)
 }
+
 
 
 #' Calculate the permuation entropy of a times series

@@ -31,6 +31,7 @@ python min_working_example.py
 ## Generate data
 
 ```{r}
+set.seed(42)
 nile <- as.numeric(Nile)
 ss_m <- as.numeric(sunspot.month)
 ss_y <- as.numeric(sunspot.year)

@@ -27,6 +27,7 @@ Hao Ye
 ## Generate data
 
 ``` r
+set.seed(42)
 nile <- as.numeric(Nile)
 ss_m <- as.numeric(sunspot.month)
 ss_y <- as.numeric(sunspot.year)
@@ -95,7 +96,7 @@ ts = np.vstack(np.asarray(r.test))
 ordinal_TSA.permutation_entropy(ts, dim = 3, step = 1, w = 1)
 ```
 
-    ## 0.91853440933503
+    ## 0.9972149151169224
 
 ``` r
 library(MATSSforecasting)
@@ -103,28 +104,28 @@ library(MATSSforecasting)
 PE(test, weighted = TRUE, tie_method = "first", word_length = 3, tau = 1)
 ```
 
-    ## [1] 0.9185344
+    ## [1] 0.9972149
 
 ``` r
 PE(test, weighted = TRUE, tie_method = "last", word_length = 3, tau = 1)
 ```
 
-    ## [1] 0.9250559
+    ## [1] 0.9974512
 
 ``` r
 PE(test, weighted = TRUE, tie_method = "average", word_length = 3, tau = 1)
 ```
 
-    ## [1] 0.6920717
+    ## [1] 0.7453637
 
 ``` r
 PE(test, weighted = TRUE, tie_method = "random", word_length = 3, tau = 1)
 ```
 
-    ## [1] 0.9253468
+    ## [1] 0.9972529
 
 ``` r
 PE(test, weighted = TRUE, tie_method = "noise", word_length = 3, tau = 1, noise_amount = 5)
 ```
 
-    ## [1] 0.6670181
+    ## [1] 0.7193993

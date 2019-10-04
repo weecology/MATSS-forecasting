@@ -4,7 +4,7 @@
 \alias{embedd}
 \title{Embed a time series}
 \usage{
-embedd(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
+embedd(x, m, d = 1, indices = FALSE, as.embed = FALSE)
 }
 \arguments{
 \item{x}{the time series, observed at regular intervals.}
@@ -13,8 +13,8 @@ embedd(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
 
 \item{d}{the time delay}
 
-\item{as.matrix}{logical; whether to convert a 1-dimensional embedding to a
-column matrix}
+\item{indices}{logical; whether to return the raw values or the time series
+indices}
 
 \item{as.embed}{logical; should we return the embedded time series in the
 order that embed() would?}
