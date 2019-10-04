@@ -27,7 +27,3 @@ Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1)
 \description{
 Weighted distribution of "word"s in a time series.
 }
-\examples{
-x <- rnorm(1000)
-word_distribution(x, 3, 1, order)
-}

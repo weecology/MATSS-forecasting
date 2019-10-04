@@ -20,6 +20,5 @@ Words containing NAs are ignored.
 }
 \examples{
 x <- rnorm(1000)
-wd <- word_distribution(x, 3, 1, order)
-PE(wd)
+PE(x, TRUE, 3, 1, "first")
 }

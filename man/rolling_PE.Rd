@@ -19,8 +19,3 @@ Entropy of a distribution of counts.
 \details{
 Words containing NAs are ignored.
 }
-\examples{
-x <- rnorm(1000)
-wd <- word_distribution(x, 3, 1, order)
-PE(wd)
-}

@@ -13,3 +13,5 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^.drake
+^.lintr$
+^.pre-commit-config.yaml$

@@ -1,5 +1,4 @@
-#' @name Check time series for potentially problematic features
-#'
+#' @title Check time series for potentially problematic features
 #' @description Some of the analysis methods have issues handling NA values, duplicated 
 #' values or consecutive segments of identical values. This function spits out 
 #' some warnings on those.
@@ -9,57 +8,65 @@
 #' @return nothing
 #' 
 #' @examples
-#' x <- rnorm(1000)
+#' check_time_series(Nile)
+#' 
 #' @export
 check_time_series <- function(x)
 {
   n <- length(x)
-  message("Many time series analysis methods assume equally spaced time series, please be careful!")
+  message("Many analysis methods assume equally spaced time series", 
+          ", please be careful!")
   if (any(is.na(x)))
-    warning("Your time series contains some NAs. Be careful, as some analyses / functions deal well with NAs, and some don't.")
+    warning("Your time series contains some NAs. Be careful, as some analyses ", 
+            "/ functions deal well with NAs, and some don't.")
   if (any(duplicated(x)))
-    warning("Your time series contains some identical values, if there are many, and if they appear consecutively, this could cause problems.")
+    warning("Your time series contain identical values, if there are many, ", 
+            "and if they appear consecutively, this could cause problems.")
   if ( sum( (x[1:(n-1)] - x[2:n] ) == 0) > 0)
-    warning("Your time series has some identical consecutive values; this could cause problems.")
+    warning("Your time series has some identical consecutive values; ", 
+            "this could cause problems.")
   ## check for long series of zeros (same values?)
   invisible(NULL)
 }
 
-
-#' Embed a time series
+#' @title Embed a time series
+#' @description Construct a time-delay embedding of an input time series, 
+#'   returning a matrix
 #'
 #' @param x the time series, observed at regular intervals.
 #' @param m the number of dimensions to embed x into.
 #' @param d the time delay
-#' @param as.matrix: logical; whether to convert a 1-dimensional embedding to a 
+#' @param as.matrix logical; whether to convert a 1-dimensional embedding to a 
 #'   column matrix 
-#' @param as.embed: logical; should we return the embedded time series in the 
+#' @param as.embed logical; should we return the embedded time series in the 
 #'   order that embed() would?
 #' @return matrix of the embedded time series
+#' 
 #' @export
 embedd <- function(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
 {
-  n <- length(x) - (m-1)*d
+  n <- length(x) - (m - 1)*d
   X <- seq_along(x)
-  if(n <= 0)
+  if (n <= 0)
     stop("Insufficient observations for the requested embedding")
   out <- matrix(rep(X[seq_len(n)], m), ncol = m)
   out[,-1] <- out[,-1, drop = FALSE] + rep(seq_len(m - 1) * d, each = nrow(out))
-  if(as.embed)
+  if (as.embed)
     out <- out[, rev(seq_len(ncol(out)))]
-  if(!indices)
+  if (!as.matrix)
     out <- matrix(x[out], ncol = m)
   out
 }
 
-
-# calculate the entropy in bits
-entropy <- function(wd){
-  
+#' @name Compute Shannon entropy
+#' @description Calculate the entropy (in bits) for a vector of word frequencies
+#' 
+#' @param wd the distribution of word frequencies
+#' @return a numeric value
+entropy <- function(wd)
+{
   -sum(wd * log2(wd))
-  
 }
-
 
 #' Get the unweighted distribution of "word"s in a time series.
 #'
@@ -73,13 +80,16 @@ entropy <- function(wd){
 #' "random" to give ties random rank.
 #'  @return The word distribution.
 #' @examples
+#' \dontrun{
 #' x <- rnorm(1000)
 #' word_distribution(x, 3, 1, order)
-# word_distribution <- function(x_emb, tie_method) {
-#   words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method=tie_method)), collapse="-"))
-#   table(words)/nrow(x_emb)
-# }
-word_distribution <- function(x_emb, tie_method) {
+#' word_distribution <- function(x_emb, tie_method) {
+#'   words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method=tie_method)), collapse="-"))
+#'   table(words)/nrow(x_emb)
+#' }
+#' }
+word_distribution <- function(x_emb, tie_method)
+{
   words <-  unlist(lapply(lapply(1:nrow(x_emb), function(x) (rev(rank(-x_emb[x,])))), paste, collapse="-"))
   table(words)/nrow(x_emb)
 }
@@ -99,9 +109,6 @@ word_distribution <- function(x_emb, tie_method) {
 #' @param noise_amount How much noise to add to the time series; only used for method "noise".
 #' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
 #'  @return The word distribution.
-#' @examples
-#' x <- rnorm(1000)
-#' word_distribution(x, 3, 1, order)
 weighted_word_distribution <- function(x_emb, tie_method) {
   words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method = tie_method)), collapse="-"))
   weights <- apply(x_emb, 1, function(x) var(x))
@@ -117,8 +124,7 @@ weighted_word_distribution <- function(x_emb, tie_method) {
 #' @details Words containing NAs are ignored.
 #' @examples
 #' x <- rnorm(1000)
-#' wd <- word_distribution(x, 3, 1, order)
-#' PE(wd)
+#' PE(x, TRUE, 3, 1, "first")
 #' @export
 PE <- function(x, weighted, word_length, tau, tie_method, noise_amount=NA) {
   
@@ -167,10 +173,6 @@ PE <- function(x, weighted, word_length, tau, tie_method, noise_amount=NA) {
 #' @param wd The distribution of counts (e.g., of words).
 #' @return The entropy of the distribution.
 #' @details Words containing NAs are ignored.
-#' @examples
-#' x <- rnorm(1000)
-#' wd <- word_distribution(x, 3, 1, order)
-#' PE(wd)
 rolling_PE <- function(x, weighted, word_length, tau, tie_method, noise_amount=NA,
                        windowsize=10){
   

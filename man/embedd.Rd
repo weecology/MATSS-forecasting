@@ -13,15 +13,16 @@ embedd(x, m, d = 1, as.matrix = TRUE, as.embed = TRUE)
 
 \item{d}{the time delay}
 
-\item{as.matrix:}{logical; whether to convert a 1-dimensional embedding to a
+\item{as.matrix}{logical; whether to convert a 1-dimensional embedding to a
 column matrix}
 
-\item{as.embed:}{logical; should we return the embedded time series in the
+\item{as.embed}{logical; should we return the embedded time series in the
 order that embed() would?}
 }
 \value{
 matrix of the embedded time series
 }
 \description{
-Embed a time series
+Construct a time-delay embedding of an input time series,
+returning a matrix
 }

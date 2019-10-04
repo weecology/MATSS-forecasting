@@ -1,5 +1,6 @@
 Package: MATSSforecasting
-Title: Analysis and Synthesis of Forecasting Ecological Time Series
+Title: Analysis and Synthesis of Forecasting Ecological Time
+    Series
 Version: 0.1.2
 Authors@R: 
     c(person(given = "Hao",
@@ -12,11 +13,11 @@ Authors@R:
              role = "aut",
              email = "Frank.Pennekamp@ieu.uzh.ch",
              comment = c(ORCID = "0000-0003-0679-1045")))
-Description: This project investigates different approaches to forecasting
-    ecological time series. It implements multiple methods to forecasting
-    single time series, as well as metrics of time series complexity, with
-    the goal of synthesizing the results to provide guidance on
-    forecasting methods.
+Description: This project investigates different approaches to
+    forecasting ecological time series. It implements multiple methods to
+    forecasting single time series, as well as metrics of time series
+    complexity, with the goal of synthesizing the results to provide
+    guidance on forecasting methods.
 License: MIT + file LICENSE
 URL: https://github.com/ha0ye/MATSS-forecasting,
     https://ha0ye.github.io/MATSS-forecasting/
@@ -28,7 +29,8 @@ Imports:
     here,
     kernlab,
     locfit,
-    magrittr
+    magrittr,
+    rlang
 Suggests:
     covr,
     knitr,

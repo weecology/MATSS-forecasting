@@ -24,6 +24,12 @@ function of the base package. Use "average" to treat ties as the same value,
 Get the unweighted distribution of "word"s in a time series.
 }
 \examples{
+\dontrun{
 x <- rnorm(1000)
 word_distribution(x, 3, 1, order)
+word_distribution <- function(x_emb, tie_method) {
+  words <- apply(x_emb, 1, function(x) paste(rev(rank(x, ties.method=tie_method)), collapse="-"))
+  table(words)/nrow(x_emb)
+}
+}
 }
