@@ -4,6 +4,9 @@
     <loc>https://weecology.github.io/MATSS-forecasting/index.html</loc>
   </url>
   <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/PE.html</loc>
+  </url>
+  <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/arima_ts.html</loc>
   </url>
   <url>
@@ -16,7 +19,13 @@
     <loc>https://weecology.github.io/MATSS-forecasting/reference/build_ward_methods_plan.html</loc>
   </url>
   <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/check_time_series.html</loc>
+  </url>
+  <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/compute_subset_range.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/embedd.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/ets_ts.html</loc>
@@ -76,10 +85,19 @@
     <loc>https://weecology.github.io/MATSS-forecasting/reference/reshape_ward_data.html</loc>
   </url>
   <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/rolling_PE.html</loc>
+  </url>
+  <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/simplex_ts.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/reference/sts_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/weighted_word_distribution.html</loc>
+  </url>
+  <url>
+    <loc>https://weecology.github.io/MATSS-forecasting/reference/word_distribution.html</loc>
   </url>
   <url>
     <loc>https://weecology.github.io/MATSS-forecasting/articles/MATSSforecasting.html</loc>

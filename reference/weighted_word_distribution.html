@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reshape the processed data file from Ward et al. 2014 — reshape_ward_data • MATSSforecasting</title>
+<title>Weighted distribution of "word"s in a time series. — weighted_word_distribution • MATSSforecasting</title>
 
 
 <!-- jquery -->
@@ -35,13 +35,8 @@
 
 
 
-<meta property="og:title" content="Reshape the processed data file from Ward et al. 2014 — reshape_ward_data" />
-<meta property="og:description" content="The master data file from Ward et al. 2014 has 8 datasets
-combined together in long form. We do some preprocessing here to correct
-dates, shift all variable names to lowercase characters, and construct a
-separate data object for each dataset. The format follows that of MATSS
-(browse the data formats vignette) The resulting object has the names of
-the datasets and the data objects." />
+<meta property="og:title" content="Weighted distribution of "word"s in a time series. — weighted_word_distribution" />
+<meta property="og:description" content="Weighted distribution of &quot;word&quot;s in a time series." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,50 +108,55 @@ the datasets and the data objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reshape the processed data file from Ward et al. 2014</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/process-ward-data.R'><code>R/process-ward-data.R</code></a></small>
-    <div class="hidden name"><code>reshape_ward_data.Rd</code></div>
+    <h1>Weighted distribution of "word"s in a time series.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/pe_code.R'><code>R/pe_code.R</code></a></small>
+    <div class="hidden name"><code>weighted_word_distribution.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The master data file from Ward et al. 2014 has 8 datasets
-combined together in long form. We do some preprocessing here to correct
-dates, shift all variable names to lowercase characters, and construct a
-separate data object for each dataset. The format follows that of MATSS
-(browse the data formats vignette) The resulting object has the names of
-the datasets and the data objects.</p>
+    <p>Weighted distribution of "word"s in a time series.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reshape_ward_data</span>(<span class='kw'>data_file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"processed_data"</span>,
-  <span class='st'>"masterDat_2019-06-12.csv"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MATSSforecasting"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span>
-  <span class='fl'>TRUE</span>), <span class='kw'>ward_RDS_file</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span>(<span class='st'>"analysis"</span>, <span class='st'>"data"</span>,
-  <span class='st'>"ward_fish_data.RDS"</span>))</pre>
+    <pre class="usage"><span class='fu'>weighted_word_distribution</span>(<span class='no'>x_emb</span>, <span class='no'>tie_method</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data_file</th>
-      <td><p>the path to the raw CSV file from Ward et al. 2014. (The
-default is bundled with this package.)</p></td>
+      <th>tie_method</th>
+      <td><p>The method for dealing with tied values; these are the methods used by the rank()
+function of the base package. Use "average" to treat ties as the same value,
+"first" to treat ties as different with first value being treated as larger than second,
+"last" to treat ties as different with last value being treated as larger than second,
+"random" to give ties random rank,
+"noise" to add some noise to the time series to break ties.</p></td>
     </tr>
     <tr>
-      <th>ward_RDS_file</th>
-      <td><p>the location of the RDS file with the combined datasets
-that is produced as a result of running <code>reshape_ward_data</code></p></td>
+      <th>x</th>
+      <td><p>A time series of real numbers.</p></td>
+    </tr>
+    <tr>
+      <th>word_length</th>
+      <td><p>The word length, also known as the permutation order.</p></td>
+    </tr>
+    <tr>
+      <th>tau</th>
+      <td><p>Time lag (not implemented).</p></td>
+    </tr>
+    <tr>
+      <th>noise_amount</th>
+      <td><p>How much noise to add to the time series; only used for method "noise".
+Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
+@return The word distribution.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a character vector with the names of the database</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>
