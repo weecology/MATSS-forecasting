@@ -30,6 +30,14 @@ Imports:
     kernlab,
     locfit,
     magrittr,
+    MARSS,
+    MATSS (>= 0.1.0),
+    mgcv,
+    np,
+    purrr,
+    randomForest,
+    readr,
+    rEDM (>= 0.7.4),
     rlang
 Suggests:
     covr,
