@@ -6,20 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>#' Weighted distribution of "word"s in a time series.
-#'
-#' @param x A time series of real numbers.
-#' @param word_length The word length, also known as the permutation order.
-#' @param tau Time lag (not implemented).
-#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
-#' function of the base package. Use "average" to treat ties as the same value,
-#' "first" to treat ties as different with first value being treated as larger than second,
-#' "last" to treat ties as different with last value being treated as larger than second,
-#' "random" to give ties random rank,
-#' "noise" to add some noise to the time series to break ties.
-#' @param noise_amount How much noise to add to the time series; only used for method "noise".
-#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
-#'  @return The word distribution. — word_distribution • MATSSforecasting</title>
+<title>Compute the distribution of "word"s in a time series. — word_distribution • MATSSforecasting</title>
 
 
 <!-- jquery -->
@@ -48,21 +35,9 @@
 
 
 
-<meta property="og:title" content="#' Weighted distribution of "word"s in a time series.
-#'
-#' @param x A time series of real numbers.
-#' @param word_length The word length, also known as the permutation order.
-#' @param tau Time lag (not implemented).
-#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
-#' function of the base package. Use "average" to treat ties as the same value,
-#' "first" to treat ties as different with first value being treated as larger than second,
-#' "last" to treat ties as different with last value being treated as larger than second,
-#' "random" to give ties random rank,
-#' "noise" to add some noise to the time series to break ties.
-#' @param noise_amount How much noise to add to the time series; only used for method "noise".
-#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
-#'  @return The word distribution. — word_distribution" />
-<meta property="og:description" content="Compute the distribution of &quot;word&quot;s in a time series." />
+<meta property="og:title" content="Compute the distribution of "word"s in a time series. — word_distribution" />
+<meta property="og:description" content="weighted_word_distribution is a wrapper that sets weighted
+to TRUE" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -134,26 +109,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>#' Weighted distribution of "word"s in a time series.
-#'
-#' @param x A time series of real numbers.
-#' @param word_length The word length, also known as the permutation order.
-#' @param tau Time lag (not implemented).
-#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
-#' function of the base package. Use "average" to treat ties as the same value,
-#' "first" to treat ties as different with first value being treated as larger than second,
-#' "last" to treat ties as different with last value being treated as larger than second,
-#' "random" to give ties random rank,
-#' "noise" to add some noise to the time series to break ties.
-#' @param noise_amount How much noise to add to the time series; only used for method "noise".
-#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
-#'  @return The word distribution.</h1>
+    <h1>Compute the distribution of "word"s in a time series.</h1>
     <small class="dont-index">Source: <a href='https://github.com/ha0ye/MATSS-forecasting/blob/master/R/pe_code.R'><code>R/pe_code.R</code></a></small>
     <div class="hidden name"><code>word_distribution.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute the distribution of "word"s in a time series.</p>
+    <p><code>weighted_word_distribution</code> is a wrapper that sets <code>weighted</code>
+to <code>TRUE</code></p>
     </div>
 
     <pre class="usage"><span class='fu'>word_distribution</span>(<span class='no'>x_emb</span>, <span class='kw'>ties.method</span> <span class='kw'>=</span> <span class='st'>"first"</span>, <span class='kw'>weighted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -167,11 +130,36 @@
       <th>x_emb</th>
       <td><p>A time series of real numbers.</p></td>
     </tr>
+    <tr>
+      <th>ties.method</th>
+      <td><p>a character string specifying how ties are treated,
+    see &#8216;Details&#8217;; can be abbreviated.</p></td>
+    </tr>
+    <tr>
+      <th>weighted</th>
+      <td><p>whether to weight by the variance in each word</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a table of the word distribution</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>#' Weighted distribution of "word"s in a time series.
+#'
+#' @param x A time series of real numbers.
+#' @param word_length The word length, also known as the permutation order.
+#' @param tau Time lag (not implemented).
+#' @param tie_method The method for dealing with tied values; these are the methods used by the rank()
+#' function of the base package. Use "average" to treat ties as the same value,
+#' "first" to treat ties as different with first value being treated as larger than second,
+#' "last" to treat ties as different with last value being treated as larger than second,
+#' "random" to give ties random rank,
+#' "noise" to add some noise to the time series to break ties.
+#' @param noise_amount How much noise to add to the time series; only used for method "noise".
+#' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
+#'  @return The word distribution.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -179,6 +167,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

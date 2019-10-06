@@ -36,7 +36,7 @@
 
 
 <meta property="og:title" content="Calculate the permuation entropy of a times series — PE" />
-<meta property="og:description" content="Calculate the permuation entropy of a times series" />
+<meta property="og:description" content="WPE is a wrapper that sets weighted to TRUE" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,17 +114,36 @@
     </div>
 
     <div class="ref-description">
-    <p>Calculate the permuation entropy of a times series</p>
+    <p><code>WPE</code> is a wrapper that sets <code>weighted</code> to <code>TRUE</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>PE</span>(<span class='no'>x</span>, <span class='no'>weighted</span>, <span class='no'>word_length</span>, <span class='no'>tau</span>, <span class='no'>tie_method</span>, <span class='kw'>noise_amount</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>PE</span>(<span class='no'>x</span>, <span class='no'>m</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ties.method</span> <span class='kw'>=</span> <span class='st'>"first"</span>, <span class='kw'>weighted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>WPE</span>(<span class='no'>x</span>, <span class='no'>m</span>, <span class='no'>d</span>, <span class='kw'>ties.method</span> <span class='kw'>=</span> <span class='st'>"first"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>wd</th>
-      <td><p>The distribution of counts (e.g., of words).</p></td>
+      <th>x</th>
+      <td><p>the time series, observed at regular intervals.</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>the number of dimensions to embed x into.</p></td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td><p>the time delay</p></td>
+    </tr>
+    <tr>
+      <th>ties.method</th>
+      <td><p>a character string specifying how ties are treated,
+    see &#8216;Details&#8217;; can be abbreviated.</p></td>
+    </tr>
+    <tr>
+      <th>weighted</th>
+      <td><p>whether to weight by the variance in each word</p></td>
     </tr>
     </table>
 
@@ -137,7 +156,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'>PE</span>(<span class='no'>x</span>, <span class='fl'>TRUE</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='st'>"first"</span>)</div><div class='output co'>#&gt; [1] 0.9991593</div></pre>
+<span class='fu'>PE</span>(<span class='no'>x</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] 0.9991593</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
