@@ -3,7 +3,29 @@
 \name{word_distribution}
 \alias{word_distribution}
 \alias{weighted_word_distribution}
-\title{#' Weighted distribution of "word"s in a time series.
+\title{Compute the distribution of "word"s in a time series.}
+\usage{
+word_distribution(x_emb, ties.method = "first", weighted = TRUE)
+
+weighted_word_distribution(x_emb, ties.method)
+}
+\arguments{
+\item{x_emb}{A time series of real numbers.}
+
+\item{ties.method}{a character string specifying how ties are treated,
+    see \sQuote{Details}; can be abbreviated.}
+
+\item{weighted}{whether to weight by the variance in each word}
+}
+\value{
+a table of the word distribution
+}
+\description{
+\code{weighted_word_distribution} is a wrapper that sets \code{weighted}
+to \code{TRUE}
+}
+\details{
+#' Weighted distribution of "word"s in a time series.
 #'
 #' @param x A time series of real numbers.
 #' @param word_length The word length, also known as the permutation order.
@@ -16,18 +38,5 @@
 #' "noise" to add some noise to the time series to break ties.
 #' @param noise_amount How much noise to add to the time series; only used for method "noise".
 #' Random numbers from a uniform distribution with maximum 1 * 10^(-noise_amount-1) and minimum zero.
-#'  @return The word distribution.}
-\usage{
-word_distribution(x_emb, ties.method = "first", weighted = TRUE)
-
-weighted_word_distribution(x_emb, ties.method)
-}
-\arguments{
-\item{x_emb}{A time series of real numbers.}
-}
-\value{
-a table of the word distribution
-}
-\description{
-Compute the distribution of "word"s in a time series.
+#'  @return The word distribution.
 }
