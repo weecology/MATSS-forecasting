@@ -12,6 +12,7 @@
 #' 
 get_LPI_data <- function(min_time_series_length = 25)
 {
+
     dat <- readr::read_csv("https://raw.githubusercontent.com/Zoological-Society-of-London/rlpi/master/inst/extdata/example_data/LPI_LPR2016data_public.csv") %>%
         
         # convert "NULL" data to proper NA values
@@ -45,6 +46,12 @@ get_LPI_data <- function(min_time_series_length = 25)
         dplyr::select(c("id", "year", "value")) %>%
         tidyr::spread(.data$id, .data$value)
     
+    # calculate start and end time for each time series to be added to metadata
+    time_table <- dat %>%
+        dplyr::select(c("id", "year", "value")) %>%
+        dplyr::group_by(id) %>%
+        dplyr::summarize(start_time = min(.data$year), end_time = max(.data$year))
+    
     data_LPI <- list(abundance = abundance_table %>%
                          dplyr::select(-.data$year), 
                      covariates = abundance_table %>% 
@@ -58,8 +65,9 @@ get_LPI_data <- function(min_time_series_length = 25)
                                                          "t_biome", "fw_realm", "fw_biome", 
                                                          "m_realm", "m_ocean", "m_biome", 
                                                          "units", "method")) %>%
-                                         dplyr::distinct(.data$id, .keep_all = TRUE), 
-                                     timename = "year")
+                                         dplyr::distinct(.data$id, .keep_all = TRUE) %>%
+                                         dplyr::full_join(time_table, by = "id"), 
+                                         timename = "year")
                      
     )
     return(data_LPI)
