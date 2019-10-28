@@ -10,10 +10,10 @@ test_that("LPI data is retrievable and works", {
     
     expect_known_hash(LPI_data$covariates, "9643eab6db")
     
-    expect_known_hash(is.na(LPI_data$metadata$species_table), "7fd38c8768")
+    expect_known_hash(is.na(LPI_data$metadata$species_table), "6f07105f1d")
     LPI_data$metadata$species_table[is.na(LPI_data$metadata$species_table)] <- ""
-    expect_known_hash(LPI_data$metadata$species_table, "572d300f7b")
-    expect_known_hash(LPI_data$metadata$timename, "daed5a6a89")
+    expect_known_hash(LPI_data$metadata$species_table, "263d6e653b")
+    expect_known_hash(LPI_data$metadata$timename, "94a38c2bf6")
     
     expect_known_hash(LPI_data, "31ebd3ca9e")
 })

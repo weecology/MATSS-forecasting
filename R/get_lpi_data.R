@@ -67,7 +67,7 @@ get_LPI_data <- function(min_time_series_length = 25)
                                                          "units", "method")) %>%
                                          dplyr::distinct(.data$id, .keep_all = TRUE) %>%
                                          dplyr::full_join(time_table, by = "id"), 
-                                         timename = "year")
+                                     timename = "year")
                      
     )
     return(data_LPI)
