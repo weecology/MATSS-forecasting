@@ -66,6 +66,7 @@ reshape_ward_data <- function(data_file = system.file("extdata", "processed_data
         dplyr::group_by(.data$database) %>% # split datasets by source
         tidyr::nest() %>%
         dplyr::mutate(dataset = purrr::map(.data$data, reshape_data)) %>% # reshape int common data format
+        dplyr::ungroup() %>%
         dplyr::select(c("database", "dataset")) %>%
         dplyr::mutate(database = sub("\\.", "_", .data$database))
     
