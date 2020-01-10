@@ -57,7 +57,7 @@ get_LPI_data <- function(min_time_series_length = 25)
                      covariates = abundance_table %>% 
                          dplyr::select(.data$year), 
                      metadata = list(species_table = dat %>%
-                                         dplyr::select(c("id", "Species_name" = "binomial", 
+                                         dplyr::select(c("id", "species_binomial" = "binomial", 
                                                          "class", "order", "family", "genus", "species", "subspecies", 
                                                          "location", "country", "region", 
                                                          "latitude", "longitude", 

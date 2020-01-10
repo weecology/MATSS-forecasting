@@ -46,7 +46,7 @@ reshape_ward_data <- function(data_file = system.file("extdata", "processed_data
             dplyr::mutate(year = ifelse(.data$year < 1800, .data$year + 1900, .data$year))
         
         species_table <- temp_data %>%
-            dplyr::select(c("id", "species", "class")) %>%
+            dplyr::select(c("id", "species_binomial" = "species", "class")) %>%
             dplyr::distinct()
         
         temp_data <- temp_data %>%
