@@ -4,8 +4,15 @@
 \alias{hindcast}
 \title{Hindcasting with one-step forecasts}
 \usage{
-hindcast(fun, timeseries, hindcast_method = c("pred_frac", "last_n",
-  "pred_start"), pred_frac = 1/3, last_n = 5, pred_start = 31, ...)
+hindcast(
+  fun,
+  timeseries,
+  hindcast_method = c("pred_frac", "last_n", "pred_start"),
+  pred_frac = 1/3,
+  last_n = 5,
+  pred_start = 31,
+  ...
+)
 }
 \arguments{
 \item{fun}{a function for doing the forecasting. It should have arguments:

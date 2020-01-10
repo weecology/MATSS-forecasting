@@ -4,8 +4,7 @@
 \alias{nnet_ts}
 \title{Make forecasts using neural network time series model}
 \usage{
-nnet_ts(timeseries, num_ahead = 5, level = 95, m = 1, size = 1,
-  ...)
+nnet_ts(timeseries, num_ahead = 5, level = 95, m = 1, size = 1, ...)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

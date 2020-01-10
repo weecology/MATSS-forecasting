@@ -4,8 +4,9 @@
 \alias{build_ward_data_plan}
 \title{Make a drake plan with all the datasets in Ward et al. 2014}
 \usage{
-build_ward_data_plan(ward_RDS_file = here::here("analysis", "data",
-  "ward_fish_data.RDS"))
+build_ward_data_plan(
+  ward_RDS_file = here::here("analysis", "data", "ward_fish_data.RDS")
+)
 }
 \arguments{
 \item{ward_RDS_file}{the location of the RDS file with the combined datasets

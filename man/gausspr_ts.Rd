@@ -4,8 +4,14 @@
 \alias{gausspr_ts}
 \title{Make forecasts using gaussian process regression}
 \usage{
-gausspr_ts(timeseries, num_ahead = 5, level = 95, frequency = 1,
-  kernel = "rbfdot", kpar = "automatic")
+gausspr_ts(
+  timeseries,
+  num_ahead = 5,
+  level = 95,
+  frequency = 1,
+  kernel = "rbfdot",
+  kpar = "automatic"
+)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

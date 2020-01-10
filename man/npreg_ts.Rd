@@ -4,8 +4,14 @@
 \alias{npreg_ts}
 \title{Make forecasts using nonparametric kernel regression}
 \usage{
-npreg_ts(timeseries, num_ahead = 5, level = 95, regtype = "ll",
-  bwmethod = "cv.aic", gradients = TRUE)
+npreg_ts(
+  timeseries,
+  num_ahead = 5,
+  level = 95,
+  regtype = "ll",
+  bwmethod = "cv.aic",
+  gradients = TRUE
+)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

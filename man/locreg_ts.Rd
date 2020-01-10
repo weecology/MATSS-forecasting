@@ -4,8 +4,13 @@
 \alias{locreg_ts}
 \title{Make forecasts using locally weighted regression}
 \usage{
-locreg_ts(timeseries, num_ahead = 5, level = 95, nn = seq(from = 0.2,
-  to = 3, by = 0.05), deg = 1:3)
+locreg_ts(
+  timeseries,
+  num_ahead = 5,
+  level = 95,
+  nn = seq(from = 0.2, to = 3, by = 0.05),
+  deg = 1:3
+)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

@@ -7,18 +7,28 @@
 \alias{smap_one_step}
 \title{Make forecasts using simplex projection or S-maps}
 \usage{
-simplex_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
-  silent = TRUE)
+simplex_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7, silent = TRUE)
 
-smap_ts(timeseries, num_ahead = 5, level = 95, E_list = 1:7,
-  theta_list = c(0, 1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3,
-  0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8), silent = TRUE)
+smap_ts(
+  timeseries,
+  num_ahead = 5,
+  level = 95,
+  E_list = 1:7,
+  theta_list = c(0, 1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.5, 0.75, 1, 1.5,
+    2, 3, 4, 6, 8),
+  silent = TRUE
+)
 
 simplex_one_step(timeseries, level = 95, E_list = 1:7, silent = TRUE)
 
-smap_one_step(timeseries, level = 95, E_list = 1:7, theta_list = c(0,
-  1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.5, 0.75, 1, 1.5, 2,
-  3, 4, 6, 8), silent = TRUE)
+smap_one_step(
+  timeseries,
+  level = 95,
+  E_list = 1:7,
+  theta_list = c(0, 1e-04, 3e-04, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.5, 0.75, 1, 1.5,
+    2, 3, 4, 6, 8),
+  silent = TRUE
+)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

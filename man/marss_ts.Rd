@@ -5,11 +5,9 @@
 \alias{marss_rw_one_step}
 \title{Make forecasts using a state space model}
 \usage{
-marss_ts(timeseries, num_ahead = 5, level = 95, drift = TRUE,
-  silent = TRUE)
+marss_ts(timeseries, num_ahead = 5, level = 95, drift = TRUE, silent = TRUE)
 
-marss_rw_one_step(timeseries, level = 95, drift = TRUE,
-  silent = TRUE)
+marss_rw_one_step(timeseries, level = 95, drift = TRUE, silent = TRUE)
 }
 \arguments{
 \item{timeseries}{the time series to forecast}

@@ -27,6 +27,11 @@ library(MATSS)
 library(tidyverse)
 library(drake)
 
+# libraries for metadata
+library(taxize)
+library(traits)
+library(rfishbase)
+
 ## make sure the package functions in MATSS and MATSSforecasting are loaded in 
 ##   as dependencies
 expose_imports(MATSS)
@@ -44,9 +49,9 @@ reshape_ward_data(data_file = raw_data_file,
 
 ## define the datasets
 datasets <- bind_rows(
-    # drake_plan(
-    #     data_LPI = get_LPI_data()
-    # ), 
+     drake_plan(
+         data_LPI = get_LPI_data()
+     ), 
     # build_datasets_plan(include_retriever_data = TRUE), 
     build_ward_data_plan(ward_RDS_file = processed_data_file)
 )
@@ -57,7 +62,7 @@ methods <- build_methods_plan()
 ## define the analyses (each method x dataset combination)
 analyses <- drake::drake_plan(
     analysis = target(fun(data),
-                      transform = cross(fun = !!rlang::syms(methods$target),
+                      transform = cross(fun = !!rlang::syms(methods$target[c(3,10)]),
                                         data = !!rlang::syms(datasets$target))
     ),
     results = target(bind_rows(analysis),
@@ -75,12 +80,20 @@ reports <- drake_plan(
     )
 )
 
+metadata <- drake_plan(
+
+taxonomy = get_taxonomy()
+    
+) 
+
+
 ## create a master plan
-pipeline <- bind_rows(datasets, methods, analyses, reports)
+pipeline <- bind_rows(datasets, methods, analyses, metadata, reports)
 
 ## Set up the cache and config
 db <- DBI::dbConnect(RSQLite::SQLite(), here::here("output", "drake-cache.sqlite"))
 cache <- storr::storr_dbi("datatable", "keystable", db)
+
 
 ## View the graph of the plan
 if (interactive())
