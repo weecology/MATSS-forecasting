@@ -10,7 +10,7 @@
 get_taxonomy <- function()
 {
 
-loadd(full_results, cache=cache)    
+drake::loadd(full_results, cache=cache)    
     
 # get list of all species and check for duplicate species
 species_table_list <- lapply(1:nrow(full_results), function(x) full_results[[x, "metadata"]]$species_table %>% select(species_binomial) %>% distinct(species_binomial) )
@@ -30,7 +30,7 @@ species_table <- bind_rows(species_table_list) %>%
     )
 
 # check whether species is in database, extract ID
-uids <- get_uid(as.character(species_table$species_binomial)[1:10], ask = F)
+uids <- get_uid(as.character(species_table$species_binomial), ask = F)
 
 # use ID to get full taxnomic information on all species
 taxonomic_classes <- classification(uids)
@@ -48,3 +48,9 @@ taxo_df <- bind_rows(
 return(taxo_df)
 
 }
+
+
+
+
+
+

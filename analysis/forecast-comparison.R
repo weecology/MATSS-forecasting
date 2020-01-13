@@ -82,10 +82,10 @@ reports <- drake_plan(
 
 metadata <- drake_plan(
 
-taxonomy = get_taxonomy()
-    
+taxonomy = get_taxonomy(),
+fish_metadata = pull_fishbase(taxonomy),
+mammal_bird_herp_metadata = pull_traits(taxonomy)    
 ) 
-
 
 ## create a master plan
 pipeline <- bind_rows(datasets, methods, analyses, metadata, reports)
